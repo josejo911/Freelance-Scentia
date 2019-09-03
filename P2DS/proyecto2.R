@@ -27,3 +27,13 @@ setwd("C:/Users/smayr/Documents/Tercer año/Semestre 6/Data Science/Proyecto 2/P
 
 # Leyendo el dataset de csv importacion
 datos <- read.csv("Paginacion.csv", TRUE, ",")
+
+
+#----------------------- A priori
+reglas<-apriori(datos, parameter = list(support = 0.50,
+                                                   confidence = 0.60,
+                                                   target = "rules"))
+
+
+#top10subRules <- head(reglas, n = 10, by = "confidence")
+#plot(top10subRules, method="graph", engine="htmlwidget")
