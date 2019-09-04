@@ -21,19 +21,57 @@ library(dplyr)
 library(caret) # Muestreo estratificado
 library(class) # Para KNN
 library(e1071) # Requisito para la matriz de confusión
+library(openxlsx)
 
-setwd("C:/Users/smayr/Documents/Tercer año/Semestre 6/Data Science/Proyecto 2/Proyecto2DS/P2DS")
+setwd("/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS")
 
 
 # Leyendo el dataset de csv importacion
-datos <- read.csv("Paginacion.csv", TRUE, ",")
-
+#Guatemala
+VSG <- read.xlsx("Paginacion1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+#Honduras
+VSH <- read.xlsx("Paginacion1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+#Salvador
+VSS <- read.xlsx("Paginacion1519.xlsx", sheet = 3, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+#Nicaragua
+VSN <- read.xlsx("Paginacion1519.xlsx", sheet = 4, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
 
 #----------------------- A priori
-reglas<-apriori(datos, parameter = list(support = 0.50,
+reglas<-apriori(VSG, parameter = list(support = 0.50,
                                                    confidence = 0.60,
                                                    target = "rules"))
+inspect(head(reglas, n = 33))
 
+top10subRules <- head(reglas, n = 10, by = "confidence")
+plot(top10subRules, method="graph", engine="htmlwidget")
 
-#top10subRules <- head(reglas, n = 10, by = "confidence")
-#plot(top10subRules, method="graph", engine="htmlwidget")
+nuevoVSS <- VSS[,c(1:9)]
+
+reglasS<-apriori(nuevoVSS, parameter = list(support = 0.10,
+                                       confidence = 0.90,
+                                       target = "rules"))
+inspect(head(reglasS, n = 11))
+
+nuevoVSH <- VSH[,c(1:9)]
+reglaH <- apriori(nuevoVSH, parameter = list(support = 0.10,
+                                        confidence = 0.10,
+                                        target = "rules"))
+inspect(head(reglaH, n = 10))
+
+nuevoVSN <- VSN[,c(1:9)]
+reglaN <- apriori(nuevoVSN, parameter = list(support = 0.10,
+                                             confidence = 0.10,
+                                             target = "rules"))
+inspect(head(reglaN, n = 13))
