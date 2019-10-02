@@ -9,22 +9,83 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Resumen de información
+## Objetivos
+## Variables de interés
+## Variables Respuesta
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Librerías que se van a utilizar
 
-```{r cars}
-summary(cars)
+
+```{r}
+# Librerias a utilizar
+require(ggpubr) # Para mejorar la visualización gráfica
+require(tidyverse) # Para explotar, manipular y visualizar datos que comparten info
+require(corrplot) # Para visualizar la matriz de correlación
+require(cluster) #Para calcular la silueta
+library(fpc) # Para hacer el plotcluster
+library(NbClust) # Para determinar el numero de clusters optimo
+library(factoextra) # Para hacer graficos bonitos de clustering
+library(rela) # Para poder utilizar paf()
+library(psych) # Para poder utilizar KMO()
+library(FactoMineR)
+library(corrplot)
+library(REdaS)
+library(ggplot2) # Graficas bonitas
+library(ggpubr) # Graficas bonitas x2
+#library(ggmap)
+library(arules) # Reglas de asociacion
+library(factoextra) 
+library(arulesViz)
+library(dplyr)
+library(caret) # Muestreo estratificado
+library(class) # Para KNN
+library(e1071) # Requisito para la matriz de confusión
+library(openxlsx)
+```
+```{r}
+#"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
+setwd("/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS")
+
+# Leyendo el dataset de csv importacion
+# Honduras
+
+SecH <- read.xlsx("USH1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+
+DescH <- read.xlsx("USH1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+
+# Leyendo el dataset de csv importacion
+# Nicaragua
+
+SecN <- read.xlsx("USN1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+
+DescN <- read.xlsx("USN1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+
+# Leyendo el dataset de csv importacion
+# El Salvador
+
+SecS <- read.xlsx("USS1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+
+DescS <- read.xlsx("USS1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Análisis Exploratorio
