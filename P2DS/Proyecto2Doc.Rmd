@@ -106,3 +106,35 @@ SecS[is.na(SecS)] <- 0
 ```
 
 ## Análisis Exploratorio
+
+```{r echo=FALSE}
+
+#vector de sectores
+sectoresG <- strsplit(DescG[,c(2)], "-")
+sectoresG <- data.frame(sectoresG)
+sectoresG <- t(sectoresG[-c(2),])
+
+#lo de abjo no funciona
+#plot.figure(figsize=(20,30))
+i = 1
+for sectores in sectoresG:
+  data = SecG[SecG['Unidades'] == sectores]
+  data = data.drop(['Unidades'], axis=1)
+  data = data.astype(int).sum(axis=0)
+  plt.subplot(7, 3, i)
+  data.plot()
+  plt.ylabel('Unidades')
+  plt.title(category)
+  i += 1
+plt.show()
+
+```
+
+
+
+```{r echo=FALSE}
+
+
+```
+
+
