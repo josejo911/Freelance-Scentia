@@ -43,7 +43,9 @@ library(openxlsx)
 ```
 ```{r echo=FALSE}
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
-setwd("F:/Data Science/Proyecto 2/Proyecto2DS")
+# /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
+# F:/Data Science/Proyecto 2/Proyecto2DS
+setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Honduras
@@ -101,8 +103,82 @@ SecG[is.na(SecG)] <- 0
 SecH[is.na(SecH)] <- 0
 SecN[is.na(SecN)] <- 0
 SecS[is.na(SecS)] <- 0
+```
 
+### Cambio de nombre a las columnas
+```{r}
+# -------------------------------
+# Títulos principales
+# -------------------------------
+names(SecG)[1] <- "Sector"
+names(SecG)[2] <- "Categoria"
+names(SecG)[3] <- "Producto y Descripcion"
+
+# -------------------------------
+# Año 2015
+# -------------------------------
+names(SecG)[4] <- "01-2015"
+names(SecG)[5] <- "02-2015"
+names(SecG)[6] <- "03-2015"
+names(SecG)[7] <- "04-2015"
+names(SecG)[8] <- "05-2015"
+names(SecG)[9] <- "06-2015"
+names(SecG)[10] <- "07-2015"
+names(SecG)[11] <- "08-2015"
+names(SecG)[12] <- "09-2015"
+names(SecG)[13] <- "10-2015"
+names(SecG)[14] <- "11-2015"
+names(SecG)[15] <- "12-2015"
+
+# -------------------------------
+# Año 2016
+# -------------------------------
+names(SecG)[16] <- "01-2016"
+names(SecG)[17] <- "02-2016"
+names(SecG)[18] <- "03-2016"
+names(SecG)[19] <- "04-2016"
+names(SecG)[20] <- "05-2016"
+names(SecG)[21] <- "06-2016"
+names(SecG)[22] <- "07-2016"
+names(SecG)[23] <- "08-2016"
+names(SecG)[24] <- "09-2016"
+names(SecG)[25] <- "10-2016"
+names(SecG)[26] <- "11-2016"
+names(SecG)[27] <- "12-2016"
+
+# -------------------------------
+# Año 2017
+# -------------------------------
+names(SecG)[28] <- "01-2017"
+names(SecG)[29] <- "02-2017"
+names(SecG)[30] <- "03-2017"
+names(SecG)[31] <- "04-2017"
+names(SecG)[32] <- "05-2017"
+names(SecG)[33] <- "06-2017"
+names(SecG)[34] <- "07-2017"
+names(SecG)[35] <- "08-2017"
+names(SecG)[36] <- "09-2017"
+names(SecG)[37] <- "10-2017"
+names(SecG)[38] <- "11-2017"
+names(SecG)[39] <- "12-2017"
+
+# -------------------------------
+# Año 2018
+# -------------------------------
+names(SecG)[40] <- "01-2018"
+names(SecG)[41] <- "02-2018"
+names(SecG)[42] <- "03-2018"
+names(SecG)[43] <- "04-2018"
+names(SecG)[44] <- "05-2018"
+names(SecG)[45] <- "06-2018"
+names(SecG)[46] <- "07-2018"
+names(SecG)[47] <- "08-2018"
+names(SecG)[48] <- "09-2018"
+names(SecG)[49] <- "10-2018"
+names(SecG)[50] <- "11-2018"
+
+# Se eliminan filas no útiles
+SecG <- SecG[-c(1, 2), ] 
 
 ```
 
-## Análisis Exploratorio
