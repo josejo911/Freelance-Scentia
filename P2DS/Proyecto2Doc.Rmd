@@ -60,7 +60,7 @@ library(openxlsx)
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
-setwd("/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS")
+setwd("F:/Data Science/Proyecto 2/Proyecto2DS")
 
 # Leyendo el dataset de csv importacion
 # Honduras
@@ -203,7 +203,6 @@ SecH <- cambioTitulos(SecH)
 SecN <- cambioTitulos(SecN)
 SecS <- cambioTitulos(SecS)
 ```
-<<<<<<< HEAD
 
 
 ```{r echo=FALSE}
@@ -236,6 +235,3 @@ plt.show()
 
 ```
 
-
-=======
->>>>>>> master
