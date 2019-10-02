@@ -60,7 +60,7 @@ library(openxlsx)
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
-setwd("/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS")
+setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Honduras
@@ -253,7 +253,6 @@ sectoresN <- t(sectoresN[-c(2),])
 ```
 
 ```{r}
-
 #Nicaragua
 ## 0
 Nsec0 <- SecN[SecN$Sector == 0, ]
@@ -462,7 +461,11 @@ Nsum27 <- colSums(Nsec27[,-1])
 
 Nica2 <- data.frame(Nsum0, Nsum1, Nsum2, Nsum3, Nsum4, Nsum5, Nsum6, Nsum7, Nsum8, Nsum9, Nsum10, Nsum11, Nsum12, Nsum13, Nsum14, Nsum15, Nsum16, Nsum17, Nsum18, Nsum19, Nsum20, Nsum21, Nsum22, Nsum23, Nsum24, Nsum25, Nsum26)
 
+# Se agrupa por distritos
+```
 
+
+```{r}
 # Salen fechas demás, como x51, x52, etc.
 
 #Idea para hacer la matriz
@@ -484,3 +487,101 @@ Nica2 <- data.frame(Nsum0, Nsum1, Nsum2, Nsum3, Nsum4, Nsum5, Nsum6, Nsum7, Nsum
 ```
 
 
+```{r}
+# -------------------------------
+# Distrito 1 de Nicaragua
+# -------------------------------
+CC01 <- Nica2[,c(1)]
+D1.ts <- ts (CC01,start = c(2015,2), end=c(2019,5), frequency = 12)
+plot(D1.ts)
+# RESUMEN: hay declives a fines de año, se observan ventas inferiores a 200
+# Descomponiendo la serie
+D1.ts.desc <- decompose(D1.ts)
+plot(D1.ts.desc)
+# RESUMEN: no hay tendencia pero no es estacionaria con la media. Es oscilatoria
+```
+Este distrito se llama "CONTADO INSTITUCIONAL". Las ventas máximas de este distrito ha sido de 700, que solamente se logró a mediados del año 2015. La segunda venta más alta ha sido en los primeros meses del 2017 pero sin sobrepasar las 600 ventas unitarias.
+Ahora, al ver la descomposición de la serie, se observa que ha sido oscilatoria la tendencia. En los últimos meses, ha tenido más tendencia de lo usual. En este caso, es posible tomar en cuenta los altos y bajos de este distrito. 
+
+
+```{r}
+# -------------------------------
+# Distrito 2 de Nicaragua
+# -------------------------------
+D01 <- Nica2[,c(2:12)]
+D01 <- rowSums(D01)
+
+D2.ts <- ts (D01,start = c(2015,1), end=c(2019,5), frequency = 12)
+plot(D2.ts)
+# RESUMEN: Ha incrementado desde el 2017 y se ha mantenido más o menos estable
+# Descomponiendo la serie
+D2.ts.desc <- decompose(D2.ts)
+plot(D2.ts.desc)
+# RESUMEN: Hay tendencia y es un poco estacionaria con la media (pero no del todo!!)
+```
+Este distrito se llama "INDIANA RIVAS". Se observa que los ventas han ido creciendo y se han logrado estabilizar desde el 2017. Las ventas más bajas han sido de 40,000 y lo máximo de 60,000. Con respecto a la descomposición, se observa que fue oscilatoria pero que ha logrado estabilizarse (posiblemente es un comportamiento logístico). 
+
+
+```{r}
+# -------------------------------
+# Distrito 3 de Nicaragua
+# -------------------------------
+D02 <- Nica2[,c(13:24)]
+D02 <- rowSums(D02)
+
+D3.ts <- ts (D02,start = c(2015,1), end=c(2019,5), frequency = 12)
+plot(D3.ts)
+# RESUMEN: Es una de las más "estables", a finales de año no exceden de 45,000 ventas
+# Descomponiendo la serie
+D3.ts.desc <- decompose(D3.ts)
+plot(D3.ts.desc)
+# RESUMEN: Hay tendencia pero se mira un comportamiento logístico, como que ya logró más o menos estabilizarse
+```
+Este distrito se llama "JANNETTE HERRERA". Las ventas unitarias han sido crecientes, mostrando que las ventas a principios del año han sido más altas con respecto a los años pasados. En la descomposición de la serie, se muestra tendencia y estable con la media, ya que no se observan picos notables.
+
+
+```{r}
+# -------------------------------
+# Distrito 4 de Nicaragua
+# -------------------------------
+D03 <- Nica2[,c(25)]
+
+D4.ts <- ts (D03,start = c(2015,1), end=c(2019,5), frequency = 12)
+plot(D4.ts)
+# RESUMEN: No es estable, hay muchos picos
+D4.ts.desc <- decompose(D4.ts)
+plot(D4.ts.desc)
+# RESUMEN: Hay bastante decrecimiento en las ventas... 
+```
+Este distrito se llama "INSTITUCIONAL". Las ventas han ido de forma decreciente en comparación de las ventas del 2016-2017. Se observa que en los últimos meses se ha presenciado un declive en esta serie, las ventas más bajas se sitúan a mediados del 2018; poco a poco, las ventas fueron creciendo pero de manera lenta. Es importante tomar en cuenta si esta serie va a volver a presentar un declive o no; ver si es oscilatoria o no. Con respecto a la descomposición, no muestra tendencia, solo un decrecimiento en las ventas.
+
+```{r}
+# -------------------------------
+# Distrito 5 de Nicaragua
+# -------------------------------
+D0AB <- Nica2[,c(26)]
+
+D5.ts <- ts (D0AB,start = c(2015,1), end=c(2019,5), frequency = 12)
+plot(D5.ts)
+# RESUMEN: Esta rara
+D5.ts.desc <- decompose(D5.ts)
+plot(D5.ts.desc)
+# RESUMEN: Hay muuuuucha tendencia en los ultimos años
+
+```
+Este distrito se llama "DISTRITO ABOGADOS". Okay, evidentemente este distrito ha solicitado muchos productos de Scentia desde el 2018 hasta este año. El crecimiento de ventas ha sido de forma radical, mostrando solamente que en el mes de diciembre del 2018 las ventas bajaron pero luego crecieron nuevamente, superando las ventas del 2018. Tomar en cuenta porqué se debe este cambio. Claramente se evidencia tendencia, aunque es estacionaria con la media pero no con la varianza. 
+
+```{r}
+# -------------------------------
+# Distrito 6 de Nicaragua
+# -------------------------------
+D0EM <- Nica2[,c(27)]
+
+D6.ts <- ts (D0EM,start = c(2015,1), end=c(2019,5), frequency = 12)
+plot(D6.ts)
+# RESUMEN: Jajaja esta suuper decreciente 
+D6.ts.desc <- decompose(D6.ts)
+plot(D6.ts.desc)
+# RESUMEN: Hay bastante decrecimiento en las ventas... 
+```
+Este distrito se llama "DISTRITO EMPLEADO". Este distrito ha perido muchas ventas, siendo estas casi nulas. Comenzó todo bien pero desde principios del 2016, las ventas han ido decreciendo. En la descomposición se observa claramente este bajón en las ventas, posiblemente es útil considerar eliminar este distrito dentro de las ventas destinadas que tiene contemplado Scentia o simplemente se podrían producir lo necesario para satisfacer este distrito y que la empresa no tenga pérdidas. 
