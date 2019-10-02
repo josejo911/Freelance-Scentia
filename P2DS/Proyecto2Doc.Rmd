@@ -5,7 +5,7 @@ date: "28 de agosto de 2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -15,10 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Variables Respuesta
 
 
-Librerías que se van a utilizar
-
-
-```{r}
+```{r echo=FALSE, warning=FALSE, include=FALSE}
 # Librerias a utilizar
 require(ggpubr) # Para mejorar la visualización gráfica
 require(tidyverse) # Para explotar, manipular y visualizar datos que comparten info
@@ -29,24 +26,24 @@ library(NbClust) # Para determinar el numero de clusters optimo
 library(factoextra) # Para hacer graficos bonitos de clustering
 library(rela) # Para poder utilizar paf()
 library(psych) # Para poder utilizar KMO()
-library(FactoMineR)
+#library(FactoMineR)
 library(corrplot)
 library(REdaS)
 library(ggplot2) # Graficas bonitas
-library(ggpubr) # Graficas bonitas x2
+#library(ggpubr) # Graficas bonitas x2
 #library(ggmap)
 library(arules) # Reglas de asociacion
 library(factoextra) 
 library(arulesViz)
 library(dplyr)
-library(caret) # Muestreo estratificado
+#library(caret) # Muestreo estratificado
 library(class) # Para KNN
 library(e1071) # Requisito para la matriz de confusión
 library(openxlsx)
 ```
-```{r}
+```{r echo=FALSE}
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
-setwd("/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS")
+setwd("F:/Data Science/Proyecto 2/Proyecto2DS")
 
 # Leyendo el dataset de csv importacion
 # Honduras
@@ -99,6 +96,13 @@ DescS <- read.xlsx("USS1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
+
+SecG[is.na(SecG)] <- 0
+SecH[is.na(SecH)] <- 0
+SecN[is.na(SecN)] <- 0
+SecS[is.na(SecS)] <- 0
+
+
 ```
 
 ## Análisis Exploratorio
