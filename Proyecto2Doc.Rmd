@@ -1,0 +1,58 @@
+---
+title: "Proyecto 2 DataScience"
+author: "Jose Javier Jo"
+date: "28 de agosto de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Resumen de información
+## Objetivos
+## Variables de interés
+## Variables Respuesta
+
+
+Librerías que se van a utilizar
+  
+```{r}
+install.packages("dplyr")
+install.packages("ggpubr")
+install.packages("tidyverse")
+require(ggpubr)
+require(tidyverse)
+require(corrplot)
+#library(corrplot)
+#library(ggplot2)
+#library(ggpubr)
+#library(arules)
+library(dplyr)
+#library(forecast)
+#library(fUnitRoots)
+#library(ggfortify)
+```
+
+```{r}
+
+setwd("C:/Users/rober/OneDrive/Documentos/Betzy/Proyecto2DS/P2DS")
+
+#Se leen los archivos
+nicaragua <- read.table("nicaragua1.csv",TRUE, ";")
+honduras <- read.csv("honduras1.csv", TRUE, ";")
+salvador <- read.csv("salvador1.csv", TRUE, ";")
+guatemala <- read.csv("guatemala1.csv", TRUE, ";")
+
+
+
+
+
+```
+
+## Análisis Exploratorio
+
+```{r, echo=FALSE}
+
+```
+
