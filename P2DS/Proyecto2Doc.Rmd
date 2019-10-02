@@ -51,10 +51,23 @@ setwd("/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/
 # Leyendo el dataset de csv importacion
 # Honduras
 
-SecH <- read.xlsx("USH1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
+SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
+
+DescG <- read.xlsx("USG1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+
+# Leyendo el dataset de csv importacion
+# Honduras
+
+SecH <- read.xlsx("USH1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
+                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
+                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
+                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
 
 DescH <- read.xlsx("USH1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
@@ -67,7 +80,7 @@ DescH <- read.xlsx("USH1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
 SecN <- read.xlsx("USN1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
 
 DescN <- read.xlsx("USN1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
@@ -85,7 +98,7 @@ SecS <- read.xlsx("USS1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
 DescS <- read.xlsx("USS1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
 ```
 
 ## Análisis Exploratorio
