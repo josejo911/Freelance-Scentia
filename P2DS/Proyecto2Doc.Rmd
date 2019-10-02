@@ -2,7 +2,9 @@
 title: "Proyecto 2 DataScience"
 author: "Jose Javier Jo"
 date: "28 de agosto de 2019"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE, warning = FALSE}
@@ -10,10 +12,20 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Resumen de información
-## Objetivos
-## Variables de interés
-## Variables Respuesta
+En los avances de proyecto 1, se había presentado el análisis exploratorio del archivo equivocado. Por ello, el primer paso fue realizar análisis exploratorio sobre los archivos que incluyen únicamente las ventas por sector, así como la distribución de cada sector. 
 
+## Objetivos
+* Separar las ventas por sectores.
+* Crear una predicción sobre la ventas a partir de líneas de tiempo generadas con los datos que se tienen por sector de los últimos 4 años.
+* Verificar la eficiencia del modelo comparando las gráficas de tiempo con la historia económica de los últimos 4 años.
+
+## Variables de interés
+* Ventas: es una variable cuantitativa la cual será clave para las predicciones.
+* Mes y año de venta: variable cuantitativa indispensable para la creación de una serie de tiempo. 
+* Sector: variable de carácter cualitativo dado que indica la pertenencia de una venta a un sector asignado en un país.
+
+## Variables Respuesta
+* Modelo de predicción a partir de la serie de tiempo. 
 
 ```{r echo=FALSE, warning=FALSE, include=FALSE}
 # Librerias a utilizar
