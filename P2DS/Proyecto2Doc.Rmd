@@ -53,12 +53,14 @@ library(dplyr)
 library(class) # Para KNN
 library(e1071) # Requisito para la matriz de confusión
 library(openxlsx)
+library(plyr)
 ```
 ```{r echo=FALSE}
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
-setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
+#C:/Users/Betzy/Documents/Betzy/Proyecto2DS
+setwd("C:/Users/Betzy/Documents/Betzy/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Guatemala
@@ -186,240 +188,77 @@ sectoresN <- t(sectoresN[-c(2),])
 
 ```
 
-```{r}
-#Nicaragua
-## 0
-Nsec0 <- SecN[SecN$Sector == 0, ]
-Nsec0 <- Nsec0[,-c(1,2,3)]
-Nsec0[] <- lapply(Nsec0, as.numeric)
-Nsum0 <- colSums(Nsec0[,-1])
-
-## 1
-Nsec1 <- SecN[SecN$Sector == 1, ]
-Nsec1 <- Nsec1[,-c(1,2,3)]
-Nsec1[] <- lapply(Nsec1, as.numeric)
-Nsum1 <- colSums(Nsec1[,-1])
-
-
-## 2
-Nsec2 <- SecN[SecN$Sector == 2, ]
-Nsec2 <- Nsec2[,-c(1,2,3)]
-Nsec2[] <- lapply(Nsec2, as.numeric)
-Nsum2 <- colSums(Nsec2[,-1])
-
-
-## 3
-
-Nsec3 <- SecN[SecN$Sector == 3, ]
-Nsec3 <- Nsec3[,-c(1,2,3)]
-Nsec3[] <- lapply(Nsec3, as.numeric)
-Nsum3 <- colSums(Nsec3[,-1])
-
-
-## 4
-
-Nsec4 <- SecN[SecN$Sector == 4, ]
-Nsec4 <- Nsec4[,-c(1,2,3)]
-Nsec4[] <- lapply(Nsec4, as.numeric)
-Nsum4 <- colSums(Nsec4[,-1])
-
-
-## 5
-
-Nsec5 <- SecN[SecN$Sector == 5, ]
-Nsec5 <- Nsec5[,-c(1,2,3)]
-Nsec5[] <- lapply(Nsec5, as.numeric)
-Nsum5 <- colSums(Nsec5[,-1])
-
-
-## 6
-
-Nsec6 <- SecN[SecN$Sector == 6, ]
-Nsec6 <- Nsec6[,-c(1,2,3)]
-Nsec6[] <- lapply(Nsec6, as.numeric)
-Nsum6 <- colSums(Nsec6[,-1])
-
-
-## 7
-
-Nsec7 <- SecN[SecN$Sector == 7, ]
-Nsec7 <- Nsec7[,-c(1,2,3)]
-Nsec7[] <- lapply(Nsec7, as.numeric)
-Nsum7 <- colSums(Nsec7[,-1])
-
-
-## 8
-
-Nsec8 <- SecN[SecN$Sector == 8, ]
-Nsec8 <- Nsec8[,-c(1,2,3)]
-Nsec8[] <- lapply(Nsec8, as.numeric)
-Nsum8 <- colSums(Nsec8[,-1])
-
-
-## 9
-
-Nsec9 <- SecN[SecN$Sector == 9, ]
-Nsec9 <- Nsec9[,-c(1,2,3)]
-Nsec9[] <- lapply(Nsec9, as.numeric)
-Nsum9 <- colSums(Nsec9[,-1])
-
-
-## 10
-
-Nsec10 <- SecN[SecN$Sector == 1, ]
-Nsec10 <- Nsec10[,-c(1,2,3)]
-Nsec10[] <- lapply(Nsec10, as.numeric)
-Nsum10 <- colSums(Nsec10[,-1])
-
-
-## 11
-
-Nsec11 <- SecN[SecN$Sector == 11, ]
-Nsec11 <- Nsec11[,-c(1,2,3)]
-Nsec11[] <- lapply(Nsec11, as.numeric)
-Nsum11 <- colSums(Nsec11[,-1])
-
-## 12
-
-Nsec12 <- SecN[SecN$Sector == 12, ]
-Nsec12 <- Nsec12[,-c(1,2,3)]
-Nsec12[] <- lapply(Nsec12, as.numeric)
-Nsum12 <- colSums(Nsec12[,-1])
-
-##sector 13
-
-Nsec13 <- subset(SecN, Sector == "13")
-Nsec13 <- Nsec13[,-c(1,2,3)]
-Nsec13[] <- lapply(Nsec13, as.numeric)
-Nsum13 <- colSums(Nsec13[,-1])
-
-##sector 14
-
-Nsec14 <- subset(SecN, Sector == "14")
-Nsec14 <- Nsec14[,-c(1,2,3)]
-Nsec14[] <- lapply(Nsec14, as.numeric)
-Nsum14 <- colSums(Nsec14[,-1])
-
-##sector 15
-
-Nsec15 <- subset(SecN, Sector == "15")
-Nsec15 <- Nsec15[,-c(1,2,3)]
-Nsec15[] <- lapply(Nsec15, as.numeric)
-Nsum15 <- colSums(Nsec15[,-1])
-
-##sector 16
-
-Nsec16 <- subset(SecN, Sector == "16")
-Nsec16 <- Nsec16[,-c(1,2,3)]
-Nsec16[] <- lapply(Nsec16, as.numeric)
-Nsum16 <- colSums(Nsec16[,-1])
-
-##sector 17
-
-Nsec17 <- subset(SecN, Sector == "17")
-Nsec17 <- Nsec17[,-c(1,2,3)]
-Nsec17[] <- lapply(Nsec17, as.numeric)
-Nsum17 <- colSums(Nsec17[,-1])
-
-##sector 18
-
-Nsec18 <- subset(SecN, Sector == "18")
-Nsec18 <- Nsec18[,-c(1,2,3)]
-Nsec18[] <- lapply(Nsec18, as.numeric)
-Nsum18 <- colSums(Nsec18[,-1])
-
-##sector 19
-
-Nsec19 <- subset(SecN, Sector == "19")
-Nsec19 <- Nsec19[,-c(1,2,3)]
-Nsec19[] <- lapply(Nsec19, as.numeric)
-Nsum19 <- colSums(Nsec19[,-1])
-
-##sector 20
-
-Nsec20 <- subset(SecN, Sector == "20")
-Nsec20 <- Nsec20[,-c(1,2,3)]
-Nsec20[] <- lapply(Nsec20, as.numeric)
-Nsum20 <- colSums(Nsec20[,-1])
-
-##sector 21
-
-Nsec21 <- subset(SecN, Sector == "21")
-Nsec21 <- Nsec21[,-c(1,2,3)]
-Nsec21[] <- lapply(Nsec21, as.numeric)
-Nsum21 <- colSums(Nsec21[,-1])
-
-##sector 22
-
-Nsec22 <- subset(SecN, Sector == "22")
-Nsec22 <- Nsec22[,-c(1,2,3)]
-Nsec22[] <- lapply(Nsec22, as.numeric)
-Nsum22 <- colSums(Nsec22[,-1])
-
-##sector 23
-
-Nsec23 <- subset(SecN, Sector == "23")
-Nsec23 <- Nsec23[,-c(1,2,3)]
-Nsec23[] <- lapply(Nsec23, as.numeric)
-Nsum23 <- colSums(Nsec23[,-1])
-
-##sector 24
-
-Nsec24 <- subset(SecN, Sector == "24")
-Nsec24 <- Nsec24[,-c(1,2,3)]
-Nsec24[] <- lapply(Nsec24, as.numeric)
-Nsum24 <- colSums(Nsec24[,-1])
-
-##sector 25
-
-Nsec25 <- subset(SecN, Sector == "25")
-Nsec25 <- Nsec25[,-c(1,2,3)]
-Nsec25[] <- lapply(Nsec25, as.numeric)
-Nsum25 <- colSums(Nsec25[,-1])
-
-##sector 26
-
-Nsec26 <- subset(SecN, Sector == "26")
-Nsec26 <- Nsec26[,-c(1,2,3)]
-Nsec26[] <- lapply(Nsec26, as.numeric)
-Nsum26 <- colSums(Nsec26[,-1])
-
-##Sector 27
-
-Nsec27 <- subset(SecN, Sector == "27")
-Nsec27 <- Nsec0[,-c(1,2,3)]
-Nsec27[] <- lapply(Nsec27, as.numeric)
-Nsum27 <- colSums(Nsec27[,-1])
-
-# Nsum27 tiene 52 objetos y no cuadra con las demas de 55 objetos.
-
-Nica2 <- data.frame(Nsum0, Nsum1, Nsum2, Nsum3, Nsum4, Nsum5, Nsum6, Nsum7, Nsum8, Nsum9, Nsum10, Nsum11, Nsum12, Nsum13, Nsum14, Nsum15, Nsum16, Nsum17, Nsum18, Nsum19, Nsum20, Nsum21, Nsum22, Nsum23, Nsum24, Nsum25, Nsum26)
-
-# Se agrupa por distritos
-```
+# Sumando las ventas por sector
 
 
 ```{r}
-# Salen fechas demás, como x51, x52, etc.
+sectoresG <- gsub(" ","", sectoresG)
+crearLista <- function(x,y){
+  lista <-c()
+  for(i in seq(1, length(y), by=1)){
+    sec <- subset(x, Sector == y[i])
+    sec <- sec[,c(length(x))]
+    lista[[i]] <- sum(as.numeric(sec))
+  }
+  return(lista)
+}
 
-#Idea para hacer la matriz
-#crearMatriz <- function(x,y){
-  #matriz <- matrix( nrow = 55, ncol = 50)
-  #for (i in 0){
-    #lista <- x[x$Sector == i,]
-    #lista <- lista[,-c(1,2,3)]
-    #lista[] <- lapply(lista, as.numeric)
-    #suma <- colSums(lista[,-1])
-    #matriz <- cbind(suma)
-  #}
-  #return(matriz)
-#}
-
+Guatemala <- as.data.frame(crearLista(SecG, sectoresG))
 ```
+
+# Categorias que mas/menos venden
+## Guatemala 
 ```{r}
-#nuevoSecG <- crearMatriz(SecG,Ga)
+SecG$VentasTotales <- as.numeric(SecG$VentasTotales) 
+catG <- ddply(SecG, .(Categoria), summarize, sum=sum(VentasTotales))
+catG<- catG[-c(1),] 
+
+ggplot(data=catG, aes(x=Categoria, y=sum)) +
+  geom_bar(stat="identity")+ coord_flip() 
+```
+Se tiene que las categorias que mas venden son: Uso diario, cabello y ellas. 
+En cuanto a las que menos venden se tiene que: cuidado personal, kimberly clark y paquetes.
+
+## El Salvador
+
+```{r}
+SecS$VentasTotales <- as.numeric(SecS$VentasTotales) 
+catS <- ddply(SecS, .(Categoria), summarize, sum=sum(VentasTotales))
+
+catS<- catS[-c(1),] 
+
+ggplot(data=catS, aes(x=Categoria, y=sum)) +
+  geom_bar(stat="identity")+ coord_flip() 
+
+```
+Nuevamente, se tiene que entre las que mas venden son: uso diario, cabello y ellas. 
+Entre las que menos venden se tienen: Joyeria, premios y paquetes.
+## Nicaragua
+```{r}
+SecN$VentasTotales <- as.numeric(SecN$VentasTotales) 
+catN <- ddply(SecN, .(Categoria), summarize, sum=sum(VentasTotales))
+catN<- catN[-c(1),] 
+
+ggplot(data=catN, aes(x=Categoria, y=sum)) +
+  geom_bar(stat="identity")+ coord_flip() 
+
+```
+## Honduras
+```{r}
+SecH$VentasTotales <- as.numeric(SecH$VentasTotales) 
+catH <- ddply(SecN, .(Categoria), summarize, sum=sum(VentasTotales))
+catH<- catN[-c(1),] 
+
+ggplot(data=catH, aes(x=Categoria, y=sum)) +
+  geom_bar(stat="identity")+ coord_flip() 
+
 ```
 
+
+# PCA entre las categorias que mas venden
+
+
+#Sneak peak: Series de tiempo
 
 ```{r}
 # -------------------------------
