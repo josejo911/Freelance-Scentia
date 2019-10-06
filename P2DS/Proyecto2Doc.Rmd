@@ -1,6 +1,6 @@
 ---
 title: "Proyecto 2 DataScience"
-author: "Jose Javier Jo"
+author: "Grupo 6"
 date: "28 de agosto de 2019"
 output:
   html_document: default
@@ -13,10 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Resumen de información
 En los avances de proyecto 1, se había presentado el análisis exploratorio del archivo equivocado. Por ello, el primer paso fue realizar análisis exploratorio sobre los archivos que incluyen únicamente las ventas por sector, así como la distribución de cada sector. 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
+
 ## Objetivos
 * Separar las ventas por sectores.
 * Crear una predicción sobre la ventas a partir de líneas de tiempo generadas con los datos que se tienen por sector de los últimos 4 años.
@@ -63,7 +61,7 @@ library(openxlsx)
 setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
-# Honduras
+# Guatemala
 
 SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
@@ -124,88 +122,23 @@ SecS[is.na(SecS)] <- 0
 ### Cambio de nombre a las columnas
 
 ```{r}
-
-gsub2 <- function(de, a, x) {
-    for(i in 1:length(de))
-    x <- gsub(de[i], a[i], x)
-    x
-  }
-
+# 
 cambioTitulos <- function(x){
-
 # -------------------------------
 # Títulos principales
 # -------------------------------
   names(x)[1] <- "Sector"
   names(x)[2] <- "Categoria"
-  names(x)[3] <- "Producto y Descripcion"
-  
-  # -------------------------------
-  # Año 2015
-  # -------------------------------
-  names(x)[4] <- "01-2015"
-  names(x)[5] <- "02-2015"
-  names(x)[6] <- "03-2015"
-  names(x)[7] <- "04-2015"
-  names(x)[8] <- "05-2015"
-  names(x)[9] <- "06-2015"
-  names(x)[10] <- "07-2015"
-  names(x)[11] <- "08-2015"
-  names(x)[12] <- "09-2015"
-  names(x)[13] <- "10-2015"
-  names(x)[14] <- "11-2015"
-  names(x)[15] <- "12-2015"
-  
-  # -------------------------------
-  # Año 2016
-  # -------------------------------
-  names(x)[16] <- "01-2016"
-  names(x)[17] <- "02-2016"
-  names(x)[18] <- "03-2016"
-  names(x)[19] <- "04-2016"
-  names(x)[20] <- "05-2016"
-  names(x)[21] <- "06-2016"
-  names(x)[22] <- "07-2016"
-  names(x)[23] <- "08-2016"
-  names(x)[24] <- "09-2016"
-  names(x)[25] <- "10-2016"
-  names(x)[26] <- "11-2016"
-  names(x)[27] <- "12-2016"
-  
-  # -------------------------------
-  # Año 2017
-  # -------------------------------
-  names(x)[28] <- "01-2017"
-  names(x)[29] <- "02-2017"
-  names(x)[30] <- "03-2017"
-  names(x)[31] <- "04-2017"
-  names(x)[32] <- "05-2017"
-  names(x)[33] <- "06-2017"
-  names(x)[34] <- "07-2017"
-  names(x)[35] <- "08-2017"
-  names(x)[36] <- "09-2017"
-  names(x)[37] <- "10-2017"
-  names(x)[38] <- "11-2017"
-  names(x)[39] <- "12-2017"
-  
-  # -------------------------------
-  # Año 2018
-  # -------------------------------
-  names(x)[40] <- "01-2018"
-  names(x)[41] <- "02-2018"
-  names(x)[42] <- "03-2018"
-  names(x)[43] <- "04-2018"
-  names(x)[44] <- "05-2018"
-  names(x)[45] <- "06-2018"
-  names(x)[46] <- "07-2018"
-  names(x)[47] <- "08-2018"
-  names(x)[48] <- "09-2018"
-  names(x)[49] <- "10-2018"
-  names(x)[50] <- "11-2018"
-  
-  # Se eliminan filas no útiles
-  x <- x[-c(1, 2), ] 
+  names(x)[length(x)] <- "VentasTotales"
+  x <- x[-c(1, 2), ]
+  x <- x[,c(1,2,length(x))]
 }
+
+SecS <- cambioTitulos(SecS)
+SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
+
+
+
 
 #Guatemala
 
@@ -234,6 +167,7 @@ SecS <- cambioTitulos(SecS)
 
 #vector de sectores
 ## Guatemala
+
 sectoresG <- strsplit(DescG[,c(2)], "-")
 sectoresG <- data.frame(sectoresG)
 sectoresG <- t(sectoresG[-c(2),])
