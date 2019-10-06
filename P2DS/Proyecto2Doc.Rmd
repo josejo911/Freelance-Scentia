@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 ---
 title: "Proyecto 2 DataScience"
 author: "Grupo 6"
@@ -150,7 +149,8 @@ SecN <- cambioTitulos(SecN)
 SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
 ```
 
-
+## Modificación a la hoja de descripción de sectores
+Se dividió la descripción de cada sector a partir del símbolo "-" dejando dos filas. En la primera fila se econtraba el código del sector y en la segunda fila se encontraba la descripción del sector. Luego se le aplicó una transpuesta a estos data frame para obtener dos columnas. A partir de esto, se limpió el código de cada sector eliminando los espacios en blanco para poder ser utilizada en un futuro. Finalemnte se ordenaron los códigos de cada sector de menor a mayor.
 ```{r echo=FALSE}
 
 #vector de sectores
@@ -185,6 +185,8 @@ sectoresS <- gsub(" ","", sectoresS)
 sectoresS <- sort(sectoresS)
 
 ```
+# Ventas totales de cada país
+Se creó una función para sumar las ventas totales de cada producto de caa sector paa obtener la venta total del sector en todo su periodo de tiempo. Después de esto, se graficaron las ventas totales de cada sector para cada país.
 ```{r}
 crearLista <- function(x,y){
   lista <-c()
@@ -212,6 +214,31 @@ Guatemala %>%
     theme_bw()
 
 ```
+Para el país de Guatemala se tiene que los sectores con más ventas son:
+
+* AB03 (COVINOC - Distrito de abogados) con un total de 6557880 ventas por unidad
+* CC (CLIENTES CONTADO - Distrito contado) con un total de 2840462 ventas por unidad
+* 0021 (SANTA ROSA TODOS SUS MUNICIPIOS - Distrito Arius) con un total de 892428 ventas por unidad
+* 0005 (CHIQUIMULA TODOS LOS MUNICIPIOS - Ditrito Sirius) con un total de 705007 ventas por unidad
+* 0027 (JUTIAPA (CENTRO), MOYUTA, JALPATAGUA, JEREZ - Distrito Arius) con un total de 684809 ventas por unidad
+* 0006 (ZACAPA TODOS LOS MUNICIPIOS - Distrito Sirius) con un total de 679730 ventas por unidad
+* 0012 (SAN JOSE Y BARCENAS (V. NUEVA), AMATITLAN Y PALIN - Distrito Airus) con un total de 668926 ventas por unidad
+* 0026 (ZONAS 17,24,25; PALENCIA Y SAN JOSE DEL GOLFO -  Distrito Sirius) con un total de 645816 ventas por unidad
+* 0031 (EL PROGRESO TODOS SUS MUNICIPIOS - Distrito Sirus) con un total de 633666 ventas por unidad
+* 0034 (PETEN Y MUNICIPIOS - Distrito Sirius) con un total de 615779 ventas por unidad
+
+Por otro lado, los sectores con menos ventas son:
+
+*EX01 ( EXTERIOR - Distrito EXTERIOR) con un total de 0 ventas por unidad
+*0040 ( San Juan/San Pedro Sacatepequez - Distrito Orion) con un total de 2 ventas por unidad
+*PR01 (PREMIOS POR RECOBRAR - Distrito Abogados) con un total de 12 ventas por unidad
+*AB01 (ABOGADO CARLOS ARANA - Distrito Abogados) con un total de 26 ventas por unidad
+*AB02 (SERVICIOS LEGALES INTEGRADOS - Distrito Abogados) con un total de 227 ventas por unidad
+*0000 (CIUDAD QUETZAL, SAN PEDRO, JUAN, RAYMUNDO, 6 MIXCO - Distrito Orion) con un total de 130241 ventas por unidad
+*0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion) con un total de 190270 ventas por unidad
+*0042 (SECTOR 42 - Distrito Orion) con un total de 206768 ventas por unidad
+*0038 (AN LUIS/POPTUN - Distrito Sirius) con un total de 255187 ventas por unidad
+*0018 (REFORMITA, VILLA LOBOS, MEZQUITAL - Distrito Arius) con un total de 281042 ventas por unidad
 ```{r}
 
 # Nicaragua
@@ -230,6 +257,31 @@ Nicaragua %>%
     theme_bw()
 
 ```
+Para el país de Nicaragua se tiene que los sectores con más ventas son:
+
+* AB01 (ABOGADO - Distrito de abogados) con un total de 3512714 ventas por unidad
+* CC (SECTOR CONTADO - Distrito contado) con un total de 509950 ventas por unidad
+* 0409 (RAQUEL UREY ESTRADA - Distrito Indiana Rivas) con un total de 307620 ventas por unidad
+* 0402 (MARBELLY OBANDO RAMOS - Ditrito Indiana Rivas) con un total de 272197 ventas por unidad
+* 0427 (MARÍA ISABEL MATUTE - Distrito Jannette Herrera) con un total de 271152 ventas por unidad
+* 0405 (CLAUDIA HATYEL ALTAMIRANO RODRIGUEZ - Distrito Indiana Rivas) con un total de 262093 ventas por unidad
+* 0407 (MILAGROS SUYEN RIVAS RIVAS - Distrito Indiana Rivas) con un total de 247739 ventas por unidad
+* 0424 (JACQUELIN LEIVA -  Distrito Jannette Herrera) con un total de 241217 ventas por unidad
+* 0404 (ROSA ADILIA OLIVAS - Distrito Indiana Rivas) con un total de 218165 ventas por unidad
+* 0410 (KAREL FUENTES - Distrito Indiana Rivas) con un total de 214711 ventas por unidad
+
+Por otro lado, los sectores con menos ventas son:
+
+*0412 ( RETAIL - Distrito Institucional) con un total de 79 ventas por unidad
+*0422 ( SECTOR CONTADO INSTITUCIONAL - Distrito Contado Institucional) con un total de 	301 ventas por unidad
+*0000 (LANCASCO - Distrito Empleado) con un total de 6061 ventas por unidad
+*0413 (SOBEYDA VARGAS - Distrito Indiana Rivas) con un total de 66970 ventas por unidad
+*0433 (VILMA RODRIGUEZ - Distrito Jannette Herrera) con un total de 94217 ventas por unidad
+*0408 (ARELYS CASTILLO - Distrito Indiana Rivas) con un total de 124018 ventas por unidad
+*0420 (KARLA ALVAREZ - Distrito Jannette Herrera) con un total de 140713 ventas por unidad
+*0426 (MAYELA DE LOS ANGELES GUTIERREZ GUEVARA - Distrito Jannette Herrera) con un total de 156187 ventas por unidad
+*0429 (JEANETH HERRERA - Distrito Jannette Herrera) con un total de 164861 ventas por unidad
+*0403 (JOHANNA MIRANDA - Distrito Indiana Rivas) con un total de 169754 ventas por unidad
 ```{r}
 
 # El Salvador
@@ -247,6 +299,31 @@ Salvador %>%
     xlab("Sector") +
     theme_bw()
 ```
+Para el país de El Salvador se tiene que los sectores con más ventas son:
+
+* AB01 (ABOGADOS - Distrito de abogados) con un total de 1792633 ventas por unidad
+* 0202 (SANTA ANA - Distrito Arius) con un total de 586658 ventas por unidad
+* 0204 (SONSONATE - Distrito Arius) con un total de 347768 ventas por unidad
+* CC (CONTADO - Ditrito Contado) con un total de 337734 ventas por unidad
+* 0216 (USULUTAN - Distrito Sirius) con un total de 325733 ventas por unidad
+* 0203 (CHALATENANGO - Distrito Arius) con un total de 301789 ventas por unidad
+* 0212 (SOYAPANGO, CENTRO LAS MARGARITAS SAN JOSE - Distrito Sirius) con un total de 297690 ventas por unidad
+* 0210 (APOPA -  Distrito Arius) con un total de 293274 ventas por unidad
+* 0206 (LOURDES - Distrito Arius) con un total de 291313 ventas por unidad
+* 0201 (AHUACHAPAN - Distrito Arius) con un total de 280664 ventas por unidad
+
+Por otro lado, los sectores con menos ventas son:
+
+*0000 (PERSONAL DE LANCASCO SALVADOREÑA, S.A DE C.V. - Distrito Empleado) con un total de 88323 ventas por unidad
+*0214 (SUCHITOTO,COJUTEPEQUE, SAN RAFAEL CEDROS - Distrito Sirius) con un total de 	106909 ventas por unidad
+*0224 (CUSCATLAN - Distrito Sirius) con un total de 112256 ventas por unidad
+*0230 (SAN SALVADOR NORTE - Distrito Arius) con un total de 114430 ventas por unidad
+*0223 (USULUTAN NORTE - Distrito Sirius) con un total de 140411 ventas por unidad
+*0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
+*0219 (MORAZAN - Distrito Sirius) con un total de 142319 ventas por unidad
+*0221 (ARMENIA - Distrito Arius) con un total de 150182 ventas por unidad
+*0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
+*0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
 # Categorias que mas/menos venden
 ## Guatemala 
 ```{r}
@@ -400,177 +477,6 @@ plot(D6.ts.desc)
 ```
 Este distrito se llama "DISTRITO EMPLEADO". Este distrito ha perido muchas ventas, siendo estas casi nulas. Comenzó todo bien pero desde principios del 2016, las ventas han ido decreciendo. En la descomposición se observa claramente este bajón en las ventas, posiblemente es útil considerar eliminar este distrito dentro de las ventas destinadas que tiene contemplado Scentia o simplemente se podrían producir lo necesario para satisfacer este distrito y que la empresa no tenga pérdidas. 
 =======
----
-title: "Proyecto 2 DataScience"
-author: "Grupo 6"
-date: "28 de agosto de 2019"
-output:
-  html_document: default
-  pdf_document: default
----
-
-```{r setup, include=FALSE, warning = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Resumen de información
-En los avances de proyecto 1, se había presentado el análisis exploratorio del archivo equivocado. Por ello, el primer paso fue realizar análisis exploratorio sobre los archivos que incluyen únicamente las ventas por sector, así como la distribución de cada sector. 
-
-
-## Objetivos
-* Separar las ventas por sectores.
-* Crear una predicción sobre la ventas a partir de líneas de tiempo generadas con los datos que se tienen por sector de los últimos 4 años.
-* Verificar la eficiencia del modelo comparando las gráficas de tiempo con la historia económica de los últimos 4 años.
-
-## Variables de interés
-* Ventas: es una variable cuantitativa la cual será clave para las predicciones.
-* Mes y año de venta: variable cuantitativa indispensable para la creación de una serie de tiempo. 
-* Sector: variable de carácter cualitativo dado que indica la pertenencia de una venta a un sector asignado en un país.
-
-## Variables Respuesta
-* Modelo de predicción a partir de la serie de tiempo. 
-
-```{r echo=FALSE, warning=FALSE, include=FALSE}
-# Librerias a utilizar
-require(ggpubr) # Para mejorar la visualización gráfica
-require(tidyverse) # Para explotar, manipular y visualizar datos que comparten info
-require(corrplot) # Para visualizar la matriz de correlación
-require(cluster) #Para calcular la silueta
-library(fpc) # Para hacer el plotcluster
-library(NbClust) # Para determinar el numero de clusters optimo
-library(factoextra) # Para hacer graficos bonitos de clustering
-library(rela) # Para poder utilizar paf()
-library(psych) # Para poder utilizar KMO()
-#library(FactoMineR)
-library(corrplot)
-library(REdaS)
-library(ggplot2) # Graficas bonitas
-#library(ggpubr) # Graficas bonitas x2
-#library(ggmap)
-library(arules) # Reglas de asociacion
-library(factoextra) 
-library(arulesViz)
-library(dplyr)
-#library(caret) # Muestreo estratificado
-library(class) # Para KNN
-library(e1071) # Requisito para la matriz de confusión
-library(openxlsx)
-```
-```{r echo=FALSE}
-#"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
-# /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
-# F:/Data Science/Proyecto 2/Proyecto2DS
-setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
-
-# Leyendo el dataset de csv importacion
-# Guatemala
-
-SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-
-DescG <- read.xlsx("USG1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-
-# Leyendo el dataset de csv importacion
-# Honduras
-
-SecH <- read.xlsx("USH1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-
-DescH <- read.xlsx("USH1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-
-# Leyendo el dataset de csv importacion
-# Nicaragua
-
-SecN <- read.xlsx("USN1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-
-DescN <- read.xlsx("USN1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-
-# Leyendo el dataset de csv importacion
-# El Salvador
-
-SecS <- read.xlsx("USS1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-
-DescS <- read.xlsx("USS1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-```
-```{r}
-SecG[is.na(SecG)] <- 0
-SecH[is.na(SecH)] <- 0
-SecN[is.na(SecN)] <- 0
-SecS[is.na(SecS)] <- 0
-```
-
-### Cambio de nombre a las columnas
-
-```{r}
-# 
-cambioTitulos <- function(x){
-# -------------------------------
-# Títulos principales
-# -------------------------------
-  names(x)[1] <- "Sector"
-  names(x)[2] <- "Categoria"
-  names(x)[length(x)] <- "VentasTotales"
-  x <- x[-c(1, 2), ]
-  x <- x[,c(1,2,length(x))]
-}
-
-SecS <- cambioTitulos(SecS)
-SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
-
-SecG <- cambioTitulos(SecG)
-
-SecH <- cambioTitulos(SecH)
-
-SecN <- cambioTitulos(SecN)
-```
-
-
-```{r echo=FALSE}
-
-#vector de sectores
-## Guatemala
-
-sectoresG <- strsplit(DescG[,c(2)], "-")
-sectoresG <- data.frame(sectoresG)
-sectoresG <- t(sectoresG[-c(2),])
-sectoresG <- gsub(" ","", sectoresG)
-
-## Honduras
-sectoresH <- strsplit(DescH[,c(2)], "-")
-sectoresH <- data.frame(sectoresH)
-sectoresH <- t(sectoresH[-c(2),])
-
-## Nigaragua
-
-sectoresN <- strsplit(DescN[,c(2)], "-")
-sectoresN <- data.frame(sectoresN)
-sectoresN <- t(sectoresN[-c(2),])
-
-
-```
-
 ```{r}
 #Nicaragua
 ## 0
