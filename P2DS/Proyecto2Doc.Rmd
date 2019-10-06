@@ -3,8 +3,8 @@ title: "Proyecto 2 DataScience"
 author: "Grupo 6"
 date: "28 de agosto de 2019"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE, warning = FALSE}
@@ -64,7 +64,7 @@ library(factoextra) # Para hacer graficos bonitos de clustering
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Betzy/Documents/Betzy/Proyecto2DS
-setwd("C:/Users/Betzy/Documents/Betzy/Proyecto2DS/P2DS")
+setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
 # Leyendo el dataset de csv importacion
 # Guatemala
 SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
@@ -313,19 +313,55 @@ Por otro lado, los sectores con menos ventas son:
 ## Clustering
 Se decidió hacer un clustering para las ventas totales por sector de cada país, con el fin de agrupar los sectores entre ventas bajas, medias y altas. A continuación, se usó el agrupamiento por medio de las k-medias, usando un cálculo de 3 clusters por los rangos de ventas ya antes mencionados. 
 
-### Guatemala
+### Clustering de Guatemala
 Se observa que para el primer cluster, solo se encuentra el sector AB03 con 6,557,880 ventas unitarias; el segundo cluster se encuentra el sector CC con 2,840,462; el tercer cluster se encuentra el resto de sectores de Guatemala. Dado que en los primeros clusters solo se encuentra un sector, se llegó a la conclusión que para este data set, no trae cuenta agrupar estos sectores por medio de clustering, a pesar que la media de la Prueba de la Silueta dio como resultado 0.8675771. 
 ```{r}
 ClusterG <- Guatemala # Nuevo data frame únicamente para clusters
-km <- kmeans(Guatemala[,1:2],3) # Se calculan 3 clusters
-ClusterG$grupo <- km$cluster # Se crea una nueva columna con el numero de cluster
+km <- kmeans(Guatemala[,1],3) # Se calculan 3 clusters
+ClusterG$Grupo <- km$cluster # Se crea una nueva columna con el numero de cluster
 
 # Grafica de los clusters
-fviz_cluster(km, data = Guatemala[,1:2], geom = "point", ellipse.type = "norm")
+fviz_cluster(km, data = Guatemala[,1:3], geom = "point", ellipse.type = "norm")
 
 # Prueba de la Silueta 
 silcluster <- silhouette(km$cluster, dist(Guatemala[,1]))
 mean(silcluster[,3]) # Media = 0.8675771. 
+```
+
+### Clustering de El Salvador
+Se observa que para este país, el clustering tiene potencial para agrupar los sectores. Al momento de aplicarle un clustering con 3 k-medias, se obtuvo que la media de la prueba de silueta fue de 0.557041. Este resultado presenta que no es la mejor media esperada pero tampoco está mal. Al mundo de agrupar, se tuvo lo siguiente: 
+* Primer grupo: En este grupo se encuentran los sectores que tienen ventas totales menores a 245,000.
+* Segundo grupo: Se encuentran los sectores que tienen ventas totales entre $245,000 \leq ventas \leq 590,000$.
+* Tercer grupo: Se encuentra el sector que tiene ventas totales mayores a 590,000. 
+```{r}
+ClusterS <- Salvador # Nuevo data frame únicamente para clusters
+kmS <- kmeans(Salvador[,1],3) # Se calculan 3 clusters
+ClusterS$Grupo <- kmS$cluster # Se crea una nueva columna con el numero de cluster
+
+# Grafica de los clusters
+fviz_cluster(kmS, data = ClusterS[,1:3], geom = "point", ellipse.type = "norm")
+
+# Prueba de la Silueta 
+silclusterS <- silhouette(kmS$cluster, dist(Salvador[,1]))
+mean(silclusterS[,3]) # Media = 0.8675771. 
+```
+
+### Clustering de Nicaragua
+Nicaragua muestra un buen agrupamiento de ventas totales por medio de clustering, a pesar que la media de la prueba de silueta fue de 0.4045472. Este resultado no presenta un buen resultado acerca de qué tan alejados están los datos de cada cluster; sin embargo, se presenta el agrupamiento por ventas totales observados por el cluster:
+* Primer grupo: En este grupo se encuentran los sectores que tienen ventas totales menores a 180,000.
+* Segundo grupo: Se encuentran los sectores que tienen ventas totales entre $180,000 \leq ventas \leq 510,000$.
+* Tercer grupo: Se encuentra el sector que tiene ventas totales mayores a 510,000. 
+```{r}
+ClusterN <- Nicaragua # Nuevo data frame únicamente para clusters
+kmN <- kmeans(Nicaragua[,1],3) # Se calculan 3 clusters
+ClusterN$Grupo <- kmN$cluster # Se crea una nueva columna con el numero de cluster
+
+# Grafica de los clusters
+fviz_cluster(kmS, data = ClusterN[,1:3], geom = "point", ellipse.type = "norm")
+
+# Prueba de la Silueta 
+silclusterN <- silhouette(kmN$cluster, dist(Nicaragua[,1]))
+mean(silclusterN[,3]) # Media = 0.8675771. 
 ```
 
 
