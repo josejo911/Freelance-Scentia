@@ -60,55 +60,43 @@ library(plyr)
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Betzy/Documents/Betzy/Proyecto2DS
-#setwd("C:/Users/Betzy/Documents/Betzy/Proyecto2DS/P2DS")
-
+setwd("C:/Users/Betzy/Documents/Betzy/Proyecto2DS/P2DS")
 # Leyendo el dataset de csv importacion
 # Guatemala
-
 SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-
 DescG <- read.xlsx("USG1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-
 # Leyendo el dataset de csv importacion
 # Honduras
-
 SecH <- read.xlsx("USH1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-
 DescH <- read.xlsx("USH1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-
 # Leyendo el dataset de csv importacion
 # Nicaragua
-
 SecN <- read.xlsx("USN1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-
 DescN <- read.xlsx("USN1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-
 # Leyendo el dataset de csv importacion
 # El Salvador
-
 SecS <- read.xlsx("USS1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-
 DescS <- read.xlsx("USS1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
@@ -135,16 +123,12 @@ cambioTitulos <- function(x){
   x <- x[-c(1, 2), ]
   x <- x[,c(1,2,length(x))]
 }
-
 SecS <- cambioTitulos(SecS)
 SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
-
 SecG <- cambioTitulos(SecG)
 SecG$VentasTotales <- as.numeric(SecG$VentasTotales)
-
 SecH <- cambioTitulos(SecH)
 SecH$VentasTotales <- as.numeric(SecH$VentasTotales)
-
 SecN <- cambioTitulos(SecN)
 SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
 ```
@@ -152,10 +136,8 @@ SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
 ## Modificación a la hoja de descripción de sectores
 Se dividió la descripción de cada sector a partir del símbolo "-" dejando dos filas. En la primera fila se econtraba el código del sector y en la segunda fila se encontraba la descripción del sector. Luego se le aplicó una transpuesta a estos data frame para obtener dos columnas. A partir de esto, se limpió el código de cada sector eliminando los espacios en blanco para poder ser utilizada en un futuro. Finalemnte se ordenaron los códigos de cada sector de menor a mayor.
 ```{r echo=FALSE}
-
 #vector de sectores
 ## Guatemala
-
 sectoresG <- strsplit(DescG[,c(2)], "-")
 sectoresG <- data.frame(sectoresG)
 sectoresG <- t(sectoresG[-c(2),])
@@ -167,23 +149,18 @@ sectoresG <- sort(sectoresG)
 # sectoresH <- t(sectoresH[-c(2),])
 # sectoresH <- gsub(" ","", sectoresH)
 # sectoresG <- sort(sectoresG)
-
 ## Nigaragua
-
 sectoresN <- strsplit(DescN[,c(2)], "-")
 sectoresN <- data.frame(sectoresN)
 sectoresN <- t(sectoresN[-c(2),])
 sectoresN <- gsub(" ","", sectoresN)
 sectoresN <- sort(sectoresN)
-
 ## El Salvador
-
 sectoresS <- strsplit(DescS[,c(2)], "-")
 sectoresS <- data.frame(sectoresS)
 sectoresS <- t(sectoresS[-c(2),])
 sectoresS <- gsub(" ","", sectoresS)
 sectoresS <- sort(sectoresS)
-
 ```
 # Ventas totales de cada país
 Se creó una función para sumar las ventas totales de cada producto de caa sector paa obtener la venta total del sector en todo su periodo de tiempo. Después de esto, se graficaron las ventas totales de cada sector para cada país.
@@ -197,9 +174,7 @@ crearLista <- function(x,y){
   }
   return(lista)
 }
-
 # Guatemala
-
 Guatemala <- as.data.frame(crearLista(SecG, sectoresG))
 Guatemala$Sector <- sectoresG
 names(Guatemala)[1] <- "VentasTotales"
@@ -212,7 +187,6 @@ Guatemala %>%
     ylab("Ventas Totales por Sector") +
     xlab("Sector") +
     theme_bw()
-
 ```
 Para el país de Guatemala se tiene que los sectores con más ventas son:
 
@@ -240,9 +214,7 @@ Por otro lado, los sectores con menos ventas son:
 * 0038 (AN LUIS/POPTUN - Distrito Sirius) con un total de 255187 ventas por unidad
 * 0018 (REFORMITA, VILLA LOBOS, MEZQUITAL - Distrito Arius) con un total de 281042 ventas por unidad
 ```{r}
-
 # Nicaragua
-
 Nicaragua <- as.data.frame(crearLista(SecN, sectoresN))
 Nicaragua$Sector <- sectoresN
 names(Nicaragua)[1] <- "VentasTotales"
@@ -255,7 +227,6 @@ Nicaragua %>%
     ylab("Ventas Totales por Sector") +
     xlab("Sector") +
     theme_bw()
-
 ```
 Para el país de Nicaragua se tiene que los sectores con más ventas son:
 
@@ -293,9 +264,7 @@ Además, las tres mujeres que menos venden en Nicaragua son:
 * Vilma Rodríquez
 * Arelys Castillo
 ```{r}
-
 # El Salvador
-
 Salvador <- as.data.frame(crearLista(SecS, sectoresS))
 Salvador$Sector <- sectoresS
 names(Salvador)[1] <- "VentasTotales"
@@ -340,7 +309,6 @@ Por otro lado, los sectores con menos ventas son:
 SecG$VentasTotales <- as.numeric(SecG$VentasTotales) 
 catG <- ddply(SecG, .(Categoria), summarize, sum=sum(VentasTotales))
 catG<- catG[-c(1),] 
-
 ggplot(data=catG, aes(x=Categoria, y=sum)) +
   geom_bar(stat="identity")+ coord_flip() 
 ```
@@ -352,12 +320,9 @@ En cuanto a las que menos venden se tiene que: cuidado personal, kimberly clark 
 ```{r}
 SecS$VentasTotales <- as.numeric(SecS$VentasTotales) 
 catS <- ddply(SecS, .(Categoria), summarize, sum=sum(VentasTotales))
-
 catS<- catS[-c(1),] 
-
 ggplot(data=catS, aes(x=Categoria, y=sum)) +
   geom_bar(stat="identity")+ coord_flip() 
-
 ```
 Nuevamente, se tiene que entre las que mas venden son: uso diario, cabello y ellas. 
 Entre las que menos venden se tienen: Joyeria, premios y paquetes.
@@ -366,21 +331,28 @@ Entre las que menos venden se tienen: Joyeria, premios y paquetes.
 SecN$VentasTotales <- as.numeric(SecN$VentasTotales) 
 catN <- ddply(SecN, .(Categoria), summarize, sum=sum(VentasTotales))
 catN<- catN[-c(1),] 
-
 ggplot(data=catN, aes(x=Categoria, y=sum)) +
   geom_bar(stat="identity")+ coord_flip() 
-
 ```
+En este caso se tiene que las categorias que mas venden son: Uso diario, cabello, limpieza y ellas. 
+Se observa que hay un incremento en las ventas de las categorias de limpieza y ellas. 
+Por otro lado, para las que menos venden se tienen: Kimberly Clark, joyeria, descontinuados y cuidado de las unas. 
+
 ## Honduras
 ```{r}
 SecH$VentasTotales <- as.numeric(SecH$VentasTotales) 
 catH <- ddply(SecN, .(Categoria), summarize, sum=sum(VentasTotales))
 catH<- catN[-c(1),] 
-
 ggplot(data=catH, aes(x=Categoria, y=sum)) +
   geom_bar(stat="identity")+ coord_flip() 
-
 ```
+Para el pais de Honduras, se observa que las categorias que mas venden son: Uso diario, limpieza, ellas y ninos. 
+Asi tambien, las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
+
+### Conclusiones de ventas por categoria
+* En general se observa que en todos los paises las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
+* Tambien se observo, que en su mayoria, las categorias que mas venden son: uso diario, limpieza y ellas. 
+
 
 
 # PCA entre las categorias que mas venden
@@ -468,7 +440,6 @@ Este distrito se llama "INSTITUCIONAL". Las ventas han ido de forma decreciente 
 # D5.ts.desc <- decompose(D5.ts)
 # plot(D5.ts.desc)
 # # RESUMEN: Hay muuuuucha tendencia en los ultimos años
-
 ```
 Este distrito se llama "DISTRITO ABOGADOS". Okay, evidentemente este distrito ha solicitado muchos productos de Scentia desde el 2018 hasta este año. El crecimiento de ventas ha sido de forma radical, mostrando solamente que en el mes de diciembre del 2018 las ventas bajaron pero luego crecieron nuevamente, superando las ventas del 2018. Tomar en cuenta porqué se debe este cambio. Claramente se evidencia tendencia, aunque es estacionaria con la media pero no con la varianza. 
 
@@ -702,7 +673,6 @@ Este distrito se llama "DISTRITO EMPLEADO". Este distrito ha perido muchas venta
 
 ```{r}
 # Salen fechas demás, como x51, x52, etc.
-
 #Idea para hacer la matriz
 #crearMatriz <- function(x,y){
   #matriz <- matrix( nrow = 55, ncol = 50)
@@ -715,8 +685,9 @@ Este distrito se llama "DISTRITO EMPLEADO". Este distrito ha perido muchas venta
   #}
   #return(matriz)
 #}
-
 ```
 ```{r}
 #nuevoSecG <- crearMatriz(SecG,Ga)
 ```
+
+
