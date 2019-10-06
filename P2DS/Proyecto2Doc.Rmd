@@ -3,8 +3,8 @@ title: "Proyecto 2 DataScience"
 author: "Grupo 6"
 date: "28 de agosto de 2019"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE, warning = FALSE}
