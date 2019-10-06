@@ -54,6 +54,10 @@ library(class) # Para KNN
 library(e1071) # Requisito para la matriz de confusión
 library(openxlsx)
 library(plyr)
+require(cluster) #Para calcular la silueta
+library(fpc) # Para hacer el plotcluster
+library(NbClust) # Para determinar el numero de clusters optimo
+library(factoextra) # Para hacer graficos bonitos de clustering 
 ```
 ```{r echo=FALSE}
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
@@ -162,6 +166,7 @@ sectoresS <- t(sectoresS[-c(2),])
 sectoresS <- gsub(" ","", sectoresS)
 sectoresS <- sort(sectoresS)
 ```
+
 # Ventas totales de cada país
 Se creó una función para sumar las ventas totales de cada producto de caa sector paa obtener la venta total del sector en todo su periodo de tiempo. Después de esto, se graficaron las ventas totales de cada sector para cada país.
 ```{r}
@@ -174,6 +179,7 @@ crearLista <- function(x,y){
   }
   return(lista)
 }
+
 # Guatemala
 Guatemala <- as.data.frame(crearLista(SecG, sectoresG))
 Guatemala$Sector <- sectoresG
@@ -303,6 +309,26 @@ Por otro lado, los sectores con menos ventas son:
 * 0221 (ARMENIA - Distrito Arius) con un total de 150182 ventas por unidad
 * 0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
 * 0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
+
+## Clustering
+Se decidió hacer un clustering para las ventas totales por sector de cada país, con el fin de agrupar los sectores entre ventas bajas, medias y altas. A continuación, se usó el agrupamiento por medio de las k-medias, usando un cálculo de 3 clusters por los rangos de ventas ya antes mencionados. 
+
+### Guatemala
+Se observa que para el primer cluster, solo se encuentra el sector AB03 con 6,557,880 ventas unitarias; el segundo cluster se encuentra el sector CC con 2,840,462; el tercer cluster se encuentra el resto de sectores de Guatemala. Dado que en los primeros clusters solo se encuentra un sector, se llegó a la conclusión que para este data set, no trae cuenta agrupar estos sectores por medio de clustering, a pesar que la media de la Prueba de la Silueta dio como resultado 0.8675771. 
+```{r}
+ClusterG <- Guatemala # Nuevo data frame únicamente para clusters
+km <- kmeans(Guatemala[,1:2],3) # Se calculan 3 clusters
+ClusterG$grupo <- km$cluster # Se crea una nueva columna con el numero de cluster
+
+# Grafica de los clusters
+fviz_cluster(km, data = Guatemala[,1:2], geom = "point", ellipse.type = "norm")
+
+# Prueba de la Silueta 
+silcluster <- silhouette(km$cluster, dist(Guatemala[,1]))
+mean(silcluster[,3]) # Media = 0.8675771. 
+```
+
+
 # Categorias que mas/menos venden
 ## Guatemala 
 ```{r}
