@@ -58,13 +58,15 @@ require(cluster) #Para calcular la silueta
 library(fpc) # Para hacer el plotcluster
 library(NbClust) # Para determinar el numero de clusters optimo
 library(factoextra) # Para hacer graficos bonitos de clustering 
+library(forcats)
+library(cluster)
 ```
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE}
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Betzy/Documents/Betzy/Proyecto2DS
-setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
+setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
 # Leyendo el dataset de csv importacion
 # Guatemala
 SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
@@ -147,24 +149,64 @@ sectoresG <- data.frame(sectoresG)
 sectoresG <- t(sectoresG[-c(2),])
 sectoresG <- gsub(" ","", sectoresG)
 sectoresG <- sort(sectoresG)
+
+
+categoriasG <- data.frame(SecG$Categoria)
+n_occur <- data.frame(table(categoriasG$SecG.Categoria))
+n_occur[n_occur$Freq > 1,]
+categoriasG[categoriasG$SecG.Categoria %in% n_occur$Var1[n_occur$Freq > 1],]
+n_occur$Freq <- NULL
+listaCatG<- t(n_occur[-c(1),])
+listaCatG <- gsub(" ","", listaCatG)
+listaCatG <- sort(listaCatG)
+
+
 ## Honduras
-# sectoresH <- strsplit(DescH[,c(2)], "-")
+# sectoresH <- strsplit(DescH[,c(2)], "-", NULL)
 # sectoresH <- data.frame(sectoresH)
 # sectoresH <- t(sectoresH[-c(2),])
 # sectoresH <- gsub(" ","", sectoresH)
 # sectoresG <- sort(sectoresG)
+# 
+# categoriasS <- data.frame(SecS$Categoria)
+# n_occurS <- data.frame(table(categoriasS$SecS.Categoria))
+# n_occurS[n_occurS$Freq > 1,]
+# categoriasS[categoriasS$SecS.Categoria %in% n_occurS$Var1[n_occurS$Freq > 1],]
+# n_occurS$Freq <- NULL
+# listaCatS<- t(n_occurS[-c(1),])
+# listaCatS <- gsub(" ","", listaCatS)
+# listaCatS <- sort(listaCatS)
+
 ## Nigaragua
 sectoresN <- strsplit(DescN[,c(2)], "-")
 sectoresN <- data.frame(sectoresN)
 sectoresN <- t(sectoresN[-c(2),])
 sectoresN <- gsub(" ","", sectoresN)
 sectoresN <- sort(sectoresN)
+
+categoriasN <- data.frame(SecN$Categoria)
+n_occurN <- data.frame(table(categoriasN$SecN.Categoria))
+n_occurN[n_occurN$Freq > 1,]
+categoriasN[categoriasN$SecN.Categoria %in% n_occurN$Var1[n_occurN$Freq > 1],]
+n_occurN$Freq <- NULL
+listaCatN<- t(n_occurN[-c(1),])
+listaCatN <- gsub(" ","", listaCatN)
+listaCatN <- sort(listaCatN)
 ## El Salvador
 sectoresS <- strsplit(DescS[,c(2)], "-")
 sectoresS <- data.frame(sectoresS)
 sectoresS <- t(sectoresS[-c(2),])
 sectoresS <- gsub(" ","", sectoresS)
 sectoresS <- sort(sectoresS)
+
+categoriasS <- data.frame(SecS$Categoria)
+n_occurS <- data.frame(table(categoriasS$SecS.Categoria))
+n_occurS[n_occurS$Freq > 1,]
+categoriasS[categoriasS$SecS.Categoria %in% n_occurS$Var1[n_occurS$Freq > 1],]
+n_occurS$Freq <- NULL
+listaCatS<- t(n_occurS[-c(1),])
+listaCatS <- gsub(" ","", listaCatS)
+listaCatS <- sort(listaCatS)
 ```
 
 # Ventas totales de cada país
@@ -219,6 +261,9 @@ Por otro lado, los sectores con menos ventas son:
 * 0042 (SECTOR 42 - Distrito Orion) con un total de 206768 ventas por unidad
 * 0038 (AN LUIS/POPTUN - Distrito Sirius) con un total de 255187 ventas por unidad
 * 0018 (REFORMITA, VILLA LOBOS, MEZQUITAL - Distrito Arius) con un total de 281042 ventas por unidad
+
+
+
 ```{r}
 # Nicaragua
 Nicaragua <- as.data.frame(crearLista(SecN, sectoresN))
@@ -319,9 +364,10 @@ Se observa que para el primer cluster, solo se encuentra el sector AB03 con 6,55
 ClusterG <- Guatemala # Nuevo data frame únicamente para clusters
 km <- kmeans(Guatemala[,1],3) # Se calculan 3 clusters
 ClusterG$Grupo <- km$cluster # Se crea una nueva columna con el numero de cluster
+#Guatemala$Sector <- as.numeric(as.factor(Guatemala$Sector))
 
 # Grafica de los clusters
-fviz_cluster(km, data = Guatemala[,1:3], geom = "point", ellipse.type = "norm")
+fviz_cluster(km, data = Guatemala[,1:2], geom = "point", ellipse.type = "norm")
 
 # Prueba de la Silueta 
 silcluster <- silhouette(km$cluster, dist(Guatemala[,1]))
