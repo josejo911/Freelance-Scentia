@@ -375,7 +375,7 @@ ggplot(data=catG, aes(x=Categoria, y=sum)) +
   geom_bar(stat="identity")+ coord_flip() 
 ```
 Se tiene que las categorias que mas venden son: Uso diario, cabello y ellas. 
-En cuanto a las que menos venden se tiene que: cuidado personal, kimberly clark y paquetes.
+En cuanto a las que menos venden se tiene que: joyeria, cuidado personal y cuidado de las unas. 
 
 ## El Salvador
 
@@ -403,7 +403,7 @@ Por otro lado, para las que menos venden se tienen: Kimberly Clark, joyeria, des
 ## Honduras
 ```{r}
 SecH$VentasTotales <- as.numeric(SecH$VentasTotales) 
-catH <- ddply(SecN, .(Categoria), summarize, sum=sum(VentasTotales))
+catH <- ddply(SecH, .(Categoria), summarize, sum=sum(VentasTotales))
 catH<- catN[-c(1),] 
 ggplot(data=catH, aes(x=Categoria, y=sum)) +
   geom_bar(stat="identity")+ coord_flip() 
@@ -752,4 +752,7 @@ Este distrito se llama "DISTRITO EMPLEADO". Este distrito ha perido muchas venta
 #nuevoSecG <- crearMatriz(SecG,Ga)
 ```
 
-
+# Fuentes consultadas
+* S.A (2018). *The R Graph Gallery*. Extraido de: https://www.r-graph-gallery.com/ [29/06/2019]
+* D. (08/2019). *Markdown Text 101*. Extraido de: https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline- [06/10/2019]
+* Theuwissen, M. (02/12/2015). *How to write the first for loop in R*. Extraido de: https://www.r-bloggers.com/how-to-write-the-first-for-loop-in-r/ [01/10/2019]
