@@ -115,20 +115,23 @@ SecN[is.na(SecN)] <- 0
 SecS[is.na(SecS)] <- 0
 ```
 
-### Cambio de nombre a las columnas
-
+## Modificación de columnas y filas
+En esta parte, se creó una función que eliminara las primeras dos filas de todo el data set, ya que estas contenían el nombre de las columnas. Asimismo, se decidió dejar solamente cuatro columnaas: Sector, Categoría, Producto y Ventas Finales. Todo lo demás se eliminó y se dejó solamente la información de todos los productos de estas cuatro categorías. 
+Sin embargo, se creó una nueva función que eliminara los sectores que no deben analizarse en este documento, tales como el sector AB y 0000, ya que son sectores de abogados y trabajadores. Asimismo, se elimina las categorías de Kimberly Clark, Descontinuados y Cuidado de uñas. 
 ```{r}
-# 
+# -------------------------------
+# Reduciendo el dataset
+# -------------------------------
 cambioTitulos <- function(x){
-# -------------------------------
-# Títulos principales
-# -------------------------------
   names(x)[1] <- "Sector"
   names(x)[2] <- "Categoria"
+  names(x)[3] <- "Producto"
   names(x)[length(x)] <- "VentasTotales"
   x <- x[-c(1, 2), ]
-  x <- x[,c(1,2,length(x))]
+  x <- x[,c(1,2,3,length(x))]
 }
+
+# Aplicación de la función a los datos
 SecS <- cambioTitulos(SecS)
 SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
 SecG <- cambioTitulos(SecG)
@@ -137,6 +140,9 @@ SecH <- cambioTitulos(SecH)
 SecH$VentasTotales <- as.numeric(SecH$VentasTotales)
 SecN <- cambioTitulos(SecN)
 SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
+
+
+
 ```
 
 ## Modificación a la hoja de descripción de sectores
