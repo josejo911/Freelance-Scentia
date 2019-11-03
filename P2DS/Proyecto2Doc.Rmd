@@ -3,8 +3,13 @@ title: "Proyecto 2 DataScience"
 author: "Grupo 6"
 date: "28 de agosto de 2019"
 output:
+<<<<<<< Updated upstream
   html_document: default
   pdf_document: default
+=======
+  pdf_document: default
+  html_document: default
+>>>>>>> Stashed changes
 ---
 
 ```{r setup, include=FALSE, warning = FALSE}
@@ -66,7 +71,11 @@ library(cluster)
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Betzy/Documents/Betzy/Proyecto2DS
+<<<<<<< Updated upstream
 setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
+=======
+#setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
+>>>>>>> Stashed changes
 # Leyendo el dataset de csv importacion
 # Guatemala
 SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
@@ -115,6 +124,7 @@ SecN[is.na(SecN)] <- 0
 SecS[is.na(SecS)] <- 0
 ```
 
+<<<<<<< Updated upstream
 ## Modificación de columnas y filas
 En esta parte, se creó una función que eliminara las primeras dos filas de todo el data set, ya que estas contenían el nombre de las columnas. Asimismo, se decidió dejar solamente cuatro columnaas: Sector, Categoría, Producto y Ventas Finales. Todo lo demás se eliminó y se dejó solamente la información de todos los productos de estas cuatro categorías. 
 Sin embargo, se creó una nueva función que eliminara los sectores que no deben analizarse en este documento, tales como el sector AB y 0000, ya que son sectores de abogados y trabajadores. Asimismo, se elimina las categorías de Kimberly Clark, Descontinuados y Cuidado de uñas. 
@@ -132,6 +142,7 @@ cambioTitulos <- function(x){
 }
 
 # Aplicación de la función a los datos
+
 SecS <- cambioTitulos(SecS)
 SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
 SecG <- cambioTitulos(SecG)
@@ -141,6 +152,33 @@ SecH$VentasTotales <- as.numeric(SecH$VentasTotales)
 SecN <- cambioTitulos(SecN)
 SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
 
+# Modificaciones nuevas según Scentia
+
+## Se crea una lista de las iniciales de los sectores que se quieren eliminar
+
+### Si el sector es un número, se debe de poner el número completo
+
+noQuieroSecGuate <- c("AB", "0000")
+
+## Se crea una lista de las iniciales de las categorías que quiero eliminar (Aquí puede ser el nombre completo)
+
+noQuieroCatGuate <- c("KIMBERLY", "DESCONTINUADOS", "	CUIDADO DE LAS UÑAS")
+
+## Se crea la función para lo que se quiere eliminar
+
+noDeseado <- function(pais, noSec, noCat){
+  for (i in noSec) {
+    pais <- pais[-grep(i, pais$Sector)]
+  }
+  for (i in noCat){
+    pais <- pais[-grep(i, pais$Sector)]
+  }
+  return(pais)
+}
+
+## Se limpia el sector
+
+SecG <- noDeseado(SecG, noQuieroSecGuate, noQuieroCatGuate)
 
 
 ```
@@ -155,6 +193,7 @@ sectoresG <- data.frame(sectoresG)
 sectoresG <- t(sectoresG[-c(2),])
 sectoresG <- gsub(" ","", sectoresG)
 sectoresG <- sort(sectoresG)
+
 
 
 categoriasG <- data.frame(SecG$Categoria)
@@ -190,6 +229,7 @@ sectoresN <- t(sectoresN[-c(2),])
 sectoresN <- gsub(" ","", sectoresN)
 sectoresN <- sort(sectoresN)
 
+
 categoriasN <- data.frame(SecN$Categoria)
 n_occurN <- data.frame(table(categoriasN$SecN.Categoria))
 n_occurN[n_occurN$Freq > 1,]
@@ -198,12 +238,14 @@ n_occurN$Freq <- NULL
 listaCatN<- t(n_occurN[-c(1),])
 listaCatN <- gsub(" ","", listaCatN)
 listaCatN <- sort(listaCatN)
+
 ## El Salvador
 sectoresS <- strsplit(DescS[,c(2)], "-")
 sectoresS <- data.frame(sectoresS)
 sectoresS <- t(sectoresS[-c(2),])
 sectoresS <- gsub(" ","", sectoresS)
 sectoresS <- sort(sectoresS)
+
 
 categoriasS <- data.frame(SecS$Categoria)
 n_occurS <- data.frame(table(categoriasS$SecS.Categoria))
@@ -213,6 +255,7 @@ n_occurS$Freq <- NULL
 listaCatS<- t(n_occurS[-c(1),])
 listaCatS <- gsub(" ","", listaCatS)
 listaCatS <- sort(listaCatS)
+
 ```
 
 # Ventas totales de cada país
@@ -361,6 +404,32 @@ Por otro lado, los sectores con menos ventas son:
 * 0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
 * 0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
 
+<<<<<<< Updated upstream
+=======
+## Ventas por sector
+
+```{r}
+crearArray <- function(x,y,z){
+  coso <- c()
+  lista <-c()
+  for(i in seq(1, length(y), by=1)){
+    sec <- subset(x, Sector == y[i])
+    for (j in seq(1, length(z), by=1)){
+      cat <- subset(sec, Categoria == z[i])
+      cat <- cat[,c(length(x))]
+      lista[[j]] <- sum(as.numeric(cat))
+    }
+    coso[[i]]<- lista
+  }
+  return(coso)
+}
+
+secMasGT <- c("AB03", "CC", "0021", "0005", "0027", "0006", "0006", "0012", "0026", "0031", "0034")
+categorias <- c("CABELLO", "CUIDADO DE LA PIEL", "CUIDADO DE LAS UÑAS", "CUIDADO PERSONAL", "DESCONTINUADOS", "DIVISION FARMA", "ELLAS", "ELLOS", "GASTOS PROMOCIONALES", "JOYERIA", "KIMBERLY CLARK", "LIMPIEZA", "MAQUILLAJE", "NIÑOS", "PAQUETES", "PREMIOS", "PROMOCIONALES VENDIDOS", "SALUD Y BIENESTAR", "TEENS", "USO DIARIO")
+masGuatemala <- t(as.data.frame(crearArray(SecG, secMasGT,categorias)))
+```
+
+>>>>>>> Stashed changes
 ## Clustering
 Se decidió hacer un clustering para las ventas totales por sector de cada país, con el fin de agrupar los sectores entre ventas bajas, medias y altas. A continuación, se usó el agrupamiento por medio de las k-medias, usando un cálculo de 3 clusters por los rangos de ventas ya antes mencionados. 
 
@@ -373,7 +442,9 @@ ClusterG$Grupo <- km$cluster # Se crea una nueva columna con el numero de cluste
 #Guatemala$Sector <- as.numeric(as.factor(Guatemala$Sector))
 
 # Grafica de los clusters
+
 fviz_cluster(km, data = Guatemala[,1:2], geom = "point", ellipse.type = "norm")
+
 
 # Prueba de la Silueta 
 silcluster <- silhouette(km$cluster, dist(Guatemala[,1]))
@@ -391,7 +462,10 @@ kmS <- kmeans(Salvador[,1],3) # Se calculan 3 clusters
 ClusterS$Grupo <- kmS$cluster # Se crea una nueva columna con el numero de cluster
 
 # Grafica de los clusters
+
 fviz_cluster(kmS, data = ClusterS[,1:3], geom = "point", ellipse.type = "norm")
+
+
 
 # Prueba de la Silueta 
 silclusterS <- silhouette(kmS$cluster, dist(Salvador[,1]))
@@ -409,7 +483,8 @@ kmN <- kmeans(Nicaragua[,1],3) # Se calculan 3 clusters
 ClusterN$Grupo <- kmN$cluster # Se crea una nueva columna con el numero de cluster
 
 # Grafica de los clusters
-fviz_cluster(kmS, data = ClusterN[,1:3], geom = "point", ellipse.type = "norm")
+
+
 
 # Prueba de la Silueta 
 silclusterN <- silhouette(kmN$cluster, dist(Nicaragua[,1]))
@@ -472,7 +547,11 @@ Asi tambien, las categorias que menos venden son: cuidado de las unas, descontin
 # PCA entre las categorias que mas venden
 
 
+<<<<<<< Updated upstream
 #Sneak peak: Series de tiempo
+=======
+#Modelos
+>>>>>>> Stashed changes
 
 ```{r}
 # # -------------------------------
