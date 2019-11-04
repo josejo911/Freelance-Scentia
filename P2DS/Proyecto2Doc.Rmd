@@ -156,25 +156,33 @@ eliminarCat <- function(x){
   x <- x[x$Categoria != "CUIDADO DE LAS UÑAS", ]
 }
 
+eliminarNegativos <- function(x){
+  x <- x[x$VentasTotales >= 0, ]
+}
+
 # Aplicación de las funciones
 SecG <- cambioTitulos(SecG)
 SecG <- eliminarSectores(SecG)
 SecG <- eliminarCat(SecG)
+SecG <- eliminarNegativos(SecG)
 SecG$VentasTotales <- as.numeric(SecG$VentasTotales)
 
 SecS <- cambioTitulos(SecS)
 SecS <- eliminarSectores(SecS)
 SecS <- eliminarCat(SecS)
+SecS <- eliminarNegativos(SecS)
 SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
 
 SecH <- cambioTitulos(SecH)
 SecH <- eliminarSectores(SecH)
 SecH <- eliminarCat(SecH)
+SecH <- eliminarNegativos(SecH)
 SecH$VentasTotales <- as.numeric(SecH$VentasTotales)
 
 SecN <- cambioTitulos(SecN)
 SecN <- eliminarSectores(SecN)
 SecN <- eliminarCat(SecN)
+SecN <- eliminarNegativos(SecN)
 SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
 
 
@@ -311,6 +319,7 @@ Por otro lado, los sectores con menos ventas son:
 
 
 
+
 ```{r}
 # Nicaragua
 Nicaragua <- as.data.frame(crearLista(SecN, sectoresN))
@@ -402,8 +411,7 @@ Por otro lado, los sectores con menos ventas son:
 * 0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
 * 0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
 
-<<<<<<< Updated upstream
-=======
+
 ## Ventas por sector
 
 ```{r}
@@ -427,7 +435,6 @@ categorias <- c("CABELLO", "CUIDADO DE LA PIEL", "CUIDADO DE LAS UÑAS", "CUIDAD
 masGuatemala <- t(as.data.frame(crearArray(SecG, secMasGT,categorias)))
 ```
 
->>>>>>> Stashed changes
 ## Clustering
 Se decidió hacer un clustering para las ventas totales por sector de cada país, con el fin de agrupar los sectores entre ventas bajas, medias y altas. A continuación, se usó el agrupamiento por medio de las k-medias, usando un cálculo de 3 clusters por los rangos de ventas ya antes mencionados. 
 
