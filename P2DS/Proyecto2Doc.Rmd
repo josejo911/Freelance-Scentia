@@ -157,7 +157,7 @@ eliminarCat <- function(x){
   x <- x[x$Categoria != "CUIDADO DE LAS UÑAS", ]
 }
 
-eliminarNegativos <- function(x){
+eliminarNegativosCeros <- function(x){
   x <- x[x$VentasTotales >= 0, ]
 }
 
@@ -318,6 +318,204 @@ Por otro lado, los sectores con menos ventas son:
 * 0038 (AN LUIS/POPTUN - Distrito Sirius) con un total de 255187 ventas por unidad
 * 0018 (REFORMITA, VILLA LOBOS, MEZQUITAL - Distrito Arius) con un total de 281042 ventas por unidad
 
+## Productos que más y menos venden según los sectores que más venden
+
+### Sector CC (CLIENTES CONTADO - Distrito contado)
+Se observa que los primeros tres productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* Fresh Fit Spray Antimicótico 200 con 86,852 ventas.
+* Top Secret Roll-On Baby Powder 80G, con 80,357 ventas.
+* Scentia Roll On Extreme Lady 80G, con 45,836 ventas. 
+```{r}
+gCC <- subset(SecG, Sector == "CC")
+gCC <- gCC[order(gCC$VentasTotales, decreasing = TRUE),]
+head(gCC,3)
+```
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* Paquete de limpieza docena de 14 (Jabón de manos Soft Blossom) con 0 venta.
+* Top Family Rosa MOSQ Crema Corp 1KG Edi. Mama OFE 2, con 0 venta.
+* Paquete Bazar 5, con 0 venta. 
+```{r}
+tail(gCC,3)
+```
+
+
+### Sector 0021 (SANTA ROSA TODOS SUS MUNICIPIOS - Distrito Arius)
+Se observa que los primeros cuatros productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* Fresh Fit Spray Antimicótico 200 con 17,392 ventas.
+* Top Secret Roll-On Baby Powder 80G, con 16,557 ventas.
+* Scentia Roll On Extreme Lady 80G, con 13,278 ventas. 
+```{r}
+g0021 <- subset(SecG, Sector == "0021")
+g0021 <- g0021[order(g0021$VentasTotales, decreasing = TRUE),]
+head(g0021,3)
+```
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de SALUD Y BIENESTAR, TEENS Y USO DIARIO, siendo estos: 
+* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta.
+* Acne Solution Mascar EXF C/Soya 10, con 0 venta.
+* Top Family Jabón Liquido Neutro Para Zonas Intimas 800ML OFE 2, con 0 venta. 
+```{r}
+tail(g0021,3)
+```
+
+
+### Sector 0005 (CHIQUIMULA TODOS LOS MUNICIPIOS - Ditrito Sirius)
+Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
+* Fresh Fit Spray Antimicótico 200 con 14,275 ventas.
+* Top Secret Roll-On Baby Powder 80G, con 8,486 ventas.
+* Scentia Roll On Extreme Lady 80G, con 8,452 ventas. 
+```{r}
+g0005 <- subset(SecG, Sector == "0005")
+g0005 <- g0005[order(g0005$VentasTotales, decreasing = TRUE),]
+head(g0005,3)
+```
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de SALUD Y BIENESTAR, siendo estos: 
+* SC Naturals Te Descanso Caja 20 Unidades OFE, con 0 venta.
+* SC Naturals Te Limp Intes Caj con 20 bol OFE, con 0 venta.
+* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta. 
+```{r}
+tail(g0005,3)
+```
+
+### Sector 0027 (JUTIAPA (CENTRO), MOYUTA, JALPATAGUA, JEREZ - Distrito Arius)
+Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
+* Fresh Fit Spray Antimicótico 200 con 14,810 ventas.
+* Rabano Yodado 240 ML, con 10,381 ventas.
+* Top Secret Roll-On Baby Powder 80G, con 9,742 ventas.
+```{r}
+g0027 <- subset(SecG, Sector == "0027")
+g0027 <- g0027[order(g0027$VentasTotales, decreasing = TRUE),]
+head(g0027,3)
+```
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* SC Naturals Te Descanso Caja 20 Unidades OFE, con 0 venta.
+* SC Naturals Te Limp Intes Caj con 20 bol OFE, con 0 venta.
+* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta. 
+```{r}
+tail(g0027,3)
+```
+
+### Sector 0006 (ZACAPA TODOS LOS MUNICIPIOS - Distrito Sirius)
+Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
+* Top Secret Roll-On Baby Powder 80G, con 42,033 ventas. 
+* Fresh Fit Spray Antimicótico 200 con 19,077 ventas.
+* Scentia Roll On Extreme Lady 80G, con 17,910 ventas. 
+```{r}
+g0006 <- subset(SecG, Sector == "0006")
+g0006 <- g0006[order(g0006$VentasTotales, decreasing = TRUE),]
+head(g0006,3)
+```
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO y TEENS, siendo estos: 
+* Acne Solution Gel Trat C/Almend 12, con 0 venta.
+* Acne Solution Mascar EXF C/Soya 10, con 0 venta.
+* Action Locion Capilar Anticaida 180 ML, con 0 venta. 
+```{r}
+tail(g0006,3)
+```
+
+## Productos que más y menos venden según los sectores que menos venden
+
+### Sector EX01 (EXTERIOR - Distrito EXTERIOR)
+Este sector cuenta con 0 ventas
+```{r}
+gEX01 <- as.data.frame(subset(SecG, Sector == "EX01"))
+gEX01 <- gEX01[order(gEX01$VentasTotales, decreasing = TRUE),]
+head(gEX01, 3)
+gEX01 <- gEX01[order(gEX01$VentasTotales, decreasing = FALSE),]
+tail(gEX01, 3)
+```
+
+### Sector 0040 (San Juan/San Pedro Sacatepequez - Distrito Orion)
+Este distrito cuenta con 4 prouctos donde solo un producto tiene ventas. Se observa que único producto con ventas pertenece a la categoría de LIMPIEZA, siendo este: 
+* Clean House Desinfectante Pinabete Vainilla 1Gl, con 2 ventas.
+
+Se observa que dos de los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO y el otro producto pertenece a la categoría de SALUD Y BIENESTAR, siendo estos: 
+* Top Scret Fresh Concha Navar 80G, con 0 venta.
+* Fresh Fit Spray Antimicótico 200, con 0 ventas.
+* Hot Ice Unguento 80G, con 0 ventas.
+
+```{r}
+g040 <- as.data.frame(subset(SecG, Sector == "0040"))
+g040 <- g040[order(g040$VentasTotales, decreasing = TRUE),]
+head(g040, 3)
+g040 <- g040[order(g040$VentasTotales, decreasing = FALSE),]
+head(g040, 3)
+```
+
+### Sector PR01 (PREMIOS POR RECOBRAR - Distrito Abogados)
+Se observa que el producto con más ventas pertenece a la categoría de Uso Diario mientras los otros dos pertenecen a la categoría de CUIDADO DE PIEL, siendo estos: 
+* Top Secret Roll-On Baby Powder 80G, con 4 ventas.
+* Clinical Sun Protector Solar 50FPS 60Gr, con 2 ventas.
+* Crema de Concha Nacar con CIT E 150G, con 1 ventas.
+
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CUIDADO DE PIEL, DIVISION FARMA y MAQUILLAJE, respectivamente. Estos son: 
+* Cobo Concha Nácar, con 0 ventas.
+* Acetaminofen Adultos 20 Tabletas, con 0 ventas.
+* Scentia Bella Color Luxury Nail Polish Silver, con 0 ventas.
+
+```{r}
+gPR01 <- as.data.frame(subset(SecG, Sector == "PR01"))
+gPR01 <- gPR01[order(gPR01$VentasTotales, decreasing = TRUE),]
+head(gPR01, 3)
+gPR01 <- gPR01[order(gPR01$VentasTotales, decreasing = FALSE),]
+head(gPR01, 3)
+```
+
+### Sector 0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion)
+Se observa que los productos con más ventas pertenecen a las categorías de USO DIARIO, CABELLO Y PROMOCIONALES VENDIDOS respectivamente, siendo estos: 
+* Fresh Fit Sprey Antimicótico 200, con 2690 ventas.
+* Top Fami Sh 2 en 1 Cola Caba Nd 1L, con 2371 ventas.
+* Estuche Sc Fruits para Gel Antibac, con 1913 ventas.
+
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
+* Cobo Concha Nácar, con 0 ventas.
+* Acetaminofen Adultos 20 Tabletas, con 0 ventas.
+* Scentia Bella Color Luxury Nail Polish Silver, con 0 ventas.
+
+```{r}
+g022 <- as.data.frame(subset(SecG, Sector == "0022"))
+g022 <- g022[order(g022$VentasTotales, decreasing = TRUE),]
+head(g022, 3)
+g022 <- g022[order(g022$VentasTotales, decreasing = FALSE),]
+head(g022, 3)
+```
+
+### Sector 0042 (SECTOR 42 - Distrito Orion)
+Se observa que el producto con más ventas pertenece a la categoría de USO DIARIO y los otros dos productos pertenecen a la categoría de LIMPIEZA, siendo estos: 
+* Fresh Fit Sprey Antimicótico 200, con 4221 ventas.
+* Clean House Desinfectante Cereza 1Gl, con 2524 ventas.
+* Clean House Desin. Manzana Canela 1Gl, con 2314 ventas.
+
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
+* Paquete Cabello Junio Extra, con 0 ventas.
+* Oro Líq Anti Edad Sha 2 en 1 400 M, con 0 ventas.
+* Oro Liquido Shampoo Negro Delumbrante 400ml. Ofe, con 0 ventas.
+
+```{r}
+g042 <- as.data.frame(subset(SecG, Sector == "0042"))
+g042 <- g042[order(g042$VentasTotales, decreasing = TRUE),]
+head(g042, 3)
+g042 <- g042[order(g042$VentasTotales, decreasing = FALSE),]
+head(g042, 3)
+```
+
+### Sector 0038 (AN LUIS/POPTUN - Distrito Sirius)
+Se observa que el producto con más ventas pertenece a la categoría de USO DIARIO, el segundo pertenece a la categoría de DIVISION FARMA y el tercer producto pertenece a la categoría de USO DIARIO, siendo estos: 
+* Fresh Fit Sprey Antimicótico 200, con 5558 ventas.
+* Rabano Yodado 240 Ml, con 4207 ventas.
+* top Secret Roll-On Baby Powder 80G, con 3274 ventas.
+
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
+* Action Shampoo Anticaida Oferta, con 0 ventas.
+* Oro Líq Anti Edad Sha 2 en 1 400 M, con 0 ventas.
+* Oro Líq Anti Edad Bál Crem 300 G, con 0 ventas.
+
+```{r}
+g038 <- as.data.frame(subset(SecG, Sector == "0038"))
+g038 <- g038[order(g038$VentasTotales, decreasing = TRUE),]
+head(g038, 3)
+g038 <- g038[order(g038$VentasTotales, decreasing = FALSE),]
+head(g038, 3)
+```
 
 
 
