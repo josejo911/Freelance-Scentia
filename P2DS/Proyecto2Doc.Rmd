@@ -1,16 +1,10 @@
-<<<<<<< Updated upstream
 ---
 title: "Proyecto 2 DataScience"
 author: "Grupo 6"
 date: "28 de agosto de 2019"
 output:
-<<<<<<< Updated upstream
-  html_document: default
-  pdf_document: default
-=======
   pdf_document: default
   html_document: default
->>>>>>> Stashed changes
 ---
 
 ```{r setup, include=FALSE, warning = FALSE}
@@ -73,7 +67,7 @@ library(cluster)
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS
 
-setwd("C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS")
+#setwd("C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Guatemala
@@ -157,7 +151,7 @@ eliminarCat <- function(x){
   x <- x[x$Categoria != "CUIDADO DE LAS UÑAS", ]
 }
 
-eliminarNegativosCeros <- function(x){
+eliminarNegativos <- function(x){
   x <- x[x$VentasTotales >= 0, ]
 }
 
@@ -207,31 +201,31 @@ sectoresG <- sort(sectoresG)
 
 
 
-categoriasG <- data.frame(SecG$Categoria)
-n_occur <- data.frame(table(categoriasG$SecG.Categoria))
-n_occur[n_occur$Freq > 1,]
-categoriasG[categoriasG$SecG.Categoria %in% n_occur$Var1[n_occur$Freq > 1],]
-n_occur$Freq <- NULL
-listaCatG<- t(n_occur[-c(1),])
-listaCatG <- gsub(" ","", listaCatG)
-listaCatG <- sort(listaCatG)
+# categoriasG <- data.frame(SecG$Categoria)
+# n_occur <- data.frame(table(categoriasG$SecG.Categoria))
+# n_occur[n_occur$Freq > 1,]
+# categoriasG[categoriasG$SecG.Categoria %in% n_occur$Var1[n_occur$Freq > 1],]
+# n_occur$Freq <- NULL
+# listaCatG<- t(n_occur[-c(1),])
+# listaCatG <- gsub(" ","", listaCatG)
+# listaCatG <- sort(listaCatG)
 
 
- Honduras
+#Honduras
 sectoresH <- strsplit(DescH[,c(2)], " - ")
 sectoresH <- data.frame(sectoresH)
 sectoresH <- t(sectoresH[-c(2),])
 sectoresH <- gsub(" ","", sectoresH)
 sectoresH <- sort(sectoresH)
-# 
-categoriasH <- data.frame(SecH$Categoria)
- n_occurH <- data.frame(table(categoriasH$SecH.Categoria))
-n_occurH[n_occurH$Freq > 1,]
-categoriasH[categoriasH$SecH.Categoria %in% n_occurH$Var1[n_occurH$Freq > 1],]
-n_occurH$Freq <- NULL
-listaCatH<- t(n_occurH[-c(1),])
-listaCatH <- gsub(" ","", listaCatH)
-listaCatH <- sort(listaCatH)
+
+# categoriasH <- data.frame(SecH$Categoria)
+#  n_occurH <- data.frame(table(categoriasH$SecH.Categoria))
+# n_occurH[n_occurH$Freq > 1,]
+# categoriasH[categoriasH$SecH.Categoria %in% n_occurH$Var1[n_occurH$Freq > 1],]
+# n_occurH$Freq <- NULL
+# listaCatH<- t(n_occurH[-c(1),])
+# listaCatH <- gsub(" ","", listaCatH)
+# listaCatH <- sort(listaCatH)
 
 ## Nigaragua
 sectoresN <- strsplit(DescN[,c(2)], "-")
@@ -241,14 +235,14 @@ sectoresN <- gsub(" ","", sectoresN)
 sectoresN <- sort(sectoresN)
 
 
-categoriasN <- data.frame(SecN$Categoria)
-n_occurN <- data.frame(table(categoriasN$SecN.Categoria))
-n_occurN[n_occurN$Freq > 1,]
-categoriasN[categoriasN$SecN.Categoria %in% n_occurN$Var1[n_occurN$Freq > 1],]
-n_occurN$Freq <- NULL
-listaCatN<- t(n_occurN[-c(1),])
-listaCatN <- gsub(" ","", listaCatN)
-listaCatN <- sort(listaCatN)
+# categoriasN <- data.frame(SecN$Categoria)
+# n_occurN <- data.frame(table(categoriasN$SecN.Categoria))
+# n_occurN[n_occurN$Freq > 1,]
+# categoriasN[categoriasN$SecN.Categoria %in% n_occurN$Var1[n_occurN$Freq > 1],]
+# n_occurN$Freq <- NULL
+# listaCatN<- t(n_occurN[-c(1),])
+# listaCatN <- gsub(" ","", listaCatN)
+# listaCatN <- sort(listaCatN)
 
 ## El Salvador
 sectoresS <- strsplit(DescS[,c(2)], "-")
@@ -258,14 +252,14 @@ sectoresS <- gsub(" ","", sectoresS)
 sectoresS <- sort(sectoresS)
 
 
-categoriasS <- data.frame(SecS$Categoria)
-n_occurS <- data.frame(table(categoriasS$SecS.Categoria))
-n_occurS[n_occurS$Freq > 1,]
-categoriasS[categoriasS$SecS.Categoria %in% n_occurS$Var1[n_occurS$Freq > 1],]
-n_occurS$Freq <- NULL
-listaCatS<- t(n_occurS[-c(1),])
-listaCatS <- gsub(" ","", listaCatS)
-listaCatS <- sort(listaCatS)
+# categoriasS <- data.frame(SecS$Categoria)
+# n_occurS <- data.frame(table(categoriasS$SecS.Categoria))
+# n_occurS[n_occurS$Freq > 1,]
+# categoriasS[categoriasS$SecS.Categoria %in% n_occurS$Var1[n_occurS$Freq > 1],]
+# n_occurS$Freq <- NULL
+# listaCatS<- t(n_occurS[-c(1),])
+# listaCatS <- gsub(" ","", listaCatS)
+# listaCatS <- sort(listaCatS)
 
 ```
 
@@ -737,19 +731,19 @@ Se decidió hacer un clustering para las ventas totales por sector de cada país
 ### Clustering de Guatemala
 Se observa que para el primer cluster, solo se encuentra el sector AB03 con 6,557,880 ventas unitarias; el segundo cluster se encuentra el sector CC con 2,840,462; el tercer cluster se encuentra el resto de sectores de Guatemala. Dado que en los primeros clusters solo se encuentra un sector, se llegó a la conclusión que para este data set, no trae cuenta agrupar estos sectores por medio de clustering, a pesar que la media de la Prueba de la Silueta dio como resultado 0.8675771. 
 ```{r}
-ClusterG <- Guatemala # Nuevo data frame únicamente para clusters
-km <- kmeans(Guatemala[,1],3) # Se calculan 3 clusters
-ClusterG$Grupo <- km$cluster # Se crea una nueva columna con el numero de cluster
-#Guatemala$Sector <- as.numeric(as.factor(Guatemala$Sector))
-
-# Grafica de los clusters
-
-fviz_cluster(km, data = Guatemala[,1:2], geom = "point", ellipse.type = "norm")
-
-
-# Prueba de la Silueta 
-silcluster <- silhouette(km$cluster, dist(Guatemala[,1]))
-mean(silcluster[,3]) # Media = 0.8675771. 
+# ClusterG <- Guatemala # Nuevo data frame únicamente para clusters
+# km <- kmeans(Guatemala[,1],3) # Se calculan 3 clusters
+# ClusterG$Grupo <- km$cluster # Se crea una nueva columna con el numero de cluster
+# #Guatemala$Sector <- as.numeric(as.factor(Guatemala$Sector))
+# 
+# # Grafica de los clusters
+# 
+# fviz_cluster(km, data = Guatemala[,1:2], geom = "point", ellipse.type = "norm")
+# 
+# 
+# # Prueba de la Silueta 
+# silcluster <- silhouette(km$cluster, dist(Guatemala[,1]))
+# mean(silcluster[,3]) # Media = 0.8675771. 
 ```
 
 ### Clustering de El Salvador
@@ -758,19 +752,19 @@ Se observa que para este país, el clustering tiene potencial para agrupar los s
 * Segundo grupo: Se encuentran los sectores que tienen ventas totales entre $245,000 \leq ventas \leq 590,000$.
 * Tercer grupo: Se encuentra el sector que tiene ventas totales mayores a 590,000. 
 ```{r}
-ClusterS <- Salvador # Nuevo data frame únicamente para clusters
-kmS <- kmeans(Salvador[,1],3) # Se calculan 3 clusters
-ClusterS$Grupo <- kmS$cluster # Se crea una nueva columna con el numero de cluster
-
-# Grafica de los clusters
-
-fviz_cluster(kmS, data = ClusterS[,1:3], geom = "point", ellipse.type = "norm")
-
-
-
-# Prueba de la Silueta 
-silclusterS <- silhouette(kmS$cluster, dist(Salvador[,1]))
-mean(silclusterS[,3]) # Media = 0.8675771. 
+# ClusterS <- Salvador # Nuevo data frame únicamente para clusters
+# kmS <- kmeans(Salvador[,1],3) # Se calculan 3 clusters
+# ClusterS$Grupo <- kmS$cluster # Se crea una nueva columna con el numero de cluster
+# 
+# # Grafica de los clusters
+# 
+# fviz_cluster(kmS, data = ClusterS[,1:3], geom = "point", ellipse.type = "norm")
+# 
+# 
+# 
+# # Prueba de la Silueta 
+# silclusterS <- silhouette(kmS$cluster, dist(Salvador[,1]))
+# mean(silclusterS[,3]) # Media = 0.8675771. 
 ```
 
 ### Clustering de Nicaragua
@@ -779,17 +773,17 @@ Nicaragua muestra un buen agrupamiento de ventas totales por medio de clustering
 * Segundo grupo: Se encuentran los sectores que tienen ventas totales entre $180,000 \leq ventas \leq 510,000$.
 * Tercer grupo: Se encuentra el sector que tiene ventas totales mayores a 510,000. 
 ```{r}
-ClusterN <- Nicaragua # Nuevo data frame únicamente para clusters
-kmN <- kmeans(Nicaragua[,1],3) # Se calculan 3 clusters
-ClusterN$Grupo <- kmN$cluster # Se crea una nueva columna con el numero de cluster
-
-# Grafica de los clusters
-
-
-
-# Prueba de la Silueta 
-silclusterN <- silhouette(kmN$cluster, dist(Nicaragua[,1]))
-mean(silclusterN[,3]) # Media = 0.8675771. 
+# ClusterN <- Nicaragua # Nuevo data frame únicamente para clusters
+# kmN <- kmeans(Nicaragua[,1],3) # Se calculan 3 clusters
+# ClusterN$Grupo <- kmN$cluster # Se crea una nueva columna con el numero de cluster
+# 
+# # Grafica de los clusters
+# 
+# 
+# 
+# # Prueba de la Silueta 
+# silclusterN <- silhouette(kmN$cluster, dist(Nicaragua[,1]))
+# mean(silclusterN[,3]) # Media = 0.8675771. 
 ```
 
 
@@ -848,11 +842,10 @@ Asi tambien, las categorias que menos venden son: cuidado de las unas, descontin
 # PCA entre las categorias que mas venden
 
 
-<<<<<<< Updated upstream
+
 #Sneak peak: Series de tiempo
-=======
+
 #Modelos
->>>>>>> Stashed changes
 
 ```{r}
 # # -------------------------------
@@ -1188,985 +1181,3 @@ Este distrito se llama "DISTRITO EMPLEADO". Este distrito ha perido muchas venta
 * S.A (2018). *The R Graph Gallery*. Extraido de: https://www.r-graph-gallery.com/ [29/06/2019]
 * D. (08/2019). *Markdown Text 101*. Extraido de: https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline- [06/10/2019]
 * Theuwissen, M. (02/12/2015). *How to write the first for loop in R*. Extraido de: https://www.r-bloggers.com/how-to-write-the-first-for-loop-in-r/ [01/10/2019]
-=======
-  
-title: "Proyecto 2 DataScience"
-author: "Grupo 6"
-date: "28 de agosto de 2019"
-output:
-
-
-```{r setup, include=FALSE, warning = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Resumen de información
-En los avances de proyecto 1, se había presentado el análisis exploratorio del archivo equivocado. Por ello, el primer paso fue realizar análisis exploratorio sobre los archivos que incluyen únicamente las ventas por sector, así como la distribución de cada sector. 
-
-
-## Objetivos
-* Separar las ventas por sectores.
-* Crear una predicción sobre la ventas a partir de líneas de tiempo generadas con los datos que se tienen por sector de los últimos 4 años.
-* Verificar la eficiencia del modelo comparando las gráficas de tiempo con la historia económica de los últimos 4 años.
-
-## Variables de interés
-* Ventas: es una variable cuantitativa la cual será clave para las predicciones.
-* Mes y año de venta: variable cuantitativa indispensable para la creación de una serie de tiempo. 
-* Sector: variable de carácter cualitativo dado que indica la pertenencia de una venta a un sector asignado en un país.
-
-## Variables Respuesta
-* Modelo de predicción a partir de la serie de tiempo. 
-
-```{r echo=FALSE, warning=FALSE, include=FALSE}
-# Librerias a utilizar
-require(ggpubr) # Para mejorar la visualización gráfica
-require(tidyverse) # Para explotar, manipular y visualizar datos que comparten info
-require(corrplot) # Para visualizar la matriz de correlación
-require(cluster) #Para calcular la silueta
-library(fpc) # Para hacer el plotcluster
-library(NbClust) # Para determinar el numero de clusters optimo
-library(factoextra) # Para hacer graficos bonitos de clustering
-library(rela) # Para poder utilizar paf()
-library(psych) # Para poder utilizar KMO()
-#library(FactoMineR)
-library(corrplot)
-library(REdaS)
-library(ggplot2) # Graficas bonitas
-#library(ggpubr) # Graficas bonitas x2
-#library(ggmap)
-library(arules) # Reglas de asociacion
-library(factoextra) 
-library(arulesViz)
-library(dplyr)
-#library(caret) # Muestreo estratificado
-library(class) # Para KNN
-library(e1071) # Requisito para la matriz de confusión
-library(openxlsx)
-library(plyr)
-require(cluster) #Para calcular la silueta
-library(fpc) # Para hacer el plotcluster
-library(NbClust) # Para determinar el numero de clusters optimo
-library(factoextra) # Para hacer graficos bonitos de clustering 
-library(forcats)
-library(cluster)
-```
-```{r echo=FALSE, warning=FALSE}
-#"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
-# /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
-# F:/Data Science/Proyecto 2/Proyecto2DS
-#C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS
-
-setwd("C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS")
-
-# Leyendo el dataset de csv importacion
-# Guatemala
-SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-DescG <- read.xlsx("USG1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-# Leyendo el dataset de csv importacion
-# Honduras
-SecH <- read.xlsx("USH1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-DescH <- read.xlsx("USH1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-# Leyendo el dataset de csv importacion
-# Nicaragua
-SecN <- read.xlsx("USN1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-DescN <- read.xlsx("USN1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-# Leyendo el dataset de csv importacion
-# El Salvador
-SecS <- read.xlsx("USS1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
-DescS <- read.xlsx("USS1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
-                 rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-                 skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-                 namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
-```
-```{r}
-SecG[is.na(SecG)] <- 0
-SecH[is.na(SecH)] <- 0
-SecN[is.na(SecN)] <- 0
-SecS[is.na(SecS)] <- 0
-```
-
-
-## Modificación de columnas y filas
-En esta parte, se creó una función que eliminara las primeras dos filas de todo el data set, ya que estas contenían el nombre de las columnas. Asimismo, se decidió dejar solamente cuatro columnaas: Sector, Categoría, Producto y Ventas Finales. Todo lo demás se eliminó y se dejó solamente la información de todos los productos de estas cuatro categorías. 
-Sin embargo, se creó una nueva función que eliminara los sectores que no deben analizarse en este documento, tales como el sector AB y 0000, ya que son sectores de abogados y trabajadores. Asimismo, se elimina las categorías de Kimberly Clark, Descontinuados y Cuidado de uñas. 
-```{r}
-# -------------------------------
-# Reduciendo el dataset
-# -------------------------------
-cambioTitulos <- function(x){
-  names(x)[1] <- "Sector"
-  names(x)[2] <- "Categoria"
-  names(x)[3] <- "Producto"
-  names(x)[length(x)] <- "VentasTotales"
-  x <- x[-c(1, 2), ]
-  x <- x[,c(1,2,3,length(x))]
-}
-
-# Aplicación de la función a los datos
-
-
-# Modificaciones nuevas según Scentia
-eliminarSectores <- function(x){
-  x <- x[x$Sector != "0000", ]
-  x <- x[x$Sector != "AB01", ]
-  x <- x[x$Sector != "AB02", ]
-  x <- x[x$Sector != "AB03", ]
-}
-
-eliminarCat <- function(x){
-  x <- x[x$Categoria != "KIMBERLY CLARK", ]
-  x <- x[x$Categoria != "DESCONTINUADOS", ]
-  x <- x[x$Categoria != "CUIDADO DE LAS UÑAS", ]
-}
-
-# Aplicación de las funciones
-SecG <- cambioTitulos(SecG)
-SecG <- eliminarSectores(SecG)
-SecG <- eliminarCat(SecG)
-SecG$VentasTotales <- as.numeric(SecG$VentasTotales)
-
-SecS <- cambioTitulos(SecS)
-SecS <- eliminarSectores(SecS)
-SecS <- eliminarCat(SecS)
-SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
-
-SecH <- cambioTitulos(SecH)
-SecH <- eliminarSectores(SecH)
-SecH <- eliminarCat(SecH)
-SecH$VentasTotales <- as.numeric(SecH$VentasTotales)
-
-SecN <- cambioTitulos(SecN)
-SecN <- eliminarSectores(SecN)
-SecN <- eliminarCat(SecN)
-SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
-
-
-DescH <- DescH[-c(32,34),]
-
-
-
-
-```
-
-## Modificación a la hoja de descripción de sectores
-Se dividió la descripción de cada sector a partir del símbolo "-" dejando dos filas. En la primera fila se econtraba el código del sector y en la segunda fila se encontraba la descripción del sector. Luego se le aplicó una transpuesta a estos data frame para obtener dos columnas. A partir de esto, se limpió el código de cada sector eliminando los espacios en blanco para poder ser utilizada en un futuro. Finalemnte se ordenaron los códigos de cada sector de menor a mayor.
-```{r echo=FALSE}
-#vector de sectores
-## Guatemala
-sectoresG <- strsplit(DescG[,c(2)], "-")
-sectoresG <- data.frame(sectoresG)
-sectoresG <- t(sectoresG[-c(2),])
-sectoresG <- gsub(" ","", sectoresG)
-sectoresG <- sort(sectoresG)
-
-
-
-categoriasG <- data.frame(SecG$Categoria)
-n_occur <- data.frame(table(categoriasG$SecG.Categoria))
-n_occur[n_occur$Freq > 1,]
-categoriasG[categoriasG$SecG.Categoria %in% n_occur$Var1[n_occur$Freq > 1],]
-n_occur$Freq <- NULL
-listaCatG<- t(n_occur[-c(1),])
-listaCatG <- gsub(" ","", listaCatG)
-listaCatG <- sort(listaCatG)
-
-
- Honduras
-sectoresH <- strsplit(DescH[,c(2)], " - ")
-sectoresH <- data.frame(sectoresH)
-sectoresH <- t(sectoresH[-c(2),])
-sectoresH <- gsub(" ","", sectoresH)
-sectoresH <- sort(sectoresH)
-# 
-categoriasH <- data.frame(SecH$Categoria)
- n_occurH <- data.frame(table(categoriasH$SecH.Categoria))
-n_occurH[n_occurH$Freq > 1,]
-categoriasH[categoriasH$SecH.Categoria %in% n_occurH$Var1[n_occurH$Freq > 1],]
-n_occurH$Freq <- NULL
-listaCatH<- t(n_occurH[-c(1),])
-listaCatH <- gsub(" ","", listaCatH)
-listaCatH <- sort(listaCatH)
-
-## Nigaragua
-sectoresN <- strsplit(DescN[,c(2)], "-")
-sectoresN <- data.frame(sectoresN)
-sectoresN <- t(sectoresN[-c(2),])
-sectoresN <- gsub(" ","", sectoresN)
-sectoresN <- sort(sectoresN)
-
-
-categoriasN <- data.frame(SecN$Categoria)
-n_occurN <- data.frame(table(categoriasN$SecN.Categoria))
-n_occurN[n_occurN$Freq > 1,]
-categoriasN[categoriasN$SecN.Categoria %in% n_occurN$Var1[n_occurN$Freq > 1],]
-n_occurN$Freq <- NULL
-listaCatN<- t(n_occurN[-c(1),])
-listaCatN <- gsub(" ","", listaCatN)
-listaCatN <- sort(listaCatN)
-
-## El Salvador
-sectoresS <- strsplit(DescS[,c(2)], "-")
-sectoresS <- data.frame(sectoresS)
-sectoresS <- t(sectoresS[-c(2),])
-sectoresS <- gsub(" ","", sectoresS)
-sectoresS <- sort(sectoresS)
-
-
-categoriasS <- data.frame(SecS$Categoria)
-n_occurS <- data.frame(table(categoriasS$SecS.Categoria))
-n_occurS[n_occurS$Freq > 1,]
-categoriasS[categoriasS$SecS.Categoria %in% n_occurS$Var1[n_occurS$Freq > 1],]
-n_occurS$Freq <- NULL
-listaCatS<- t(n_occurS[-c(1),])
-listaCatS <- gsub(" ","", listaCatS)
-listaCatS <- sort(listaCatS)
-
-```
-
-# Ventas totales de cada país
-Se creó una función para sumar las ventas totales de cada producto de caa sector paa obtener la venta total del sector en todo su periodo de tiempo. Después de esto, se graficaron las ventas totales de cada sector para cada país.
-```{r}
-crearLista <- function(x,y){
-  lista <-c()
-  for(i in seq(1, length(y), by=1)){
-    sec <- subset(x, Sector == y[i])
-    sec <- sec[,c(length(x))]
-    lista[[i]] <- sum(as.numeric(sec))
-  }
-  return(lista)
-}
-
-# Guatemala
-Guatemala <- as.data.frame(crearLista(SecG, sectoresG))
-Guatemala$Sector <- sectoresG
-names(Guatemala)[1] <- "VentasTotales"
-Guatemala <- Guatemala[order(-Guatemala$VentasTotales),]
-Guatemala %>%
-  mutate(name = fct_reorder(Guatemala$Sector, desc(Guatemala$VentasTotales))) %>%
-  ggplot( aes(x=name, y=Guatemala$VentasTotales)) +
-    geom_bar(stat="identity", fill="#f68060", alpha=.6, width=.4) +
-    coord_flip() +
-    ylab("Ventas Totales por Sector") +
-    xlab("Sector") +
-    theme_bw()
-
-```
-Para el país de Guatemala se tiene que los sectores con más ventas son:
-
-* CC (CLIENTES CONTADO - Distrito contado) con un total de 2840462 ventas por unidad
-* 0021 (SANTA ROSA TODOS SUS MUNICIPIOS - Distrito Arius) con un total de 892428 ventas por unidad
-* 0005 (CHIQUIMULA TODOS LOS MUNICIPIOS - Ditrito Sirius) con un total de 705007 ventas por unidad
-* 0027 (JUTIAPA (CENTRO), MOYUTA, JALPATAGUA, JEREZ - Distrito Arius) con un total de 684809 ventas por unidad
-* 0006 (ZACAPA TODOS LOS MUNICIPIOS - Distrito Sirius) con un total de 679730 ventas por unidad
-* 0012 (SAN JOSE Y BARCENAS (V. NUEVA), AMATITLAN Y PALIN - Distrito Airus) con un total de 668926 ventas por unidad
-* 0026 (ZONAS 17,24,25; PALENCIA Y SAN JOSE DEL GOLFO -  Distrito Sirius) con un total de 645816 ventas por unidad
-* 0031 (EL PROGRESO TODOS SUS MUNICIPIOS - Distrito Sirus) con un total de 633666 ventas por unidad
-* 0034 (PETEN Y MUNICIPIOS - Distrito Sirius) con un total de 615779 ventas por unidad
-
-Por otro lado, los sectores con menos ventas son:
-
-* EX01 ( EXTERIOR - Distrito EXTERIOR) con un total de 0 ventas por unidad
-* 0040 ( San Juan/San Pedro Sacatepequez - Distrito Orion) con un total de 2 ventas por unidad
-* PR01 (PREMIOS POR RECOBRAR - Distrito Abogados) con un total de 12 ventas por unidad
-* 0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion) con un total de 190270 ventas por unidad
-* 0042 (SECTOR 42 - Distrito Orion) con un total de 206768 ventas por unidad
-* 0038 (AN LUIS/POPTUN - Distrito Sirius) con un total de 255187 ventas por unidad
-* 0018 (REFORMITA, VILLA LOBOS, MEZQUITAL - Distrito Arius) con un total de 281042 ventas por unidad
-
-
-
-```{r}
-# Nicaragua
-Nicaragua <- as.data.frame(crearLista(SecN, sectoresN))
-Nicaragua$Sector <- sectoresN
-names(Nicaragua)[1] <- "VentasTotales"
-Nicaragua <- Nicaragua[order(-Nicaragua$VentasTotales),]
-Nicaragua %>%
-  mutate(name = fct_reorder(Nicaragua$Sector, desc(Nicaragua$VentasTotales))) %>%
-  ggplot( aes(x=name, y=Nicaragua$VentasTotales)) +
-    geom_bar(stat="identity", fill="#f68060", alpha=.6, width=.4) +
-    coord_flip() +
-    ylab("Ventas Totales por Sector") +
-    xlab("Sector") +
-    theme_bw()
-Nicaragua
-```
-Para el país de Nicaragua se tiene que los sectores con más ventas son:
-
-* CC (SECTOR CONTADO - Distrito contado) con un total de 509950 ventas por unidad
-* 0409 (RAQUEL UREY ESTRADA - Distrito Indiana Rivas) con un total de 307620 ventas por unidad
-* 0402 (MARBELLY OBANDO RAMOS - Ditrito Indiana Rivas) con un total de 272197 ventas por unidad
-* 0427 (MARÍA ISABEL MATUTE - Distrito Jannette Herrera) con un total de 271152 ventas por unidad
-* 0405 (CLAUDIA HATYEL ALTAMIRANO RODRIGUEZ - Distrito Indiana Rivas) con un total de 262093 ventas por unidad
-* 0407 (MILAGROS SUYEN RIVAS RIVAS - Distrito Indiana Rivas) con un total de 247739 ventas por unidad
-* 0424 (JACQUELIN LEIVA -  Distrito Jannette Herrera) con un total de 241217 ventas por unidad
-* 0404 (ROSA ADILIA OLIVAS - Distrito Indiana Rivas) con un total de 218165 ventas por unidad
-* 0410 (KAREL FUENTES - Distrito Indiana Rivas) con un total de 214711 ventas por unidad
-
-Por otro lado, los sectores con menos ventas son:
-
-* 0412 ( RETAIL - Distrito Institucional) con un total de 79 ventas por unidad
-* 0422 ( SECTOR CONTADO INSTITUCIONAL - Distrito Contado Institucional) con un total de 	301 ventas por unidad
-* 0000 (LANCASCO - Distrito Empleado) con un total de 6061 ventas por unidad
-* 0413 (SOBEYDA VARGAS - Distrito Indiana Rivas) con un total de 66970 ventas por unidad
-* 0433 (VILMA RODRIGUEZ - Distrito Jannette Herrera) con un total de 94217 ventas por unidad
-* 0408 (ARELYS CASTILLO - Distrito Indiana Rivas) con un total de 124018 ventas por unidad
-* 0420 (KARLA ALVAREZ - Distrito Jannette Herrera) con un total de 140713 ventas por unidad
-* 0426 (MAYELA DE LOS ANGELES GUTIERREZ GUEVARA - Distrito Jannette Herrera) con un total de 156187 ventas por unidad
-* 0429 (JEANETH HERRERA - Distrito Jannette Herrera) con un total de 164861 ventas por unidad
-* 0403 (JOHANNA MIRANDA - Distrito Indiana Rivas) con un total de 169754 ventas por unidad
-
-Podemos observar que las tres mujeres que mas venden en Nicaragua son:
-* Raquel  Urey Estrada
-* Marbelly Obando Ramos
-* María Isabel Matute
-
-Además, las tres mujeres que menos venden en Nicaragua son:
-* Sobeyda Vargas
-* Vilma Rodríquez
-* Arelys Castillo
-```{r}
-# El Salvador
-Salvador <- as.data.frame(crearLista(SecS, sectoresS))
-Salvador$Sector <- sectoresS
-names(Salvador)[1] <- "VentasTotales"
-Salvador <- Salvador[order(-Salvador$VentasTotales),]
-Salvador %>%
-  mutate(name = fct_reorder(Salvador$Sector, desc(Salvador$VentasTotales))) %>%
-  ggplot( aes(x=name, y=Salvador$VentasTotales)) +
-    geom_bar(stat="identity", fill="#f68060", alpha=.6, width=.4) +
-    coord_flip() +
-    ylab("Ventas Totales por Sector") +
-    xlab("Sector") +
-    theme_bw()
-```
-Para el país de El Salvador se tiene que los sectores con más ventas son:
-
-
-* 0202 (SANTA ANA - Distrito Arius) con un total de 586658 ventas por unidad
-* 0204 (SONSONATE - Distrito Arius) con un total de 347768 ventas por unidad
-* CC (CONTADO - Ditrito Contado) con un total de 337734 ventas por unidad
-* 0216 (USULUTAN - Distrito Sirius) con un total de 325733 ventas por unidad
-* 0203 (CHALATENANGO - Distrito Arius) con un total de 301789 ventas por unidad
-* 0212 (SOYAPANGO, CENTRO LAS MARGARITAS SAN JOSE - Distrito Sirius) con un total de 297690 ventas por unidad
-* 0210 (APOPA -  Distrito Arius) con un total de 293274 ventas por unidad
-* 0206 (LOURDES - Distrito Arius) con un total de 291313 ventas por unidad
-* 0201 (AHUACHAPAN - Distrito Arius) con un total de 280664 ventas por unidad
-
-Por otro lado, los sectores con menos ventas son:
-
-
-* 0214 (SUCHITOTO,COJUTEPEQUE, SAN RAFAEL CEDROS - Distrito Sirius) con un total de 	106909 ventas por unidad
-* 0224 (CUSCATLAN - Distrito Sirius) con un total de 112256 ventas por unidad
-* 0230 (SAN SALVADOR NORTE - Distrito Arius) con un total de 114430 ventas por unidad
-* 0223 (USULUTAN NORTE - Distrito Sirius) con un total de 140411 ventas por unidad
-* 0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
-* 0219 (MORAZAN - Distrito Sirius) con un total de 142319 ventas por unidad
-* 0221 (ARMENIA - Distrito Arius) con un total de 150182 ventas por unidad
-* 0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
-* 0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
-
-
-## Ventas por sector
-
-```{r}
-crearArray <- function(x,y,z){
-  coso <- c()
-  lista <-c()
-  for(i in seq(1, length(y), by=1)){
-    sec <- subset(x, Sector == y[i])
-    for (j in seq(1, length(z), by=1)){
-      cat <- subset(sec, Categoria == z[i])
-      cat <- cat[,c(length(x))]
-      lista[[j]] <- sum(as.numeric(cat))
-    }
-    coso[[i]]<- lista
-  }
-  return(coso)
-}
-
-secMasGT <- c("AB03", "CC", "0021", "0005", "0027", "0006", "0006", "0012", "0026", "0031", "0034")
-categorias <- c("CABELLO", "CUIDADO DE LA PIEL", "CUIDADO DE LAS UÑAS", "CUIDADO PERSONAL", "DESCONTINUADOS", "DIVISION FARMA", "ELLAS", "ELLOS", "GASTOS PROMOCIONALES", "JOYERIA", "KIMBERLY CLARK", "LIMPIEZA", "MAQUILLAJE", "NIÑOS", "PAQUETES", "PREMIOS", "PROMOCIONALES VENDIDOS", "SALUD Y BIENESTAR", "TEENS", "USO DIARIO")
-masGuatemala <- t(as.data.frame(crearArray(SecG, secMasGT,categorias)))
-
-
-```
-
-## Análisis por producto
-```{r}
-# El Salvador
-
-#SECTORES CON MAS VENTAS
-
-#* 0202 (SANTA ANA - Distrito Arius) con un total de 586658 ventas por unidad
-#* 0204 (SONSONATE - Distrito Arius) con un total de 347768 ventas por unidad
-###0203 (CHALATENANGO - Distrito Arius) con un total de 301789 ventas por unidad
-# 0212 (SOYAPANGO, CENTRO LAS MARGARITAS SAN JOSE - Distrito Sirius) con un total de 297690 ventas por unidad
-#* 0210 (APOPA -  Distrito Arius) con un total de 293274 ventas por unidad
-#* 0206 (LOURDES - Distrito Arius) con un total de 291313 ventas por unidad
-#* 0201 (AHUACHAPAN - Distrito Arius) con un total de 280664 ventas por unidad
-
-secS1 <- as.data.frame(subset(SecS, Sector == "0202"))
-secS1<- secS1[order(secS1$VentasTotales, decreasing=TRUE),] 
-secS1<- head(secS1, 3) #contiene los que mas se venden
-secS01 <- secS1[order(secS1$VentasTotales, decreasing=FALSE),] 
-secS01 <- head(secS01, 3) #contiene los que menos se venden
-
-secS2 <- as.data.frame(subset(SecS, Sector == "0204"))
-secS2<- secS2[order(secS2$VentasTotales, decreasing=TRUE),] 
-secS2<- head(secS2, 3)
-secS02 <- secS2[order(secS2$VentasTotales, decreasing=FALSE),] 
-secS02 <- head(secS02, 3) #contiene los que menos se venden
-
-secS3 <- as.data.frame(subset(SecS, Sector == "0203"))
-secS3<- secS3[order(secS3$VentasTotales, decreasing=TRUE),] 
-secS3<- head(secS3, 3)
-secS03 <- secS3[order(secS3$VentasTotales, decreasing=FALSE),] 
-secS03 <- head(secS03, 3) #contiene los que menos se venden
-
-secS4 <- as.data.frame(subset(SecS, Sector == "0212"))
-secS4<- secS4[order(secS4$VentasTotales, decreasing=TRUE),] 
-secS4<- head(secS4, 3)
-secS04 <- secS4[order(secS4$VentasTotales, decreasing=FALSE),] 
-secS04 <- head(secS04, 3) #contiene los que menos se venden
-
-secS5 <- as.data.frame(subset(SecS, Sector == "0210"))
-secS5<- secS5[order(secS5$VentasTotales, decreasing=TRUE),] 
-secS5<- head(secS5, 3)
-secS05 <- secS5[order(secS5$VentasTotales, decreasing=FALSE),] 
-secS05 <- head(secS05, 3) #contiene los que menos se venden
-
-
-
-
-masSalvador <-  c(secS1, secS2 , secS3, secS4, secS5)
-
-
-
-#SECTORES CON Menos VENTAS
-
-#* 0214 (SUCHITOTO,COJUTEPEQUE, SAN RAFAEL CEDROS - Distrito Sirius) con un total de 	106909 ventas por unidad
-#* 0224 (CUSCATLAN - Distrito Sirius) con un total de 112256 ventas por unidad
-#* 0230 (SAN SALVADOR NORTE - Distrito Arius) con un total de 114430 ventas por unidad
-#* 0223 (USULUTAN NORTE - Distrito Sirius) con un total de 140411 ventas por unidad
-#* 0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
-#* 0219 (MORAZAN - Distrito Sirius) con un total de 142319 ventas por unidad
-#* 0221 (ARMENIA - Distrito Arius) con un total de 150182 ventas por unidad
-#* 0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
-#* 0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
-
-
-secS6 <- as.data.frame(subset(SecS, Sector == "0214"))
-secS6<- secS6[order(secS6$VentasTotales, decreasing=TRUE),] 
-secS6<- head(secS6, 3) #contiene los que mas se venden
-secS06 <- secS6[order(secS6$VentasTotales, decreasing=FALSE),] 
-secS06 <- head(secS06, 3) #contiene los que menos se venden
-
-secS7 <- as.data.frame(subset(SecS, Sector == "0224"))
-secS7<- secS7[order(secS7$VentasTotales, decreasing=TRUE),] 
-secS7<- head(secS7, 3) #contiene los que mas se venden
-secS07 <- secS7[order(secS7$VentasTotales, decreasing=FALSE),] 
-secS07 <- head(secS07, 3) #contiene los que menos se venden
-
-secS8 <- as.data.frame(subset(SecS, Sector == "0230"))
-secS8<- secS8[order(secS8$VentasTotales, decreasing=TRUE),] 
-secS8<- head(secS8, 3) #contiene los que mas se venden
-secS08 <- secS8[order(secS8$VentasTotales, decreasing=FALSE),] 
-secS08 <- head(secS08, 3) #contiene los que menos se venden
-
-secS9 <- as.data.frame(subset(SecS, Sector == "0223"))
-secS9<- secS9[order(secS9$VentasTotales, decreasing=TRUE),] 
-secS9<- head(secS9, 3) #contiene los que mas se venden
-secS09 <- secS9[order(secS9$VentasTotales, decreasing=FALSE),] 
-secS09 <- head(secS09, 3) #contiene los que menos se venden
-
-secS10 <- as.data.frame(subset(SecS, Sector == "0220"))
-secS10<- secS10[order(secS10$VentasTotales, decreasing=TRUE),] 
-secS10<- head(secS10, 3) #contiene los que mas se venden
-secS010 <- secS10[order(secS10$VentasTotales, decreasing=FALSE),] 
-secS010 <- head(secS010,3)
-
-
-
-```
-
-
-## Clustering
-Se decidió hacer un clustering para las ventas totales por sector de cada país, con el fin de agrupar los sectores entre ventas bajas, medias y altas. A continuación, se usó el agrupamiento por medio de las k-medias, usando un cálculo de 3 clusters por los rangos de ventas ya antes mencionados. 
-
-### Clustering de Guatemala
-Se observa que para el primer cluster, solo se encuentra el sector AB03 con 6,557,880 ventas unitarias; el segundo cluster se encuentra el sector CC con 2,840,462; el tercer cluster se encuentra el resto de sectores de Guatemala. Dado que en los primeros clusters solo se encuentra un sector, se llegó a la conclusión que para este data set, no trae cuenta agrupar estos sectores por medio de clustering, a pesar que la media de la Prueba de la Silueta dio como resultado 0.8675771. 
-```{r}
-ClusterG <- Guatemala # Nuevo data frame únicamente para clusters
-km <- kmeans(Guatemala[,1],3) # Se calculan 3 clusters
-ClusterG$Grupo <- km$cluster # Se crea una nueva columna con el numero de cluster
-#Guatemala$Sector <- as.numeric(as.factor(Guatemala$Sector))
-
-# Grafica de los clusters
-
-fviz_cluster(km, data = Guatemala[,1:2], geom = "point", ellipse.type = "norm")
-
-
-# Prueba de la Silueta 
-silcluster <- silhouette(km$cluster, dist(Guatemala[,1]))
-mean(silcluster[,3]) # Media = 0.8675771. 
-```
-
-### Clustering de El Salvador
-Se observa que para este país, el clustering tiene potencial para agrupar los sectores. Al momento de aplicarle un clustering con 3 k-medias, se obtuvo que la media de la prueba de silueta fue de 0.557041. Este resultado presenta que no es la mejor media esperada pero tampoco está mal. Al mundo de agrupar, se tuvo lo siguiente: 
-* Primer grupo: En este grupo se encuentran los sectores que tienen ventas totales menores a 245,000.
-* Segundo grupo: Se encuentran los sectores que tienen ventas totales entre $245,000 \leq ventas \leq 590,000$.
-* Tercer grupo: Se encuentra el sector que tiene ventas totales mayores a 590,000. 
-```{r}
-ClusterS <- Salvador # Nuevo data frame únicamente para clusters
-kmS <- kmeans(Salvador[,1],3) # Se calculan 3 clusters
-ClusterS$Grupo <- kmS$cluster # Se crea una nueva columna con el numero de cluster
-
-# Grafica de los clusters
-
-fviz_cluster(kmS, data = ClusterS[,1:3], geom = "point", ellipse.type = "norm")
-
-
-
-# Prueba de la Silueta 
-silclusterS <- silhouette(kmS$cluster, dist(Salvador[,1]))
-mean(silclusterS[,3]) # Media = 0.8675771. 
-```
-
-### Clustering de Nicaragua
-Nicaragua muestra un buen agrupamiento de ventas totales por medio de clustering, a pesar que la media de la prueba de silueta fue de 0.4045472. Este resultado no presenta un buen resultado acerca de qué tan alejados están los datos de cada cluster; sin embargo, se presenta el agrupamiento por ventas totales observados por el cluster:
-* Primer grupo: En este grupo se encuentran los sectores que tienen ventas totales menores a 180,000.
-* Segundo grupo: Se encuentran los sectores que tienen ventas totales entre $180,000 \leq ventas \leq 510,000$.
-* Tercer grupo: Se encuentra el sector que tiene ventas totales mayores a 510,000. 
-```{r}
-ClusterN <- Nicaragua # Nuevo data frame únicamente para clusters
-kmN <- kmeans(Nicaragua[,1],3) # Se calculan 3 clusters
-ClusterN$Grupo <- kmN$cluster # Se crea una nueva columna con el numero de cluster
-
-# Grafica de los clusters
-
-
-
-# Prueba de la Silueta 
-silclusterN <- silhouette(kmN$cluster, dist(Nicaragua[,1]))
-mean(silclusterN[,3]) # Media = 0.8675771. 
-```
-
-
-# Categorias que mas/menos venden
-## Guatemala 
-```{r}
-SecG$VentasTotales <- as.numeric(SecG$VentasTotales) 
-catG <- ddply(SecG, .(Categoria), summarize, sum=sum(VentasTotales))
-catG<- catG[-c(1),] 
-ggplot(data=catG, aes(x=Categoria, y=sum)) +
-  geom_bar(stat="identity")+ coord_flip() 
-```
-Se tiene que las categorias que mas venden son: Uso diario, cabello y ellas. 
-En cuanto a las que menos venden se tiene que: joyeria, cuidado personal y cuidado de las unas. 
-
-## El Salvador
-
-```{r}
-SecS$VentasTotales <- as.numeric(SecS$VentasTotales) 
-catS <- ddply(SecS, .(Categoria), summarize, sum=sum(VentasTotales))
-catS<- catS[-c(1),] 
-ggplot(data=catS, aes(x=Categoria, y=sum)) +
-  geom_bar(stat="identity")+ coord_flip() 
-```
-Nuevamente, se tiene que entre las que mas venden son: uso diario, cabello y ellas. 
-Entre las que menos venden se tienen: Joyeria, premios y paquetes.
-## Nicaragua
-```{r}
-SecN$VentasTotales <- as.numeric(SecN$VentasTotales) 
-catN <- ddply(SecN, .(Categoria), summarize, sum=sum(VentasTotales))
-catN<- catN[-c(1),] 
-ggplot(data=catN, aes(x=Categoria, y=sum)) +
-  geom_bar(stat="identity")+ coord_flip() 
-```
-En este caso se tiene que las categorias que mas venden son: Uso diario, cabello, limpieza y ellas. 
-Se observa que hay un incremento en las ventas de las categorias de limpieza y ellas. 
-Por otro lado, para las que menos venden se tienen: Kimberly Clark, joyeria, descontinuados y cuidado de las unas. 
-
-## Honduras
-```{r}
-SecH$VentasTotales <- as.numeric(SecH$VentasTotales) 
-catH <- ddply(SecH, .(Categoria), summarize, sum=sum(VentasTotales))
-catH<- catN[-c(1),] 
-ggplot(data=catH, aes(x=Categoria, y=sum)) +
-  geom_bar(stat="identity")+ coord_flip() 
-```
-Para el pais de Honduras, se observa que las categorias que mas venden son: Uso diario, limpieza, ellas y ninos. 
-Asi tambien, las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
-
-### Conclusiones de ventas por categoria
-* En general se observa que en todos los paises las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
-* Tambien se observo, que en su mayoria, las categorias que mas venden son: uso diario, limpieza y ellas. 
-
-
-
-# PCA entre las categorias que mas venden
-
-
-<<<<<<< Updated upstream
-#Sneak peak: Series de tiempo
-=======
-#Modelos
->>>>>>> Stashed changes
-
-```{r}
-# # -------------------------------
-# # Distrito 1 de Nicaragua
-# # -------------------------------
-# CC01 <- Nica2[,c(1)]
-# D1.ts <- ts (CC01,start = c(2015,2), end=c(2019,5), frequency = 12)
-# plot(D1.ts)
-# # RESUMEN: hay declives a fines de año, se observan ventas inferiores a 200
-# # Descomponiendo la serie
-# D1.ts.desc <- decompose(D1.ts)
-# plot(D1.ts.desc)
-# # RESUMEN: no hay tendencia pero no es estacionaria con la media. Es oscilatoria
-```
-Este distrito se llama "CONTADO INSTITUCIONAL". Las ventas máximas de este distrito ha sido de 700, que solamente se logró a mediados del año 2015. La segunda venta más alta ha sido en los primeros meses del 2017 pero sin sobrepasar las 600 ventas unitarias.
-Ahora, al ver la descomposición de la serie, se observa que ha sido oscilatoria la tendencia. En los últimos meses, ha tenido más tendencia de lo usual. En este caso, es posible tomar en cuenta los altos y bajos de este distrito. 
-
-
-```{r}
-# # -------------------------------
-# # Distrito 2 de Nicaragua
-# # -------------------------------
-# D01 <- Nica2[,c(2:12)]
-# D01 <- rowSums(D01)
-# 
-# D2.ts <- ts (D01,start = c(2015,1), end=c(2019,5), frequency = 12)
-# plot(D2.ts)
-# # RESUMEN: Ha incrementado desde el 2017 y se ha mantenido más o menos estable
-# # Descomponiendo la serie
-# D2.ts.desc <- decompose(D2.ts)
-# plot(D2.ts.desc)
-# # RESUMEN: Hay tendencia y es un poco estacionaria con la media (pero no del todo!!)
-```
-Este distrito se llama "INDIANA RIVAS". Se observa que los ventas han ido creciendo y se han logrado estabilizar desde el 2017. Las ventas más bajas han sido de 40,000 y lo máximo de 60,000. Con respecto a la descomposición, se observa que fue oscilatoria pero que ha logrado estabilizarse (posiblemente es un comportamiento logístico). 
-
-
-```{r}
-# # -------------------------------
-# # Distrito 3 de Nicaragua
-# # -------------------------------
-# D02 <- Nica2[,c(13:24)]
-# D02 <- rowSums(D02)
-# 
-# D3.ts <- ts (D02,start = c(2015,1), end=c(2019,5), frequency = 12)
-# plot(D3.ts)
-# # RESUMEN: Es una de las más "estables", a finales de año no exceden de 45,000 ventas
-# # Descomponiendo la serie
-# D3.ts.desc <- decompose(D3.ts)
-# plot(D3.ts.desc)
-# # RESUMEN: Hay tendencia pero se mira un comportamiento logístico, como que ya logró más o menos estabilizarse
-```
-Este distrito se llama "JANNETTE HERRERA". Las ventas unitarias han sido crecientes, mostrando que las ventas a principios del año han sido más altas con respecto a los años pasados. En la descomposición de la serie, se muestra tendencia y estable con la media, ya que no se observan picos notables.
-
-
-```{r}
-# # -------------------------------
-# # Distrito 4 de Nicaragua
-# # -------------------------------
-# D03 <- Nica2[,c(25)]
-# 
-# D4.ts <- ts (D03,start = c(2015,1), end=c(2019,5), frequency = 12)
-# plot(D4.ts)
-# # RESUMEN: No es estable, hay muchos picos
-# D4.ts.desc <- decompose(D4.ts)
-# plot(D4.ts.desc)
-# # RESUMEN: Hay bastante decrecimiento en las ventas... 
-```
-Este distrito se llama "INSTITUCIONAL". Las ventas han ido de forma decreciente en comparación de las ventas del 2016-2017. Se observa que en los últimos meses se ha presenciado un declive en esta serie, las ventas más bajas se sitúan a mediados del 2018; poco a poco, las ventas fueron creciendo pero de manera lenta. Es importante tomar en cuenta si esta serie va a volver a presentar un declive o no; ver si es oscilatoria o no. Con respecto a la descomposición, no muestra tendencia, solo un decrecimiento en las ventas.
-
-```{r}
-# # -------------------------------
-# # Distrito 5 de Nicaragua
-# # -------------------------------
-# D0AB <- Nica2[,c(26)]
-# 
-# D5.ts <- ts (D0AB,start = c(2015,1), end=c(2019,5), frequency = 12)
-# plot(D5.ts)
-# # RESUMEN: Esta rara
-# D5.ts.desc <- decompose(D5.ts)
-# plot(D5.ts.desc)
-# # RESUMEN: Hay muuuuucha tendencia en los ultimos años
-```
-Este distrito se llama "DISTRITO ABOGADOS". Okay, evidentemente este distrito ha solicitado muchos productos de Scentia desde el 2018 hasta este año. El crecimiento de ventas ha sido de forma radical, mostrando solamente que en el mes de diciembre del 2018 las ventas bajaron pero luego crecieron nuevamente, superando las ventas del 2018. Tomar en cuenta porqué se debe este cambio. Claramente se evidencia tendencia, aunque es estacionaria con la media pero no con la varianza. 
-
-```{r}
-# # -------------------------------
-# # Distrito 6 de Nicaragua
-# # -------------------------------
-# D0EM <- Nica2[,c(27)]
-# 
-# D6.ts <- ts (D0EM,start = c(2015,1), end=c(2019,5), frequency = 12)
-# plot(D6.ts)
-# # RESUMEN: Jajaja esta suuper decreciente 
-# D6.ts.desc <- decompose(D6.ts)
-# plot(D6.ts.desc)
-# # RESUMEN: Hay bastante decrecimiento en las ventas... 
-```
-Este distrito se llama "DISTRITO EMPLEADO". Este distrito ha perido muchas ventas, siendo estas casi nulas. Comenzó todo bien pero desde principios del 2016, las ventas han ido decreciendo. En la descomposición se observa claramente este bajón en las ventas, posiblemente es útil considerar eliminar este distrito dentro de las ventas destinadas que tiene contemplado Scentia o simplemente se podrían producir lo necesario para satisfacer este distrito y que la empresa no tenga pérdidas. 
-
-```{r}
-# #Nicaragua
-# ## 0
-# Nsec0 <- SecN[SecN$Sector == 0, ]
-# Nsec0 <- Nsec0[,-c(1,2,3)]
-# Nsec0[] <- lapply(Nsec0, as.numeric)
-# Nsum0 <- colSums(Nsec0[,-1])
-# 
-# ## 1
-# Nsec1 <- SecN[SecN$Sector == 1, ]
-# Nsec1 <- Nsec1[,-c(1,2,3)]
-# Nsec1[] <- lapply(Nsec1, as.numeric)
-# Nsum1 <- colSums(Nsec1[,-1])
-# 
-# 
-# ## 2
-# Nsec2 <- SecN[SecN$Sector == 2, ]
-# Nsec2 <- Nsec2[,-c(1,2,3)]
-# Nsec2[] <- lapply(Nsec2, as.numeric)
-# Nsum2 <- colSums(Nsec2[,-1])
-# 
-# 
-# ## 3
-# 
-# Nsec3 <- SecN[SecN$Sector == 3, ]
-# Nsec3 <- Nsec3[,-c(1,2,3)]
-# Nsec3[] <- lapply(Nsec3, as.numeric)
-# Nsum3 <- colSums(Nsec3[,-1])
-# 
-# 
-# ## 4
-# 
-# Nsec4 <- SecN[SecN$Sector == 4, ]
-# Nsec4 <- Nsec4[,-c(1,2,3)]
-# Nsec4[] <- lapply(Nsec4, as.numeric)
-# Nsum4 <- colSums(Nsec4[,-1])
-# 
-# 
-# ## 5
-# 
-# Nsec5 <- SecN[SecN$Sector == 5, ]
-# Nsec5 <- Nsec5[,-c(1,2,3)]
-# Nsec5[] <- lapply(Nsec5, as.numeric)
-# Nsum5 <- colSums(Nsec5[,-1])
-# 
-# 
-# ## 6
-# 
-# Nsec6 <- SecN[SecN$Sector == 6, ]
-# Nsec6 <- Nsec6[,-c(1,2,3)]
-# Nsec6[] <- lapply(Nsec6, as.numeric)
-# Nsum6 <- colSums(Nsec6[,-1])
-# 
-# 
-# ## 7
-# 
-# Nsec7 <- SecN[SecN$Sector == 7, ]
-# Nsec7 <- Nsec7[,-c(1,2,3)]
-# Nsec7[] <- lapply(Nsec7, as.numeric)
-# Nsum7 <- colSums(Nsec7[,-1])
-# 
-# 
-# ## 8
-# 
-# Nsec8 <- SecN[SecN$Sector == 8, ]
-# Nsec8 <- Nsec8[,-c(1,2,3)]
-# Nsec8[] <- lapply(Nsec8, as.numeric)
-# Nsum8 <- colSums(Nsec8[,-1])
-# 
-# 
-# ## 9
-# 
-# Nsec9 <- SecN[SecN$Sector == 9, ]
-# Nsec9 <- Nsec9[,-c(1,2,3)]
-# Nsec9[] <- lapply(Nsec9, as.numeric)
-# Nsum9 <- colSums(Nsec9[,-1])
-# 
-# 
-# ## 10
-# 
-# Nsec10 <- SecN[SecN$Sector == 1, ]
-# Nsec10 <- Nsec10[,-c(1,2,3)]
-# Nsec10[] <- lapply(Nsec10, as.numeric)
-# Nsum10 <- colSums(Nsec10[,-1])
-# 
-# 
-# ## 11
-# 
-# Nsec11 <- SecN[SecN$Sector == 11, ]
-# Nsec11 <- Nsec11[,-c(1,2,3)]
-# Nsec11[] <- lapply(Nsec11, as.numeric)
-# Nsum11 <- colSums(Nsec11[,-1])
-# 
-# ## 12
-# 
-# Nsec12 <- SecN[SecN$Sector == 12, ]
-# Nsec12 <- Nsec12[,-c(1,2,3)]
-# Nsec12[] <- lapply(Nsec12, as.numeric)
-# Nsum12 <- colSums(Nsec12[,-1])
-# 
-# ##sector 13
-# 
-# Nsec13 <- subset(SecN, Sector == "13")
-# Nsec13 <- Nsec13[,-c(1,2,3)]
-# Nsec13[] <- lapply(Nsec13, as.numeric)
-# Nsum13 <- colSums(Nsec13[,-1])
-# 
-# ##sector 14
-# 
-# Nsec14 <- subset(SecN, Sector == "14")
-# Nsec14 <- Nsec14[,-c(1,2,3)]
-# Nsec14[] <- lapply(Nsec14, as.numeric)
-# Nsum14 <- colSums(Nsec14[,-1])
-# 
-# ##sector 15
-# 
-# Nsec15 <- subset(SecN, Sector == "15")
-# Nsec15 <- Nsec15[,-c(1,2,3)]
-# Nsec15[] <- lapply(Nsec15, as.numeric)
-# Nsum15 <- colSums(Nsec15[,-1])
-# 
-# ##sector 16
-# 
-# Nsec16 <- subset(SecN, Sector == "16")
-# Nsec16 <- Nsec16[,-c(1,2,3)]
-# Nsec16[] <- lapply(Nsec16, as.numeric)
-# Nsum16 <- colSums(Nsec16[,-1])
-# 
-# ##sector 17
-# 
-# Nsec17 <- subset(SecN, Sector == "17")
-# Nsec17 <- Nsec17[,-c(1,2,3)]
-# Nsec17[] <- lapply(Nsec17, as.numeric)
-# Nsum17 <- colSums(Nsec17[,-1])
-# 
-# ##sector 18
-# 
-# Nsec18 <- subset(SecN, Sector == "18")
-# Nsec18 <- Nsec18[,-c(1,2,3)]
-# Nsec18[] <- lapply(Nsec18, as.numeric)
-# Nsum18 <- colSums(Nsec18[,-1])
-# 
-# ##sector 19
-# 
-# Nsec19 <- subset(SecN, Sector == "19")
-# Nsec19 <- Nsec19[,-c(1,2,3)]
-# Nsec19[] <- lapply(Nsec19, as.numeric)
-# Nsum19 <- colSums(Nsec19[,-1])
-# 
-# ##sector 20
-# 
-# Nsec20 <- subset(SecN, Sector == "20")
-# Nsec20 <- Nsec20[,-c(1,2,3)]
-# Nsec20[] <- lapply(Nsec20, as.numeric)
-# Nsum20 <- colSums(Nsec20[,-1])
-# 
-# ##sector 21
-# 
-# Nsec21 <- subset(SecN, Sector == "21")
-# Nsec21 <- Nsec21[,-c(1,2,3)]
-# Nsec21[] <- lapply(Nsec21, as.numeric)
-# Nsum21 <- colSums(Nsec21[,-1])
-# 
-# ##sector 22
-# 
-# Nsec22 <- subset(SecN, Sector == "22")
-# Nsec22 <- Nsec22[,-c(1,2,3)]
-# Nsec22[] <- lapply(Nsec22, as.numeric)
-# Nsum22 <- colSums(Nsec22[,-1])
-# 
-# ##sector 23
-# 
-# Nsec23 <- subset(SecN, Sector == "23")
-# Nsec23 <- Nsec23[,-c(1,2,3)]
-# Nsec23[] <- lapply(Nsec23, as.numeric)
-# Nsum23 <- colSums(Nsec23[,-1])
-# 
-# ##sector 24
-# 
-# Nsec24 <- subset(SecN, Sector == "24")
-# Nsec24 <- Nsec24[,-c(1,2,3)]
-# Nsec24[] <- lapply(Nsec24, as.numeric)
-# Nsum24 <- colSums(Nsec24[,-1])
-# 
-# ##sector 25
-# 
-# Nsec25 <- subset(SecN, Sector == "25")
-# Nsec25 <- Nsec25[,-c(1,2,3)]
-# Nsec25[] <- lapply(Nsec25, as.numeric)
-# Nsum25 <- colSums(Nsec25[,-1])
-# 
-# ##sector 26
-# 
-# Nsec26 <- subset(SecN, Sector == "26")
-# Nsec26 <- Nsec26[,-c(1,2,3)]
-# Nsec26[] <- lapply(Nsec26, as.numeric)
-# Nsum26 <- colSums(Nsec26[,-1])
-# 
-# ##Sector 27
-# 
-# Nsec27 <- subset(SecN, Sector == "27")
-# Nsec27 <- Nsec0[,-c(1,2,3)]
-# Nsec27[] <- lapply(Nsec27, as.numeric)
-# Nsum27 <- colSums(Nsec27[,-1])
-# 
-# # Nsum27 tiene 52 objetos y no cuadra con las demas de 55 objetos.
-# 
-# Nica2 <- data.frame(Nsum0, Nsum1, Nsum2, Nsum3, Nsum4, Nsum5, Nsum6, Nsum7, Nsum8, Nsum9, Nsum10, Nsum11, Nsum12, Nsum13, Nsum14, Nsum15, Nsum16, Nsum17, Nsum18, Nsum19, Nsum20, Nsum21, Nsum22, Nsum23, Nsum24, Nsum25, Nsum26)
-# 
-# # Se agrupa por distritos
-```
-
-
-```{r}
-# Salen fechas demás, como x51, x52, etc.
-#Idea para hacer la matriz
-#crearMatriz <- function(x,y){
-  #matriz <- matrix( nrow = 55, ncol = 50)
-  #for (i in 0){
-    #lista <- x[x$Sector == i,]
-    #lista <- lista[,-c(1,2,3)]
-    #lista[] <- lapply(lista, as.numeric)
-    #suma <- colSums(lista[,-1])
-    #matriz <- cbind(suma)
-  #}
-  #return(matriz)
-#}
-```
-```{r}
-#nuevoSecG <- crearMatriz(SecG,Ga)
-```
-
-# Fuentes consultadas
-* S.A (2018). *The R Graph Gallery*. Extraido de: https://www.r-graph-gallery.com/ [29/06/2019]
-* D. (08/2019). *Markdown Text 101*. Extraido de: https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline- [06/10/2019]
-* Theuwissen, M. (02/12/2015). *How to write the first for loop in R*. Extraido de: https://www.r-bloggers.com/how-to-write-the-first-for-loop-in-r/ [01/10/2019]
->>>>>>> Stashed changes
