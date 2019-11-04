@@ -70,9 +70,9 @@ library(cluster)
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
-#C:/Users/Betzy/Documents/Betzy/Proyecto2DS
+#C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS
 
-setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
+setwd("C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Guatemala
@@ -178,6 +178,9 @@ SecN <- eliminarCat(SecN)
 SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
 
 
+DescH <- DescH[-c(32,34),]
+
+
 
 
 ```
@@ -205,21 +208,21 @@ listaCatG <- gsub(" ","", listaCatG)
 listaCatG <- sort(listaCatG)
 
 
-## Honduras
-# sectoresH <- strsplit(DescH[,c(2)], "-", NULL)
-# sectoresH <- data.frame(sectoresH)
-# sectoresH <- t(sectoresH[-c(2),])
-# sectoresH <- gsub(" ","", sectoresH)
-# sectoresG <- sort(sectoresG)
+ Honduras
+sectoresH <- strsplit(DescH[,c(2)], " - ")
+sectoresH <- data.frame(sectoresH)
+sectoresH <- t(sectoresH[-c(2),])
+sectoresH <- gsub(" ","", sectoresH)
+sectoresH <- sort(sectoresH)
 # 
-# categoriasS <- data.frame(SecS$Categoria)
-# n_occurS <- data.frame(table(categoriasS$SecS.Categoria))
-# n_occurS[n_occurS$Freq > 1,]
-# categoriasS[categoriasS$SecS.Categoria %in% n_occurS$Var1[n_occurS$Freq > 1],]
-# n_occurS$Freq <- NULL
-# listaCatS<- t(n_occurS[-c(1),])
-# listaCatS <- gsub(" ","", listaCatS)
-# listaCatS <- sort(listaCatS)
+categoriasH <- data.frame(SecH$Categoria)
+ n_occurH <- data.frame(table(categoriasH$SecH.Categoria))
+n_occurH[n_occurH$Freq > 1,]
+categoriasH[categoriasH$SecH.Categoria %in% n_occurH$Var1[n_occurH$Freq > 1],]
+n_occurH$Freq <- NULL
+listaCatH<- t(n_occurH[-c(1),])
+listaCatH <- gsub(" ","", listaCatH)
+listaCatH <- sort(listaCatH)
 
 ## Nigaragua
 sectoresN <- strsplit(DescN[,c(2)], "-")
