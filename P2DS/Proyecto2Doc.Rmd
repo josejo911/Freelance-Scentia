@@ -145,7 +145,9 @@ cambioTitulos <- function(x){
 # Modificaciones nuevas según Scentia
 eliminarSectores <- function(x){
   x <- x[x$Sector != "0000", ]
-  x <- x[x$Sector != "AB", ]
+  x <- x[x$Sector != "AB01", ]
+  x <- x[x$Sector != "AB02", ]
+  x <- x[x$Sector != "AB03", ]
 }
 
 eliminarCat <- function(x){
@@ -284,7 +286,6 @@ Guatemala %>%
 ```
 Para el país de Guatemala se tiene que los sectores con más ventas son:
 
-* AB03 (COVINOC - Distrito de abogados) con un total de 6557880 ventas por unidad
 * CC (CLIENTES CONTADO - Distrito contado) con un total de 2840462 ventas por unidad
 * 0021 (SANTA ROSA TODOS SUS MUNICIPIOS - Distrito Arius) con un total de 892428 ventas por unidad
 * 0005 (CHIQUIMULA TODOS LOS MUNICIPIOS - Ditrito Sirius) con un total de 705007 ventas por unidad
@@ -300,9 +301,6 @@ Por otro lado, los sectores con menos ventas son:
 * EX01 ( EXTERIOR - Distrito EXTERIOR) con un total de 0 ventas por unidad
 * 0040 ( San Juan/San Pedro Sacatepequez - Distrito Orion) con un total de 2 ventas por unidad
 * PR01 (PREMIOS POR RECOBRAR - Distrito Abogados) con un total de 12 ventas por unidad
-* AB01 (ABOGADO CARLOS ARANA - Distrito Abogados) con un total de 26 ventas por unidad
-* AB02 (SERVICIOS LEGALES INTEGRADOS - Distrito Abogados) con un total de 227 ventas por unidad
-* 0000 (CIUDAD QUETZAL, SAN PEDRO, JUAN, RAYMUNDO, 6 MIXCO - Distrito Orion) con un total de 130241 ventas por unidad
 * 0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion) con un total de 190270 ventas por unidad
 * 0042 (SECTOR 42 - Distrito Orion) con un total de 206768 ventas por unidad
 * 0038 (AN LUIS/POPTUN - Distrito Sirius) con un total de 255187 ventas por unidad
