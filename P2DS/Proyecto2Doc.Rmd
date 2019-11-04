@@ -71,11 +71,9 @@ library(cluster)
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Betzy/Documents/Betzy/Proyecto2DS
-<<<<<<< Updated upstream
+
 setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
-=======
-#setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
->>>>>>> Stashed changes
+
 # Leyendo el dataset de csv importacion
 # Guatemala
 SecG <- read.xlsx("USG1519.xlsx", sheet = 1, startRow = 1, colNames = TRUE,
@@ -124,7 +122,7 @@ SecN[is.na(SecN)] <- 0
 SecS[is.na(SecS)] <- 0
 ```
 
-<<<<<<< Updated upstream
+
 ## Modificación de columnas y filas
 En esta parte, se creó una función que eliminara las primeras dos filas de todo el data set, ya que estas contenían el nombre de las columnas. Asimismo, se decidió dejar solamente cuatro columnaas: Sector, Categoría, Producto y Ventas Finales. Todo lo demás se eliminó y se dejó solamente la información de todos los productos de estas cuatro categorías. 
 Sin embargo, se creó una nueva función que eliminara los sectores que no deben analizarse en este documento, tales como el sector AB y 0000, ya que son sectores de abogados y trabajadores. Asimismo, se elimina las categorías de Kimberly Clark, Descontinuados y Cuidado de uñas. 
@@ -143,42 +141,41 @@ cambioTitulos <- function(x){
 
 # Aplicación de la función a los datos
 
-SecS <- cambioTitulos(SecS)
-SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
-SecG <- cambioTitulos(SecG)
-SecG$VentasTotales <- as.numeric(SecG$VentasTotales)
-SecH <- cambioTitulos(SecH)
-SecH$VentasTotales <- as.numeric(SecH$VentasTotales)
-SecN <- cambioTitulos(SecN)
-SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
 
 # Modificaciones nuevas según Scentia
-
-## Se crea una lista de las iniciales de los sectores que se quieren eliminar
-
-### Si el sector es un número, se debe de poner el número completo
-
-noQuieroSecGuate <- c("AB", "0000")
-
-## Se crea una lista de las iniciales de las categorías que quiero eliminar (Aquí puede ser el nombre completo)
-
-noQuieroCatGuate <- c("KIMBERLY", "DESCONTINUADOS", "	CUIDADO DE LAS UÑAS")
-
-## Se crea la función para lo que se quiere eliminar
-
-noDeseado <- function(pais, noSec, noCat){
-  for (i in noSec) {
-    pais <- pais[-grep(i, pais$Sector)]
-  }
-  for (i in noCat){
-    pais <- pais[-grep(i, pais$Sector)]
-  }
-  return(pais)
+eliminarSectores <- function(x){
+  x <- x[x$Sector != "0000", ]
+  x <- x[x$Sector != "AB", ]
 }
 
-## Se limpia el sector
+eliminarCat <- function(x){
+  x <- x[x$Categoria != "KIMBERLY CLARK", ]
+  x <- x[x$Categoria != "DESCONTINUADOS", ]
+  x <- x[x$Categoria != "CUIDADO DE LAS UÑAS", ]
+}
 
-SecG <- noDeseado(SecG, noQuieroSecGuate, noQuieroCatGuate)
+# Aplicación de las funciones
+SecG <- cambioTitulos(SecG)
+SecG <- eliminarSectores(SecG)
+SecG <- eliminarCat(SecG)
+SecG$VentasTotales <- as.numeric(SecG$VentasTotales)
+
+SecS <- cambioTitulos(SecS)
+SecS <- eliminarSectores(SecS)
+SecS <- eliminarCat(SecS)
+SecS$VentasTotales <- as.numeric(SecS$VentasTotales)
+
+SecH <- cambioTitulos(SecH)
+SecH <- eliminarSectores(SecH)
+SecH <- eliminarCat(SecH)
+SecH$VentasTotales <- as.numeric(SecH$VentasTotales)
+
+SecN <- cambioTitulos(SecN)
+SecN <- eliminarSectores(SecN)
+SecN <- eliminarCat(SecN)
+SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
+
+
 
 
 ```
