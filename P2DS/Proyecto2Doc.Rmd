@@ -16,18 +16,39 @@ En los avances de proyecto 1, se había presentado el análisis exploratorio del
 
 
 ## Objetivos
-* Separar las ventas por sectores.
-* Crear una predicción sobre la ventas a partir de líneas de tiempo generadas con los datos que se tienen por sector de los últimos 4 años.
-* Verificar la eficiencia del modelo comparando las gráficas de tiempo con la historia económica de los últimos 4 años.
+### Objetivo general
+* Realizar un análisis exploratorio sobre las ventas por sector obtenidas en los países de Guatemala, El Salvador, Nicaragua y Honduras del año 2015 a 2019.
 
-## Variables de interés
-* Ventas: es una variable cuantitativa la cual será clave para las predicciones.
-* Mes y año de venta: variable cuantitativa indispensable para la creación de una serie de tiempo. 
-* Sector: variable de carácter cualitativo dado que indica la pertenencia de una venta a un sector asignado en un país.
+### Objetivos específicos
+* Determinar cuales son los sectores que venden más y cuales son los que venden menos en cada país.
 
-## Variables Respuesta
-* Modelo de predicción a partir de la serie de tiempo. 
+* Enlistar los productos que tienen más ventas y las que tienen menos ventas según los sectores que hayan resaltado en sus ventas totales.
 
+* Analizar el comportamiento político, económico y social de los países centroamericanos Guatemala, El Salvador, Nicaragua y Honduras. 
+
+
+## Variables
+### Variables de interés
+* Ventas: Es una variable cuantitativa la cual será la clave para el análisis exploratorio.
+
+* Mes y año de venta: Variable cuantitativa indispensable para la creación de ventas totales.
+
+* Ventas totales: Variable cuantitativa que será utilizada para encontrar los sectores con más ventas por país y para encontrar las categorías con más ventas por sector.
+
+* Distrito: Variable de carácter cualitativo dado que indica la pertenencia de una venta o un distrito asignado a un país. 
+
+### Variables Respuesta
+* Sectores que tienen mayor y menor cantidad de venta.
+
+* Productos que más se venden y categorías que se venden menos. 
+
+* Mujeres que más venden en Nicaragua.
+
+
+# Análisis exploratorio
+
+## Librerías a usar
+A continuación se llaman a todas los paquetes necesarios para poder llevar a cabo el análisis exploratorio.
 ```{r echo=FALSE, warning=FALSE, include=FALSE}
 # Librerias a utilizar
 require(ggpubr) # Para mejorar la visualización gráfica
@@ -61,13 +82,15 @@ library(factoextra) # Para hacer graficos bonitos de clustering
 library(forcats)
 library(cluster)
 ```
+
+
 ```{r echo=FALSE, warning=FALSE}
 #"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS
 
-setwd("C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS")
+#setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Guatemala
@@ -110,6 +133,8 @@ DescS <- read.xlsx("USS1519.xlsx", sheet = 2, startRow = 1, colNames = TRUE,
                  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
                  namedRegion = NULL, na.strings = "0", fillMergedCells = FALSE)
 ```
+
+Luego, se colocan ceros en las casillas que tienen NA ya que se analizará variables cuantitativas.
 ```{r}
 SecG[is.na(SecG)] <- 0
 SecH[is.na(SecH)] <- 0
@@ -119,7 +144,8 @@ SecS[is.na(SecS)] <- 0
 
 
 ## Modificación de columnas y filas
-En esta parte, se creó una función que eliminara las primeras dos filas de todo el data set, ya que estas contenían el nombre de las columnas. Asimismo, se decidió dejar solamente cuatro columnaas: Sector, Categoría, Producto y Ventas Finales. Todo lo demás se eliminó y se dejó solamente la información de todos los productos de estas cuatro categorías. 
+En esta parte, se creó una función que eliminara las primeras dos filas de todo el data set, ya que estas contenían el nombre de las columnas. Asimismo, se decidió dejar solamente cuatro columnas: Sector, Categoría, Producto y Ventas Finales. Todo lo demás se eliminó y se dejó solamente la información de todos los productos junto con sus categorías correspondientes. 
+
 Sin embargo, se creó una nueva función que eliminara los sectores que no deben analizarse en este documento, tales como el sector AB y 0000, ya que son sectores de abogados y trabajadores. Asimismo, se elimina las categorías de Kimberly Clark, Descontinuados y Cuidado de uñas. 
 ```{r}
 # -------------------------------
@@ -134,9 +160,6 @@ cambioTitulos <- function(x){
   x <- x[,c(1,2,3,length(x))]
 }
 
-# Aplicación de la función a los datos
-
-
 # Modificaciones nuevas según Scentia
 eliminarSectores <- function(x){
   x <- x[x$Sector != "0000", ]
@@ -144,7 +167,7 @@ eliminarSectores <- function(x){
   x <- x[x$Sector != "AB02", ]
   x <- x[x$Sector != "AB03", ]
 }
-
+# Elimina categorías
 eliminarCat <- function(x){
   x <- x[x$Categoria != "KIMBERLY CLARK", ]
   x <- x[x$Categoria != "DESCONTINUADOS", ]
@@ -152,10 +175,9 @@ eliminarCat <- function(x){
 }
 
 
-
-
-
+# -------------------------------
 # Aplicación de las funciones
+# -------------------------------
 SecG <- cambioTitulos(SecG)
 SecG <- eliminarSectores(SecG)
 SecG <- eliminarCat(SecG)
@@ -182,12 +204,6 @@ SecN$VentasTotales <- as.numeric(SecN$VentasTotales)
 
 
 DescH <- DescH[-c(32,34),]
-
-
-
-
-
-
 ```
 
 ## Modificación a la hoja de descripción de sectores
@@ -201,33 +217,12 @@ sectoresG <- t(sectoresG[-c(2),])
 sectoresG <- gsub(" ","", sectoresG)
 sectoresG <- sort(sectoresG)
 
-
-
-# categoriasG <- data.frame(SecG$Categoria)
-# n_occur <- data.frame(table(categoriasG$SecG.Categoria))
-# n_occur[n_occur$Freq > 1,]
-# categoriasG[categoriasG$SecG.Categoria %in% n_occur$Var1[n_occur$Freq > 1],]
-# n_occur$Freq <- NULL
-# listaCatG<- t(n_occur[-c(1),])
-# listaCatG <- gsub(" ","", listaCatG)
-# listaCatG <- sort(listaCatG)
-
-
 #Honduras
 sectoresH <- strsplit(DescH[,c(2)], " - ")
 sectoresH <- data.frame(sectoresH)
 sectoresH <- t(sectoresH[-c(2),])
 sectoresH <- gsub(" ","", sectoresH)
 sectoresH <- sort(sectoresH)
-
-# categoriasH <- data.frame(SecH$Categoria)
-#  n_occurH <- data.frame(table(categoriasH$SecH.Categoria))
-# n_occurH[n_occurH$Freq > 1,]
-# categoriasH[categoriasH$SecH.Categoria %in% n_occurH$Var1[n_occurH$Freq > 1],]
-# n_occurH$Freq <- NULL
-# listaCatH<- t(n_occurH[-c(1),])
-# listaCatH <- gsub(" ","", listaCatH)
-# listaCatH <- sort(listaCatH)
 
 ## Nigaragua
 sectoresN <- strsplit(DescN[,c(2)], "-")
@@ -236,37 +231,16 @@ sectoresN <- t(sectoresN[-c(2),])
 sectoresN <- gsub(" ","", sectoresN)
 sectoresN <- sort(sectoresN)
 
-
-# categoriasN <- data.frame(SecN$Categoria)
-# n_occurN <- data.frame(table(categoriasN$SecN.Categoria))
-# n_occurN[n_occurN$Freq > 1,]
-# categoriasN[categoriasN$SecN.Categoria %in% n_occurN$Var1[n_occurN$Freq > 1],]
-# n_occurN$Freq <- NULL
-# listaCatN<- t(n_occurN[-c(1),])
-# listaCatN <- gsub(" ","", listaCatN)
-# listaCatN <- sort(listaCatN)
-
 ## El Salvador
 sectoresS <- strsplit(DescS[,c(2)], "-")
 sectoresS <- data.frame(sectoresS)
 sectoresS <- t(sectoresS[-c(2),])
 sectoresS <- gsub(" ","", sectoresS)
 sectoresS <- sort(sectoresS)
-
-
-# categoriasS <- data.frame(SecS$Categoria)
-# n_occurS <- data.frame(table(categoriasS$SecS.Categoria))
-# n_occurS[n_occurS$Freq > 1,]
-# categoriasS[categoriasS$SecS.Categoria %in% n_occurS$Var1[n_occurS$Freq > 1],]
-# n_occurS$Freq <- NULL
-# listaCatS<- t(n_occurS[-c(1),])
-# listaCatS <- gsub(" ","", listaCatS)
-# listaCatS <- sort(listaCatS)
-
 ```
 
-# Ventas totales de cada país
-Se creó una función para sumar las ventas totales de cada producto de caa sector paa obtener la venta total del sector en todo su periodo de tiempo. Después de esto, se graficaron las ventas totales de cada sector para cada país.
+## Ventas totales de cada país
+Se creó una función para sumar las ventas totales de cada producto de caa sector para obtener la venta total del sector en todo su periodo de tiempo. Después de esto, se graficaron las ventas totales de cada sector para cada país.
 ```{r}
 crearLista <- function(x,y){
   lista <-c()
@@ -295,60 +269,67 @@ Guatemala %>%
 Para el país de Guatemala se tiene que los sectores con más ventas son:
 
 * CC (CLIENTES CONTADO - Distrito contado) con un total de 2840462 ventas por unidad
+
 * 0021 (SANTA ROSA TODOS SUS MUNICIPIOS - Distrito Arius) con un total de 892428 ventas por unidad
+
 * 0005 (CHIQUIMULA TODOS LOS MUNICIPIOS - Ditrito Sirius) con un total de 705007 ventas por unidad
+
 * 0027 (JUTIAPA (CENTRO), MOYUTA, JALPATAGUA, JEREZ - Distrito Arius) con un total de 684809 ventas por unidad
+
 * 0006 (ZACAPA TODOS LOS MUNICIPIOS - Distrito Sirius) con un total de 679730 ventas por unidad
-* 0012 (SAN JOSE Y BARCENAS (V. NUEVA), AMATITLAN Y PALIN - Distrito Airus) con un total de 668926 ventas por unidad
-* 0026 (ZONAS 17,24,25; PALENCIA Y SAN JOSE DEL GOLFO -  Distrito Sirius) con un total de 645816 ventas por unidad
-* 0031 (EL PROGRESO TODOS SUS MUNICIPIOS - Distrito Sirus) con un total de 633666 ventas por unidad
-* 0034 (PETEN Y MUNICIPIOS - Distrito Sirius) con un total de 615779 ventas por unidad
+
 
 Por otro lado, los sectores con menos ventas son:
 
 * EX01 ( EXTERIOR - Distrito EXTERIOR) con un total de 0 ventas por unidad
-* 0040 ( San Juan/San Pedro Sacatepequez - Distrito Orion) con un total de 2 ventas por unidad
-* PR01 (PREMIOS POR RECOBRAR - Distrito Abogados) con un total de 12 ventas por unidad
-* 0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion) con un total de 190270 ventas por unidad
-* 0042 (SECTOR 42 - Distrito Orion) con un total de 206768 ventas por unidad
-* 0038 (AN LUIS/POPTUN - Distrito Sirius) con un total de 255187 ventas por unidad
-* 0018 (REFORMITA, VILLA LOBOS, MEZQUITAL - Distrito Arius) con un total de 281042 ventas por unidad
 
-## Productos que más y menos venden según los sectores que más venden
+* 0040 ( San Juan/San Pedro Sacatepequez - Distrito Orion) con un total de 2 ventas por unidad
+
+* PR01 (PREMIOS POR RECOBRAR - Distrito Abogados) con un total de 12 ventas por unidad
+
+* 0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion) con un total de 190270 ventas por unidad
+
+* 0042 (SECTOR 42 - Distrito Orion) con un total de 206768 ventas por unidad
+
+
+## Top de productos de los sectores que más venden para Guatemala
 
 ### Sector CC (CLIENTES CONTADO - Distrito contado)
 Se observa que los primeros tres productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
 * Fresh Fit Spray Antimicótico 200 con 86,852 ventas.
+
 * Top Secret Roll-On Baby Powder 80G, con 80,357 ventas.
+
 * Scentia Roll On Extreme Lady 80G, con 45,836 ventas. 
+
 ```{r}
 gCC <- subset(SecG, Sector == "CC")
 gCC <- gCC[order(gCC$VentasTotales, decreasing = TRUE),]
 head(gCC,3)
 ```
-Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
-* Paquete de limpieza docena de 14 (Jabón de manos Soft Blossom) con 0 venta.
-* Top Family Rosa MOSQ Crema Corp 1KG Edi. Mama OFE 2, con 0 venta.
-* Paquete Bazar 5, con 0 venta. 
+
 ```{r}
-tail(gCC,3)
+gCCM <- as.data.frame(subset(SecG, VentasTotales > "0"))
+gCCM <- gCCM[order(gCCM$VentasTotales, decreasing = TRUE),]
+tail(gCCM, 10)
 ```
 
 
 ### Sector 0021 (SANTA ROSA TODOS SUS MUNICIPIOS - Distrito Arius)
 Se observa que los primeros cuatros productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
 * Fresh Fit Spray Antimicótico 200 con 17,392 ventas.
+
 * Top Secret Roll-On Baby Powder 80G, con 16,557 ventas.
+
 * Scentia Roll On Extreme Lady 80G, con 13,278 ventas. 
+
 ```{r}
 g0021 <- subset(SecG, Sector == "0021")
 g0021 <- g0021[order(g0021$VentasTotales, decreasing = TRUE),]
 head(g0021,3)
 ```
-Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de SALUD Y BIENESTAR, TEENS Y USO DIARIO, siendo estos: 
-* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta.
-* Acne Solution Mascar EXF C/Soya 10, con 0 venta.
-* Top Family Jabón Liquido Neutro Para Zonas Intimas 800ML OFE 2, con 0 venta. 
+
+
 ```{r}
 tail(g0021,3)
 ```
@@ -357,17 +338,16 @@ tail(g0021,3)
 ### Sector 0005 (CHIQUIMULA TODOS LOS MUNICIPIOS - Ditrito Sirius)
 Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
 * Fresh Fit Spray Antimicótico 200 con 14,275 ventas.
+
 * Top Secret Roll-On Baby Powder 80G, con 8,486 ventas.
+
 * Scentia Roll On Extreme Lady 80G, con 8,452 ventas. 
 ```{r}
 g0005 <- subset(SecG, Sector == "0005")
 g0005 <- g0005[order(g0005$VentasTotales, decreasing = TRUE),]
 head(g0005,3)
 ```
-Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de SALUD Y BIENESTAR, siendo estos: 
-* SC Naturals Te Descanso Caja 20 Unidades OFE, con 0 venta.
-* SC Naturals Te Limp Intes Caj con 20 bol OFE, con 0 venta.
-* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta. 
+
 ```{r}
 tail(g0005,3)
 ```
@@ -375,35 +355,34 @@ tail(g0005,3)
 ### Sector 0027 (JUTIAPA (CENTRO), MOYUTA, JALPATAGUA, JEREZ - Distrito Arius)
 Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
 * Fresh Fit Spray Antimicótico 200 con 14,810 ventas.
+
 * Rabano Yodado 240 ML, con 10,381 ventas.
+
 * Top Secret Roll-On Baby Powder 80G, con 9,742 ventas.
+
 ```{r}
 g0027 <- subset(SecG, Sector == "0027")
 g0027 <- g0027[order(g0027$VentasTotales, decreasing = TRUE),]
 head(g0027,3)
 ```
-Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
-* SC Naturals Te Descanso Caja 20 Unidades OFE, con 0 venta.
-* SC Naturals Te Limp Intes Caj con 20 bol OFE, con 0 venta.
-* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta. 
+
 ```{r}
 tail(g0027,3)
 ```
 
 ### Sector 0006 (ZACAPA TODOS LOS MUNICIPIOS - Distrito Sirius)
 Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
-* Top Secret Roll-On Baby Powder 80G, con 42,033 ventas. 
+* Top Secret Roll-On Baby Powder 80G, con 42,033 ventas.
+
 * Fresh Fit Spray Antimicótico 200 con 19,077 ventas.
+
 * Scentia Roll On Extreme Lady 80G, con 17,910 ventas. 
 ```{r}
 g0006 <- subset(SecG, Sector == "0006")
 g0006 <- g0006[order(g0006$VentasTotales, decreasing = TRUE),]
 head(g0006,3)
 ```
-Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO y TEENS, siendo estos: 
-* Acne Solution Gel Trat C/Almend 12, con 0 venta.
-* Acne Solution Mascar EXF C/Soya 10, con 0 venta.
-* Action Locion Capilar Anticaida 180 ML, con 0 venta. 
+
 ```{r}
 tail(g0006,3)
 ```
@@ -425,8 +404,11 @@ Este distrito cuenta con 4 prouctos donde solo un producto tiene ventas. Se obse
 * Clean House Desinfectante Pinabete Vainilla 1Gl, con 2 ventas.
 
 Se observa que dos de los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO y el otro producto pertenece a la categoría de SALUD Y BIENESTAR, siendo estos: 
+
 * Top Scret Fresh Concha Navar 80G, con 0 venta.
+
 * Fresh Fit Spray Antimicótico 200, con 0 ventas.
+
 * Hot Ice Unguento 80G, con 0 ventas.
 
 ```{r}
@@ -440,7 +422,9 @@ head(g040, 3)
 ### Sector PR01 (PREMIOS POR RECOBRAR - Distrito Abogados)
 Se observa que el producto con más ventas pertenece a la categoría de Uso Diario mientras los otros dos pertenecen a la categoría de CUIDADO DE PIEL, siendo estos: 
 * Top Secret Roll-On Baby Powder 80G, con 4 ventas.
+
 * Clinical Sun Protector Solar 50FPS 60Gr, con 2 ventas.
+
 * Crema de Concha Nacar con CIT E 150G, con 1 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CUIDADO DE PIEL, DIVISION FARMA y MAQUILLAJE, respectivamente. Estos son: 
@@ -452,33 +436,38 @@ Se observa que los primeros tres productos que menos venden en este sector perte
 gPR01 <- as.data.frame(subset(SecG, Sector == "PR01"))
 gPR01 <- gPR01[order(gPR01$VentasTotales, decreasing = TRUE),]
 head(gPR01, 3)
-gPR01 <- gPR01[order(gPR01$VentasTotales, decreasing = FALSE),]
-head(gPR01, 3)
+
 ```
 
 ### Sector 0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion)
 Se observa que los productos con más ventas pertenecen a las categorías de USO DIARIO, CABELLO Y PROMOCIONALES VENDIDOS respectivamente, siendo estos: 
 * Fresh Fit Sprey Antimicótico 200, con 2690 ventas.
+
 * Top Fami Sh 2 en 1 Cola Caba Nd 1L, con 2371 ventas.
+
 * Estuche Sc Fruits para Gel Antibac, con 1913 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
 * Cobo Concha Nácar, con 0 ventas.
+
 * Acetaminofen Adultos 20 Tabletas, con 0 ventas.
+
 * Scentia Bella Color Luxury Nail Polish Silver, con 0 ventas.
 
 ```{r}
 g022 <- as.data.frame(subset(SecG, Sector == "0022"))
 g022 <- g022[order(g022$VentasTotales, decreasing = TRUE),]
 head(g022, 3)
-g022 <- g022[order(g022$VentasTotales, decreasing = FALSE),]
-head(g022, 3)
+
 ```
 
 ### Sector 0042 (SECTOR 42 - Distrito Orion)
 Se observa que el producto con más ventas pertenece a la categoría de USO DIARIO y los otros dos productos pertenecen a la categoría de LIMPIEZA, siendo estos: 
+
 * Fresh Fit Sprey Antimicótico 200, con 4221 ventas.
+
 * Clean House Desinfectante Cereza 1Gl, con 2524 ventas.
+
 * Clean House Desin. Manzana Canela 1Gl, con 2314 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
@@ -497,12 +486,16 @@ head(g042, 3)
 ### Sector 0038 (AN LUIS/POPTUN - Distrito Sirius)
 Se observa que el producto con más ventas pertenece a la categoría de USO DIARIO, el segundo pertenece a la categoría de DIVISION FARMA y el tercer producto pertenece a la categoría de USO DIARIO, siendo estos: 
 * Fresh Fit Sprey Antimicótico 200, con 5558 ventas.
+
 * Rabano Yodado 240 Ml, con 4207 ventas.
+
 * top Secret Roll-On Baby Powder 80G, con 3274 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
 * Action Shampoo Anticaida Oferta, con 0 ventas.
+
 * Oro Líq Anti Edad Sha 2 en 1 400 M, con 0 ventas.
+
 * Oro Líq Anti Edad Bál Crem 300 G, con 0 ventas.
 
 ```{r}
@@ -514,6 +507,66 @@ head(g038, 3)
 ```
 
 
+### Honduras
+```{r}
+# Guatemala
+Honduras <- as.data.frame(crearLista(SecH, sectoresH))
+Honduras$Sector <- sectoresH
+names(Honduras)[1] <- "VentasTotales"
+Honduras <- Honduras[order(-Honduras$VentasTotales),]
+Honduras %>%
+  mutate(name = fct_reorder(Honduras$Sector, desc(Honduras$VentasTotales))) %>%
+  ggplot( aes(x=name, y=Honduras$VentasTotales)) +
+    geom_bar(stat="identity", fill="#f68060", alpha=.6, width=.4) +
+    coord_flip() +
+    ylab("Ventas Totales por Sector") +
+    xlab("Sector") +
+    theme_bw()
+```
+
+```{r}
+H1 <- subset(SecH, Sector == "0321")
+H1 <- H1[order(H1$VentasTotales, decreasing = TRUE),]
+head(H1,3)
+```
+
+```{r}
+H2 <- subset(SecH, Sector == "0319")
+H2 <- H2[order(H2$VentasTotales, decreasing = TRUE),]
+head(H2,3)
+```
+```{r}
+H3 <- subset(SecH, Sector == "0304")
+H3 <- H3[order(H3$VentasTotales, decreasing = TRUE),]
+head(H3,3)
+```
+
+```{r}
+H4 <- subset(SecH, Sector == "0308")
+H4 <- H4[order(H4$VentasTotales, decreasing = TRUE),]
+head(H4,3)
+```
+
+```{r}
+H5 <- subset(SecH, Sector == "0335")
+H5 <- H5[order(H5$VentasTotales, decreasing = TRUE),]
+head(H5,3)
+```
+
+```{r}
+sH <- as.data.frame(subset(SecH, VentasTotales > "0"))
+sH <- sH[order(sH$VentasTotales, decreasing = TRUE),]
+tail(sH, 15)
+```
+
+
+
+```{r}
+dH <- as.data.frame(subset(SecH, Sector == "CC", VentasTotales < "0"))
+dH$VentasTotales <- dH$VentasTotales*-1
+dH <- dH[order(dH$VentasTotales, decreasing = TRUE),]
+head(dH, 10)
+```
 
 ```{r}
 # Nicaragua
@@ -655,40 +708,30 @@ Para el país de El Salvador se tiene que los sectores con más ventas son:
 
 
 * 0202 (SANTA ANA - Distrito Arius) con un total de 586658 ventas por unidad
+
 * 0204 (SONSONATE - Distrito Arius) con un total de 347768 ventas por unidad
+
 * CC (CONTADO - Ditrito Contado) con un total de 337734 ventas por unidad
+
 * 0216 (USULUTAN - Distrito Sirius) con un total de 325733 ventas por unidad
+
 * 0203 (CHALATENANGO - Distrito Arius) con un total de 301789 ventas por unidad
-* 0212 (SOYAPANGO, CENTRO LAS MARGARITAS SAN JOSE - Distrito Sirius) con un total de 297690 ventas por unidad
-* 0210 (APOPA -  Distrito Arius) con un total de 293274 ventas por unidad
-* 0206 (LOURDES - Distrito Arius) con un total de 291313 ventas por unidad
-* 0201 (AHUACHAPAN - Distrito Arius) con un total de 280664 ventas por unidad
 
 Por otro lado, los sectores con menos ventas son:
 
 
 * 0214 (SUCHITOTO,COJUTEPEQUE, SAN RAFAEL CEDROS - Distrito Sirius) con un total de 	106909 ventas por unidad
+
 * 0224 (CUSCATLAN - Distrito Sirius) con un total de 112256 ventas por unidad
+
 * 0230 (SAN SALVADOR NORTE - Distrito Arius) con un total de 114430 ventas por unidad
+
 * 0223 (USULUTAN NORTE - Distrito Sirius) con un total de 140411 ventas por unidad
+
 * 0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
-* 0219 (MORAZAN - Distrito Sirius) con un total de 142319 ventas por unidad
-* 0221 (ARMENIA - Distrito Arius) con un total de 150182 ventas por unidad
-* 0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
-* 0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
+
 ```{r}
 # El Salvador
-
-#SECTORES CON MAS VENTAS
-
-#* 0202 (SANTA ANA - Distrito Arius) con un total de 586658 ventas por unidad
-#* 0204 (SONSONATE - Distrito Arius) con un total de 347768 ventas por unidad
-###0203 (CHALATENANGO - Distrito Arius) con un total de 301789 ventas por unidad
-# 0212 (SOYAPANGO, CENTRO LAS MARGARITAS SAN JOSE - Distrito Sirius) con un total de 297690 ventas por unidad
-#* 0210 (APOPA -  Distrito Arius) con un total de 293274 ventas por unidad
-#* 0206 (LOURDES - Distrito Arius) con un total de 291313 ventas por unidad
-#* 0201 (AHUACHAPAN - Distrito Arius) con un total de 280664 ventas por unidad
-
 secS1 <- as.data.frame(subset(SecS, Sector == "0202"))
 secS1<- secS1[order(secS1$VentasTotales, decreasing=TRUE),] 
 secS1<- head(secS1, 3) #contiene los que mas se venden
@@ -770,7 +813,66 @@ secS010 <- secS10[order(secS10$VentasTotales, decreasing=FALSE),]
 secS010 <- head(secS010,3)
 
 ```
-# Análisis de Honduras
+
+## Top de productos de los sectores que más venden para El Salvador
+
+### Sector 0202 (SANTA ANA - Distrito Arius)
+Se observa que los primeros tres productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* Fresh Fit Spray Antimicótico 200 con 86,852 ventas.
+
+* Top Secret Roll-On Baby Powder 80G, con 80,357 ventas.
+
+* Scentia Roll On Extreme Lady 80G, con 45,836 ventas. 
+
+```{r}
+s202 <- subset(SecS, Sector == "0202")
+s202 <- s202[order(s202$VentasTotales, decreasing = TRUE),]
+head(s202,3)
+```
+
+```{r}
+sM <- as.data.frame(subset(SecS, VentasTotales > "0"))
+sM <- sM[order(sM$VentasTotales, decreasing = TRUE),]
+tail(sM, 15)
+```
+
+* 0214 (SUCHITOTO,COJUTEPEQUE, SAN RAFAEL CEDROS - Distrito Sirius) con un total de 	106909 ventas por unidad
+
+* 0224 (CUSCATLAN - Distrito Sirius) con un total de 112256 ventas por unidad
+
+* 0230 (SAN SALVADOR NORTE - Distrito Arius) con un total de 114430 ventas por unidad
+
+* 0223 (USULUTAN NORTE - Distrito Sirius) con un total de 140411 ventas por unidad
+
+* 0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
+```{r}
+S <- as.data.frame(subset(SecS, Sector == "0214"))
+S <- S[order(S$VentasTotales, decreasing = TRUE),]
+head(S, 3)
+```
+```{r}
+S1 <- as.data.frame(subset(SecS, Sector == "0224"))
+S1 <- S1[order(S1$VentasTotales, decreasing = TRUE),]
+head(S1, 3)
+```
+```{r}
+S2 <- as.data.frame(subset(SecS, Sector == "0230"))
+S2 <- S2[order(S2$VentasTotales, decreasing = TRUE),]
+head(S2, 3)
+```
+```{r}
+S3 <- as.data.frame(subset(SecS, Sector == "0223"))
+S3 <- S3[order(S3$VentasTotales, decreasing = TRUE),]
+head(S3, 3)
+```
+```{r}
+S4 <- as.data.frame(subset(SecS, Sector == "0220"))
+S4 <- S4[order(S4$VentasTotales, decreasing = TRUE),]
+head(S4, 3)
+```
+
+
+## Análisis de Honduras
 
 ```{r}
 #Honduras
@@ -793,7 +895,7 @@ Honduras %>%
 
 ```{r}
 zeroG <- as.data.frame(subset(SecG, VentasTotales == "0"))
-head(zeroG, 10)
+head(zeroG,10)
 
 ```
 
@@ -819,16 +921,17 @@ head(zeroN, 10)
 
 ## Análisis de devoluciones
 
-# Guatemala
+### Guatemala
 ```{r}
 dG <- as.data.frame(subset(SecG, VentasTotales < "0"))
+dG$VentasTotales <- dG$VentasTotales*-1
+dG <- dG[order(dG$VentasTotales, decreasing = TRUE),]
 head(dG, 10)
-
 ```
 # El Salvador
 ```{r}
 dS <- as.data.frame(subset(SecS, VentasTotales < "0"))
-head(dS, 10)
+tail(dS, 10)
 
 ```
 
@@ -977,6 +1080,7 @@ ggplot(data=catH, aes(x=Categoria, y=sum)) +
 Para el pais de Honduras, se observa que las categorias que mas venden son: Uso diario, limpieza, ellas y ninos. 
 Asi tambien, las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
 
+
 ### Conclusiones de ventas por categoria
 * En general se observa que en todos los paises las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
 * Tambien se observo, que en su mayoria, las categorias que mas venden son: uso diario, limpieza y ellas. 
@@ -987,5 +1091,7 @@ Asi tambien, las categorias que menos venden son: cuidado de las unas, descontin
 
 # Fuentes consultadas
 * S.A (2018). *The R Graph Gallery*. Extraido de: https://www.r-graph-gallery.com/ [29/06/2019]
+
 * D. (08/2019). *Markdown Text 101*. Extraido de: https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline- [06/10/2019]
+
 * Theuwissen, M. (02/12/2015). *How to write the first for loop in R*. Extraido de: https://www.r-bloggers.com/how-to-write-the-first-for-loop-in-r/ [01/10/2019]
