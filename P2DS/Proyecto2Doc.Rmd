@@ -291,98 +291,151 @@ Por otro lado, los sectores con menos ventas son:
 
 * 0042 (SECTOR 42 - Distrito Orion) con un total de 206768 ventas por unidad
 
+## Top de roductos que más y menos venden según los sectores que más venden y total de 0 ventas por producto por sector
 
-## Top de productos de los sectores que más venden para Guatemala
+Se crea una función para separar los 0 de un sector para poder saber cuantos y cuales productos obtuvieron 0 en un sector.
+```{r}
+ceros <- function(x){
+  prodCero <- subset(x, VentasTotales == "0")
+  return(prodCero)
+}
+```
+
 
 ### Sector CC (CLIENTES CONTADO - Distrito contado)
-Se observa que los primeros tres productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
-* Fresh Fit Spray Antimicótico 200 con 86,852 ventas.
 
-* Top Secret Roll-On Baby Powder 80G, con 80,357 ventas.
-
-* Scentia Roll On Extreme Lady 80G, con 45,836 ventas. 
-
+Se tiene que en el sector de gCC hay 84 productos con venta total igual a 0
 ```{r}
 gCC <- subset(SecG, Sector == "CC")
+cerosgcc <- ceros(gCC)
+cerosgcc
+length(cerosgcc$VentasTotales)
+```
+
+Se observa que los primeros tres productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* Fresh Fit Spray Antimicótico 200 con 86,852 ventas.
+* Top Secret Roll-On Baby Powder 80G, con 80,357 ventas.
+* Scentia Roll On Extreme Lady 80G, con 45,836 ventas. 
+```{r}
+gCC <- subset(gCC, VentasTotales != "0")
 gCC <- gCC[order(gCC$VentasTotales, decreasing = TRUE),]
 head(gCC,3)
 ```
-
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* Paquete de limpieza docena de 14 (Jabón de manos Soft Blossom) con 0 venta.
+* Top Family Rosa MOSQ Crema Corp 1KG Edi. Mama OFE 2, con 0 venta.
+* Paquete Bazar 5, con 0 venta. 
 ```{r}
-gCCM <- as.data.frame(subset(SecG, VentasTotales > "0"))
-gCCM <- gCCM[order(gCCM$VentasTotales, decreasing = TRUE),]
-tail(gCCM, 10)
+tail(gCC,3)
 ```
 
 
 ### Sector 0021 (SANTA ROSA TODOS SUS MUNICIPIOS - Distrito Arius)
-Se observa que los primeros cuatros productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
-* Fresh Fit Spray Antimicótico 200 con 17,392 ventas.
 
-* Top Secret Roll-On Baby Powder 80G, con 16,557 ventas.
-
-* Scentia Roll On Extreme Lady 80G, con 13,278 ventas. 
-
+Se tiene que en el sector de g0021 hay 51 productos con venta total igual a 0
 ```{r}
 g0021 <- subset(SecG, Sector == "0021")
+cerosg0021 <- ceros(g0021)
+cerosg0021
+length(cerosg0021$VentasTotales)
+```
+
+Se observa que los primeros cuatros productos que más venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* Fresh Fit Spray Antimicótico 200 con 17,392 ventas.
+* Top Secret Roll-On Baby Powder 80G, con 16,557 ventas.
+* Scentia Roll On Extreme Lady 80G, con 13,278 ventas. 
+```{r}
+g0021 <- subset(g0021, VentasTotales != "0")
 g0021 <- g0021[order(g0021$VentasTotales, decreasing = TRUE),]
 head(g0021,3)
 ```
-
-
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de SALUD Y BIENESTAR, TEENS Y USO DIARIO, siendo estos: 
+* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta.
+* Acne Solution Mascar EXF C/Soya 10, con 0 venta.
+* Top Family Jabón Liquido Neutro Para Zonas Intimas 800ML OFE 2, con 0 venta. 
 ```{r}
 tail(g0021,3)
 ```
 
 
+
 ### Sector 0005 (CHIQUIMULA TODOS LOS MUNICIPIOS - Ditrito Sirius)
-Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
-* Fresh Fit Spray Antimicótico 200 con 14,275 ventas.
 
-* Top Secret Roll-On Baby Powder 80G, con 8,486 ventas.
-
-* Scentia Roll On Extreme Lady 80G, con 8,452 ventas. 
+Se tiene que en el sector de g0005 hay 37 productos con venta total igual a 0
 ```{r}
 g0005 <- subset(SecG, Sector == "0005")
+cerosg0005 <- ceros(g0005)
+cerosg0005
+length(cerosg0005$VentasTotales)
+```
+
+Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
+* Fresh Fit Spray Antimicótico 200 con 14,275 ventas.
+* Top Secret Roll-On Baby Powder 80G, con 8,486 ventas.
+* Scentia Roll On Extreme Lady 80G, con 8,452 ventas. 
+```{r}
+
 g0005 <- g0005[order(g0005$VentasTotales, decreasing = TRUE),]
 head(g0005,3)
 ```
-
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de SALUD Y BIENESTAR, siendo estos: 
+* SC Naturals Te Descanso Caja 20 Unidades OFE, con 0 venta.
+* SC Naturals Te Limp Intes Caj con 20 bol OFE, con 0 venta.
+* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta. 
 ```{r}
 tail(g0005,3)
 ```
 
 ### Sector 0027 (JUTIAPA (CENTRO), MOYUTA, JALPATAGUA, JEREZ - Distrito Arius)
+
+Se tiene que en el sector de g0027 hay 46 productos con venta total igual a 0
+```{r}
+g0027 <- subset(SecG, Sector == "0027")
+cerosg0027 <- ceros(g0027)
+cerosg0027
+length(cerosg0027$VentasTotales)
+```
+
 Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
 * Fresh Fit Spray Antimicótico 200 con 14,810 ventas.
-
 * Rabano Yodado 240 ML, con 10,381 ventas.
-
 * Top Secret Roll-On Baby Powder 80G, con 9,742 ventas.
-
 ```{r}
 g0027 <- subset(SecG, Sector == "0027")
 g0027 <- g0027[order(g0027$VentasTotales, decreasing = TRUE),]
 head(g0027,3)
 ```
-
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
+* SC Naturals Te Descanso Caja 20 Unidades OFE, con 0 venta.
+* SC Naturals Te Limp Intes Caj con 20 bol OFE, con 0 venta.
+* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta. 
 ```{r}
 tail(g0027,3)
 ```
 
 ### Sector 0006 (ZACAPA TODOS LOS MUNICIPIOS - Distrito Sirius)
+
+Se tiene que en el sector de g0006 hay 49 productos con venta total igual a 0
+```{r}
+g0006 <- subset(SecG, Sector == "0006")
+cerosg0006 <- ceros(g0006)
+cerosg0006
+length(cerosg0006$VentasTotales)
+```
+
 Se observa que los primeros productos que más venden en este sector pertenecen a la categoría de USO DIARIO y VISION FARMA, siendo estos: 
-* Top Secret Roll-On Baby Powder 80G, con 42,033 ventas.
-
+* Top Secret Roll-On Baby Powder 80G, con 42,033 ventas. 
 * Fresh Fit Spray Antimicótico 200 con 19,077 ventas.
-
 * Scentia Roll On Extreme Lady 80G, con 17,910 ventas. 
 ```{r}
 g0006 <- subset(SecG, Sector == "0006")
 g0006 <- g0006[order(g0006$VentasTotales, decreasing = TRUE),]
 head(g0006,3)
 ```
-
+Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO y TEENS, siendo estos: 
+* Acne Solution Gel Trat C/Almend 12, con 0 venta.
+* Acne Solution Mascar EXF C/Soya 10, con 0 venta.
+* Action Locion Capilar Anticaida 180 ML, con 0 venta. 
 ```{r}
 tail(g0006,3)
 ```
@@ -404,11 +457,8 @@ Este distrito cuenta con 4 prouctos donde solo un producto tiene ventas. Se obse
 * Clean House Desinfectante Pinabete Vainilla 1Gl, con 2 ventas.
 
 Se observa que dos de los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO y el otro producto pertenece a la categoría de SALUD Y BIENESTAR, siendo estos: 
-
 * Top Scret Fresh Concha Navar 80G, con 0 venta.
-
 * Fresh Fit Spray Antimicótico 200, con 0 ventas.
-
 * Hot Ice Unguento 80G, con 0 ventas.
 
 ```{r}
@@ -420,11 +470,18 @@ head(g040, 3)
 ```
 
 ### Sector PR01 (PREMIOS POR RECOBRAR - Distrito Abogados)
+
+Se tiene que en el sector de gPR01 hay 4 productos con venta total igual a 0
+```{r}
+gPR01 <- subset(SecG, Sector == "PR01")
+cerosgPR01 <- ceros(gPR01)
+cerosgPR01
+length(cerosgPR01$VentasTotales)
+```
+
 Se observa que el producto con más ventas pertenece a la categoría de Uso Diario mientras los otros dos pertenecen a la categoría de CUIDADO DE PIEL, siendo estos: 
 * Top Secret Roll-On Baby Powder 80G, con 4 ventas.
-
 * Clinical Sun Protector Solar 50FPS 60Gr, con 2 ventas.
-
 * Crema de Concha Nacar con CIT E 150G, con 1 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CUIDADO DE PIEL, DIVISION FARMA y MAQUILLAJE, respectivamente. Estos son: 
@@ -436,38 +493,51 @@ Se observa que los primeros tres productos que menos venden en este sector perte
 gPR01 <- as.data.frame(subset(SecG, Sector == "PR01"))
 gPR01 <- gPR01[order(gPR01$VentasTotales, decreasing = TRUE),]
 head(gPR01, 3)
-
+gPR01 <- gPR01[order(gPR01$VentasTotales, decreasing = FALSE),]
+head(gPR01, 3)
 ```
 
 ### Sector 0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion)
+
+Se tiene que en el sector de g0022 hay 37 productos con venta total igual a 0
+```{r}
+g0022 <- subset(SecG, Sector == "0022")
+cerosg0022 <- ceros(g0022)
+cerosg0022
+length(cerosg0022$VentasTotales)
+```
+
 Se observa que los productos con más ventas pertenecen a las categorías de USO DIARIO, CABELLO Y PROMOCIONALES VENDIDOS respectivamente, siendo estos: 
 * Fresh Fit Sprey Antimicótico 200, con 2690 ventas.
-
 * Top Fami Sh 2 en 1 Cola Caba Nd 1L, con 2371 ventas.
-
 * Estuche Sc Fruits para Gel Antibac, con 1913 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
 * Cobo Concha Nácar, con 0 ventas.
-
 * Acetaminofen Adultos 20 Tabletas, con 0 ventas.
-
 * Scentia Bella Color Luxury Nail Polish Silver, con 0 ventas.
 
 ```{r}
 g022 <- as.data.frame(subset(SecG, Sector == "0022"))
 g022 <- g022[order(g022$VentasTotales, decreasing = TRUE),]
 head(g022, 3)
-
+g022 <- g022[order(g022$VentasTotales, decreasing = FALSE),]
+head(g022, 3)
 ```
 
 ### Sector 0042 (SECTOR 42 - Distrito Orion)
+
+Se tiene que en el sector de g0042 hay 31 productos con venta total igual a 0
+```{r}
+g0042 <- subset(SecG, Sector == "0042")
+cerosg0042 <- ceros(g0042)
+cerosg0042
+length(cerosg0042$VentasTotales)
+```
+
 Se observa que el producto con más ventas pertenece a la categoría de USO DIARIO y los otros dos productos pertenecen a la categoría de LIMPIEZA, siendo estos: 
-
 * Fresh Fit Sprey Antimicótico 200, con 4221 ventas.
-
 * Clean House Desinfectante Cereza 1Gl, con 2524 ventas.
-
 * Clean House Desin. Manzana Canela 1Gl, con 2314 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
@@ -483,19 +553,24 @@ g042 <- g042[order(g042$VentasTotales, decreasing = FALSE),]
 head(g042, 3)
 ```
 
-### Sector 0038 (AN LUIS/POPTUN - Distrito Sirius)
+#### Sector 0038 (AN LUIS/POPTUN - Distrito Sirius)
+
+Se tiene que en el sector de g0038 hay 70 productos con venta total igual a 0
+```{r}
+g0038 <- subset(SecG, Sector == "0038")
+cerosg0038 <- ceros(g0038)
+cerosg0038
+length(cerosg0038$VentasTotales)
+```
+
 Se observa que el producto con más ventas pertenece a la categoría de USO DIARIO, el segundo pertenece a la categoría de DIVISION FARMA y el tercer producto pertenece a la categoría de USO DIARIO, siendo estos: 
 * Fresh Fit Sprey Antimicótico 200, con 5558 ventas.
-
 * Rabano Yodado 240 Ml, con 4207 ventas.
-
 * top Secret Roll-On Baby Powder 80G, con 3274 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
 * Action Shampoo Anticaida Oferta, con 0 ventas.
-
 * Oro Líq Anti Edad Sha 2 en 1 400 M, con 0 ventas.
-
 * Oro Líq Anti Edad Bál Crem 300 G, con 0 ventas.
 
 ```{r}
@@ -505,6 +580,8 @@ head(g038, 3)
 g038 <- g038[order(g038$VentasTotales, decreasing = FALSE),]
 head(g038, 3)
 ```
+
+
 
 
 ### Honduras
@@ -523,22 +600,61 @@ Honduras %>%
     xlab("Sector") +
     theme_bw()
 ```
+#### Sector 0321
 
+Se tiene que en el sector de 0321 hay 32 productos con venta total igual a 0
 ```{r}
 H1 <- subset(SecH, Sector == "0321")
+cerosH1 <- ceros(H1)
+cerosH1
+length(cerosH1$VentasTotales)
+```
+
+```{r}
 H1 <- H1[order(H1$VentasTotales, decreasing = TRUE),]
 head(H1,3)
 ```
 
+
+#### Sector 0319
+
+Se tiene que en el sector de 0319 hay 23 productos con venta total igual a 0
 ```{r}
 H2 <- subset(SecH, Sector == "0319")
+cerosH2 <- ceros(H2)
+cerosH2
+length(cerosH2$VentasTotales)
+```
+
+```{r}
 H2 <- H2[order(H2$VentasTotales, decreasing = TRUE),]
 head(H2,3)
 ```
+
+#### Sector 0304
+
+Se tiene que en el sector de 0304 hay 47 productos con venta total igual a 0
+```{r}
+H3 <- subset(SecH, Sector == "0304")
+cerosH3 <- ceros(H3)
+cerosH3
+length(cerosH3$VentasTotales)
+```
+
 ```{r}
 H3 <- subset(SecH, Sector == "0304")
 H3 <- H3[order(H3$VentasTotales, decreasing = TRUE),]
 head(H3,3)
+```
+
+#### Sector 0308
+
+Se tiene que en el sector de 0308 hay 35 productos con venta total igual a 0
+```{r}
+H4 <- subset(SecH, Sector == "0308")
+cerosH4 <- ceros(H4)
+cerosH4
+length(cerosH4$VentasTotales)
 ```
 
 ```{r}
@@ -547,8 +663,17 @@ H4 <- H4[order(H4$VentasTotales, decreasing = TRUE),]
 head(H4,3)
 ```
 
+#### Sector 0335
+
+Se tiene que en el sector de 0335 hay 40 productos con venta total igual a 0
 ```{r}
 H5 <- subset(SecH, Sector == "0335")
+cerosH5 <- ceros(H5)
+cerosH5
+length(cerosH5$VentasTotales)
+```
+
+```{r}
 H5 <- H5[order(H5$VentasTotales, decreasing = TRUE),]
 head(H5,3)
 ```
@@ -622,24 +747,50 @@ Además, las tres mujeres que menos venden en Nicaragua son:
 
 ### Sector Contado CC
 
+Se tiene que en el sector de CC hay 35 productos con venta total igual a 0
+```{r}
+n1 <- as.data.frame(subset(SecN, Sector == "CC"))
+cerosn1 <- ceros(n1)
+cerosn1
+length(cerosn1$VentasTotales)
+```
+
 ```{r}
 n1 <- as.data.frame(subset(SecN, Sector == "CC"))
 n1 <- n1[order(n1$VentasTotales, decreasing = TRUE),]
 head(n1, 3)
-n01 <- n1[order(n1$VentasTotales, decreasing = FALSE),]
-head(n01, 3)
+n1 <- as.data.frame(subset(SecN, VentasTotales > "0"))
+n1 <- n1[order(n1$VentasTotales, decreasing = TRUE),]
+tail(n1, 15)
 ```
 
 ### Sector  0409
 
+Se tiene que en el sector de 0409 hay 45 productos con venta total igual a 0
 ```{r}
 n2 <- as.data.frame(subset(SecN, Sector == "0409"))
-n2 <- n2[order(n1$VentasTotales, decreasing = TRUE),]
+cerosn2 <- ceros(n2)
+cerosn2
+length(cerosn2$VentasTotales)
+```
+
+```{r}
+n2 <- as.data.frame(subset(SecN, Sector == "0409"))
+n2 <- n2[order(n2$VentasTotales, decreasing = TRUE),]
 head(n2, 3)
-n02 <- n2[order(n2$VentasTotales, decreasing = FALSE),]
-head(n02, 3)
+n2 <- as.data.frame(subset(SecN, VentasTotales > "0"))
+n1 <- n1[order(n1$VentasTotales, decreasing = TRUE),]
+tail(n1, 15)
 ```
 ### Sector  0402
+
+Se tiene que en el sector de 0402 hay 40 productos con venta total igual a 0
+```{r}
+n3 <- as.data.frame(subset(SecN, Sector == "0402"))
+cerosn3 <- ceros(n3)
+cerosn3
+length(cerosn3$VentasTotales)
+```
 
 ```{r}
 n3 <- as.data.frame(subset(SecN, Sector == "0402"))
@@ -649,6 +800,15 @@ n03 <- n3[order(n3$VentasTotales, decreasing = FALSE),]
 head(n03, 3)
 ```
 ### Sector  0427
+
+Se tiene que en el sector de 0427 hay 29 productos con venta total igual a 0
+```{r}
+n4 <- as.data.frame(subset(SecN, Sector == "0427"))
+cerosn4 <- ceros(n4)
+cerosn4
+length(cerosn4$VentasTotales)
+```
+
 ```{r}
 n4 <- as.data.frame(subset(SecN, Sector == "0427"))
 n4 <- n4[order(n4$VentasTotales, decreasing = TRUE),]
@@ -658,6 +818,14 @@ head(n04, 3)
 ```
 
 ### Sector  0405
+Se tiene que en el sector de 0405 hay 56 productos con venta total igual a 0
+```{r}
+n5 <- as.data.frame(subset(SecN, Sector == "0405"))
+cerosn5 <- ceros(n5)
+cerosn5
+length(cerosn5$VentasTotales)
+```
+
 ```{r}
 n5 <- as.data.frame(subset(SecN, Sector == "0405"))
 n5 <- n5[order(n5$VentasTotales, decreasing = TRUE),]
@@ -668,6 +836,15 @@ head(n05, 3)
 ## Sectores con menos ventas
 
 ### Sector 0412
+
+Se tiene que en el sector de 0412 hay 1 producto con venta total igual a 0
+```{r}
+n6 <- as.data.frame(subset(SecN, Sector == "0412"))
+cerosn6 <- ceros(n6)
+cerosn6
+length(cerosn6$VentasTotales)
+```
+
 ```{r}
 n6 <- as.data.frame(subset(SecN, Sector == "0412"))
 n6 <- n6[order(n6$VentasTotales, decreasing = TRUE),]
@@ -677,6 +854,15 @@ head(n06, 3)
 ```
 
 ### Sector 0422
+
+Se tiene que en el sector de 0422 hay 0 productos con venta total igual a 0
+```{r}
+n7 <- as.data.frame(subset(SecN, Sector == "0422"))
+cerosn7 <- ceros(n7)
+cerosn7
+length(cerosn7$VentasTotales)
+```
+
 ```{r}
 n7 <- as.data.frame(subset(SecN, Sector == "0422"))
 n7 <- n7[order(n7$VentasTotales, decreasing = TRUE),]
@@ -684,6 +870,42 @@ head(n7, 3)
 n07 <- n7[order(n7$VentasTotales, decreasing = FALSE),]
 head(n07, 3)
 ```
+
+### Sector 0413
+
+Se tiene que en el sector de 0413 hay 38 productos con venta total igual a 0
+```{r}
+n9 <- as.data.frame(subset(SecN, Sector == "0413"))
+cerosn9 <- ceros(n9)
+cerosn9
+length(cerosn9$VentasTotales)
+```
+
+```{r}
+n9 <- as.data.frame(subset(SecN, Sector == "0413"))
+n9 <- n9[order(n9$VentasTotales, decreasing = TRUE),]
+head(n9, 3)
+n9 <- n9[order(n9$VentasTotales, decreasing = FALSE),]
+head(n9, 3)
+```
+### Sector 0433
+
+Se tiene que en el sector de 0433 hay 36 productos con venta total igual a 0
+```{r}
+n10 <- as.data.frame(subset(SecN, Sector == "0433"))
+cerosn10 <- ceros(n10)
+cerosn10
+length(cerosn10$VentasTotales)
+```
+
+```{r}
+n10 <- as.data.frame(subset(SecN, Sector == "0433"))
+n10 <- n10[order(n10$VentasTotales, decreasing = TRUE),]
+head(n10, 3)
+n10 <- n10[order(n10$VentasTotales, decreasing = FALSE),]
+head(n10, 3)
+```
+
 
 
 ## Análisis de El Salvador
@@ -730,32 +952,88 @@ Por otro lado, los sectores con menos ventas son:
 
 * 0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
 
+Se tiene que en el sector de 0413 hay 38 productos con venta total igual a 0
+
+#### Sector 0202
+Se tiene que en el sector de 0202 hay 47 productos con venta total igual a 0
 ```{r}
-# El Salvador
 secS1 <- as.data.frame(subset(SecS, Sector == "0202"))
+cerosS1 <- ceros(secS1)
+cerosS1
+length(cerosS1$VentasTotales)
+```
+
+```{r}
 secS1<- secS1[order(secS1$VentasTotales, decreasing=TRUE),] 
 secS1<- head(secS1, 3) #contiene los que mas se venden
 secS01 <- secS1[order(secS1$VentasTotales, decreasing=FALSE),] 
 secS01 <- head(secS01, 3) #contiene los que menos se venden
+```
 
+#### Sector 0204
+
+Se tiene que en el sector de 0204 hay 48 productos con venta total igual a 0
+```{r}
 secS2 <- as.data.frame(subset(SecS, Sector == "0204"))
+cerosS2 <- ceros(secS2)
+cerosS2
+length(cerosS2$VentasTotales)
+```
+
+```{r}
 secS2<- secS2[order(secS2$VentasTotales, decreasing=TRUE),] 
 secS2<- head(secS2, 3)
 secS02 <- secS2[order(secS2$VentasTotales, decreasing=FALSE),] 
 secS02 <- head(secS02, 3) #contiene los que menos se venden
+```
 
+#### Sector 0203
+
+Se tiene que en el sector de 0203 hay 52 productos con venta total igual a 0
+```{r}
 secS3 <- as.data.frame(subset(SecS, Sector == "0203"))
+cerosS3 <- ceros(secS3)
+cerosS3
+length(cerosS3$VentasTotales)
+```
+
+```{r}
+
 secS3<- secS3[order(secS3$VentasTotales, decreasing=TRUE),] 
 secS3<- head(secS3, 3)
 secS03 <- secS3[order(secS3$VentasTotales, decreasing=FALSE),] 
 secS03 <- head(secS03, 3) #contiene los que menos se venden
+```
 
+#### Sector 0212
+
+Se tiene que en el sector de 0212 hay 59 productos con venta total igual a 0
+```{r}
 secS4 <- as.data.frame(subset(SecS, Sector == "0212"))
+cerosS4 <- ceros(secS4)
+cerosS4
+length(cerosS4$VentasTotales)
+```
+
+```{r}
+
 secS4<- secS4[order(secS4$VentasTotales, decreasing=TRUE),] 
 secS4<- head(secS4, 3)
 secS04 <- secS4[order(secS4$VentasTotales, decreasing=FALSE),] 
 secS04 <- head(secS04, 3) #contiene los que menos se venden
+```
 
+#### Sector 0210
+
+Se tiene que en el sector de 0210 hay 62 productos con venta total igual a 0
+```{r}
+secS5 <- as.data.frame(subset(SecS, Sector == "0210"))
+cerosS5 <- ceros(secS5)
+cerosS5
+length(cerosS5$VentasTotales)
+```
+
+```{r}
 secS5 <- as.data.frame(subset(SecS, Sector == "0210"))
 secS5<- secS5[order(secS5$VentasTotales, decreasing=TRUE),] 
 secS5<- head(secS5, 3)
