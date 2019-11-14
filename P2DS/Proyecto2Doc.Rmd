@@ -1,7 +1,7 @@
 ---
-title: "Proyecto 2 DataScience"
+title: "Entrega Final Proyecto 2 DataScience"
 author: "Grupo 6"
-date: "28 de agosto de 2019"
+date: "13 de noviembre de 2019"
 output:
   pdf_document: default
   html_document: default
@@ -11,24 +11,50 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Resumen de información
-En los avances de proyecto 1, se había presentado el análisis exploratorio del archivo equivocado. Por ello, el primer paso fue realizar análisis exploratorio sobre los archivos que incluyen únicamente las ventas por sector, así como la distribución de cada sector. 
+# Resumen Ejecutivo
+Scentia tiene una problemática que está afectando en sus números por lo tanto se debe de realizar una investigación, contar con un análisis de información para clasificarla e indagar áreas de oportunidad, conocer qué es lo que afecta actualmente a la empresa, los productos que menos rotan en cada país centroamericano, enlistar a los mejores vendedores de cada sector. Para ello se decidió determinar cada sector para poder conocer quienes son los que más o menos venden, uno de los puntos importantes para la empresa es conocer los productos que más devoluciones están obteniendo en cada país y los productos que no representan ventas para no enviar ese producto a ese país y enviarlo donde se vende mejor, así mismo conocer el comportamiento del mercado en cada país esto conlleva a recabar datos históricos sobre acontecimientos políticos, económicos y sociales.
+
+Todo el codigo realizado puede ser consultado en el siguiente link a Github (Ubicación del código): https://github.com/josejo911/Proyecto2DS.git 
 
 
-## Objetivos
-### Objetivo general
-* Realizar un análisis exploratorio sobre las ventas por sector obtenidas en los países de Guatemala, El Salvador, Nicaragua y Honduras del año 2015 a 2019.
+# Introducción 
+Scentia es una empresa que se dedica a la comercialización de productos como perfumería, cuidado personal, maquillajes, productos de limpieza. Cuentan con operaciones en diferentes países a nivel centroamericano como Honduras, El Salvador, Nicaragua. Actualmente la empresa necesita conocer más puntos de vista para la optimización de la producción, logística y comercialización de sus productos en cada uno de los países que opera. Como objetivo general planteamos realizar un análisis exploratorio sobre las ventas por sector obtenidas en los países que se tienen operación mencionados anteriormente del año 2015 a 2019. Específicamente se decidió determinar cuales son los sectores que venden más y cuales son lo que venden menos en cada país, así mismo enlistar los productos que tienen más ventas y las que tienen menos ventas según los sectores que hayan resaltado en sus ventas totales además se analizó el comportamiento político, económico y social de los países centroamericanos mencionados anteriormente y por último se analizaron los productos que más devoluciones obtuvieron en cada año ya que representa un dato importante a la empresa por ser una pérdida de recursos. 
 
-### Objetivos específicos
-* Determinar cuales son los sectores que venden más y cuales son los que venden menos en cada país.
+# Seleccion de algoritmos a utilizar
+Machine Learning es un método de aprendizaje automático que automatiza la construcción de modelos analíticos. Se basa en máquinas de enseñanza a través de modelos de algoritmos.
 
-* Enlistar los productos que tienen más ventas y las que tienen menos ventas según los sectores que hayan resaltado en sus ventas totales.
+Se puede dividir en tres modelos de aplicación:
+* Aprendizaje supervisado
+* Aprendizaje no supervisado
+* Aprendizaje de refuerzo
 
-* Analizar el comportamiento político, económico y social de los países centroamericanos Guatemala, El Salvador, Nicaragua y Honduras. 
+Pasemos al caso clásico del hundimiento del Titanic . Con los modelos supervisados, es posible predecir qué pasajeros tienen más probabilidades de sobrevivir. El modelo se basa en algunas variables como clase, género, edad, número de hijos, etc.
+
+Con el aprendizaje no supervisado, tenemos poca idea del resultado. En este contexto, utilizamos estructuras de datos que realmente no conocen el efecto de las variables.
+
+El aprendizaje por refuerzo ya se basa en observar el contexto y seleccionar la mejor acción para esa situación. A cambio, el sistema recibe un premio, de lo contrario recibe una penalización. El aprendizaje por refuerzo busca la mejor estrategia de acuerdo con su política.
+
+Algoritmos de aprendizaje
+Existen varios algoritmos de Machine Learning pero debido a la estructura de la información que nos fue proporcionada y el objetivo general que nos expresó la empresa debemos mostrarles, es pequeña la cantidad de algoritmos que son de utilidad siendo algunos los siguientes: 
+
+Regresión Lineal: Es la mejor manera de describir la relación entre dos variables. Su objetivo es dibujar un valor que no se puede estimar inicialmente. Es parte del aprendizaje supervisado. El objetivo de la regresión lineal es encontrar la ecuación que se ajuste a la mejor línea para modelar los datos.
+
+Clustering: También conocido como análisis de conglomerados, consiste en agrupar cada punto del conjunto de datos en un grupo específico. Los datos agrupados comparten una similitud entre sí. La agrupación es un ejemplo de método de aprendizaje no supervisado.
+
+Q-learning: Es el método más popular de aprendizaje por refuerzo. Le permite establecer una política de acción de forma interactiva y mostrar qué comportamiento tomar bajo ciertas circunstancias.
+
+Series de Tiempo Temporales: Una serie temporal es un conjunto de muestras tomadas a intervalos de tiempo regulares. Es interesante analizar su comportamiento al mediano y largo plazo, intentando detectar patrones y poder hacer pronósticos de cómo será su comportamiento futuro. Lo que hace especial a una Time Series a diferencia de un problema de Regresión son dos cosas:
+
+* Es dependiente del Tiempo. Esto rompe con el requerimiento que tiene la regresión lineal de que sus observaciones sean independientes.
+Suelen tener algún tipo de estacionalidad, ó de tendencias a crecer ó decrecer. Pensemos en cuánto más producto vende una heladería en sólo 4 meses al año que en el resto de estaciones.
+
+* Para el cumplimiento de nuestros objetivos se utilizaron finalmente dos algoritmos que fueron clustering y series de tiempo temporales. Debido a que uno de nuestros objetivos es saber el comportamiento de ventas generadas por los distintos sectores ubicados en los países centroamericanos, el uso de series de tiempo nos seria de gran utilidad para identificar algun patron de ventas a través de los años 2015 a 2019. El uso de clustering fue de gran ayuda al realizar el comportamiento de la data y en la toma de decisiones ya que al saber el comportamiento se podría empezar a plantear preguntas encontrando soluciones para los objetivos planteados.
 
 
-## Variables
+Para realizar un mejor análisis se generó una matriz de correlación utilizando la data proporcionada para identificar las variables que están relacionadas y útiles para el análisis. Entre las variables de interés encontradas están:
+
 ### Variables de interés
+
 * Ventas: Es una variable cuantitativa la cual será la clave para el análisis exploratorio.
 
 * Mes y año de venta: Variable cuantitativa indispensable para la creación de ventas totales.
@@ -45,9 +71,11 @@ En los avances de proyecto 1, se había presentado el análisis exploratorio del
 * Mujeres que más venden en Nicaragua.
 
 
-# Análisis exploratorio
+# Modelos, Cálculos y Resultados
 
-## Librerías a usar
+## Análisis exploratorio
+
+### Librerías a usar
 A continuación se llaman a todas los paquetes necesarios para poder llevar a cabo el análisis exploratorio.
 ```{r echo=FALSE, warning=FALSE, include=FALSE}
 # Librerias a utilizar
@@ -60,7 +88,6 @@ library(NbClust) # Para determinar el numero de clusters optimo
 library(factoextra) # Para hacer graficos bonitos de clustering
 library(rela) # Para poder utilizar paf()
 library(psych) # Para poder utilizar KMO()
-#library(FactoMineR)
 library(corrplot)
 library(REdaS)
 library(ggplot2) # Graficas bonitas
@@ -90,7 +117,7 @@ library(cluster)
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS
 
-#setwd("/Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS")
+setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Guatemala
@@ -686,7 +713,7 @@ tail(sH, 15)
 
 
 
-```{r}
+```{r echo=FALSE, warning=FALSE, include=FALSE}
 dH <- as.data.frame(subset(SecH, Sector == "CC", VentasTotales < "0"))
 dH$VentasTotales <- dH$VentasTotales*-1
 dH <- dH[order(dH$VentasTotales, decreasing = TRUE),]
@@ -1359,9 +1386,18 @@ Para el pais de Honduras, se observa que las categorias que mas venden son: Uso 
 Asi tambien, las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
 
 
-### Conclusiones de ventas por categoria
-* En general se observa que en todos los paises las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
-* Tambien se observo, que en su mayoria, las categorias que mas venden son: uso diario, limpieza y ellas. 
+# Discusión
+
+
+# Conclusiones 
+
+* La línea que más ventas tiene en los diferentes países es TOP FAMILY, se debe considerar para las proyecciones. 
+* En Guatemala la categoría que menos vende es la de Cabello y el que más se vende es el Fresh Fit Spray Antimicótico 200. Sin embargo la categoría de Uso Diario contiene los productos que más se venden en todos los sectores, pero también contiene los que menos se venden.
+* En El Salvador una de las categorías que más vendían eran cabello, uso diario pero engloban productos que tienen mayores y menores ventas
+* En Honduras el producto que más se vende es el Clean House Desin. Manzana Canela 1G, además es un país que tiene pocas ventas en sus productos y la categoría que más ventas representa es la de Uso Diario. Se debe establecer un buen escenario para futuras proyecciones de lanzamientos de productos.
+* En Nicaragua tiene la categoría de uso diario y salud bienestar que tiene los productos que más y menos ventas representan en todos los sectores. El producto que destaca es el Shampoo Cola de Caballo 2 en 1 y en comparación con el resto de países sus ventas no son tan bajas, pero se debe analizar sus futuros productos de lanzamiento.
+
+
 
 
 
@@ -1373,3 +1409,5 @@ Asi tambien, las categorias que menos venden son: cuidado de las unas, descontin
 * D. (08/2019). *Markdown Text 101*. Extraido de: https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline- [06/10/2019]
 
 * Theuwissen, M. (02/12/2015). *How to write the first for loop in R*. Extraido de: https://www.r-bloggers.com/how-to-write-the-first-for-loop-in-r/ [01/10/2019]
+
+* Wickham, H. (2019). Advanced R. Chapman & Hall/CRC.
