@@ -112,12 +112,12 @@ library(cluster)
 
 
 ```{r echo=FALSE, warning=FALSE}
-#"/Users/quiebres/Documents/Ivan Maldonado/UVG/Sexto Semestre/Data Science/Proyecto2DS"
+#"/Users/quiebres/Documents/Ivan Maldonado/UVG/SextoSemestre/Data Science/Proyecto2DS/P2DS"
 # /Users/odalisrg/Documents/Semestre 6/Data Science/Proyecto2DS/P2DS
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS
 
-setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
+setwd("/Users/quiebres/Documents/Ivan Maldonado/UVG/SextoSemestre/Data Science/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Guatemala
@@ -267,7 +267,7 @@ sectoresS <- sort(sectoresS)
 ```
 
 ## Ventas totales de cada país
-Se creó una función para sumar las ventas totales de cada producto de caa sector para obtener la venta total del sector en todo su periodo de tiempo. Después de esto, se graficaron las ventas totales de cada sector para cada país.
+Se creó una función para sumar las ventas totales de cada producto de cada sector para obtener la venta total del sector en todo su periodo de tiempo. Después de esto, se graficaron las ventas totales de cada sector para cada país.
 ```{r}
 crearLista <- function(x,y){
   lista <-c()
@@ -331,8 +331,8 @@ ceros <- function(x){
 
 ### Sector CC (CLIENTES CONTADO - Distrito contado)
 
-Se tiene que en el sector de gCC hay 84 productos con venta total igual a 0
-```{r}
+Se tiene que en el sector de CC hay 84 productos con venta total igual a 0
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 gCC <- subset(SecG, Sector == "CC")
 cerosgcc <- ceros(gCC)
 cerosgcc
@@ -349,9 +349,9 @@ gCC <- gCC[order(gCC$VentasTotales, decreasing = TRUE),]
 head(gCC,3)
 ```
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
-* Paquete de limpieza docena de 14 (Jabón de manos Soft Blossom) con 0 venta.
-* Top Family Rosa MOSQ Crema Corp 1KG Edi. Mama OFE 2, con 0 venta.
-* Paquete Bazar 5, con 0 venta. 
+* Scentia perfume desodorante corporal apolo black 120 ml ofe2 con -120 ventas.
+* Bolsa de recalo oct 2012 of con -127 ventas.
+* Bolsa de regalo 2012 ofe 2 con -380 ventas.
 ```{r}
 tail(gCC,3)
 ```
@@ -359,8 +359,8 @@ tail(gCC,3)
 
 ### Sector 0021 (SANTA ROSA TODOS SUS MUNICIPIOS - Distrito Arius)
 
-Se tiene que en el sector de g0021 hay 51 productos con venta total igual a 0
-```{r}
+Se tiene que en el sector de 0021 hay 53 productos con venta total igual a 0
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 g0021 <- subset(SecG, Sector == "0021")
 cerosg0021 <- ceros(g0021)
 cerosg0021
@@ -377,9 +377,9 @@ g0021 <- g0021[order(g0021$VentasTotales, decreasing = TRUE),]
 head(g0021,3)
 ```
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de SALUD Y BIENESTAR, TEENS Y USO DIARIO, siendo estos: 
-* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta.
-* Acne Solution Mascar EXF C/Soya 10, con 0 venta.
-* Top Family Jabón Liquido Neutro Para Zonas Intimas 800ML OFE 2, con 0 venta. 
+* Grazia eau de parfum 100Ml ofe, con -35 ventas.
+* Torino apazote y manzanilla 100gr ofe, con -45 ventas.
+* Bolsa de regalo blanca estucheria 2018 ellas ofe 8, con -48 ventas. 
 ```{r}
 tail(g0021,3)
 ```
@@ -388,8 +388,8 @@ tail(g0021,3)
 
 ### Sector 0005 (CHIQUIMULA TODOS LOS MUNICIPIOS - Ditrito Sirius)
 
-Se tiene que en el sector de g0005 hay 37 productos con venta total igual a 0
-```{r}
+Se tiene que en el sector de 0005 hay 37 productos con venta total igual a 0
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 g0005 <- subset(SecG, Sector == "0005")
 cerosg0005 <- ceros(g0005)
 cerosg0005
@@ -406,17 +406,17 @@ g0005 <- g0005[order(g0005$VentasTotales, decreasing = TRUE),]
 head(g0005,3)
 ```
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de SALUD Y BIENESTAR, siendo estos: 
-* SC Naturals Te Descanso Caja 20 Unidades OFE, con 0 venta.
-* SC Naturals Te Limp Intes Caj con 20 bol OFE, con 0 venta.
-* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta. 
+* Catalogo suelto marzo gt 2019, con -26 ventas.
+* Roll on extreme men + roll on active, con -34 venta.
+* Catalogo suelto noviembre gt 2018 ofe, con -46 venta. 
 ```{r}
 tail(g0005,3)
 ```
 
 ### Sector 0027 (JUTIAPA (CENTRO), MOYUTA, JALPATAGUA, JEREZ - Distrito Arius)
 
-Se tiene que en el sector de g0027 hay 46 productos con venta total igual a 0
-```{r}
+Se tiene que en el sector de 0027 hay 46 productos con venta total igual a 0
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 g0027 <- subset(SecG, Sector == "0027")
 cerosg0027 <- ceros(g0027)
 cerosg0027
@@ -433,17 +433,17 @@ g0027 <- g0027[order(g0027$VentasTotales, decreasing = TRUE),]
 head(g0027,3)
 ```
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO, siendo estos: 
-* SC Naturals Te Descanso Caja 20 Unidades OFE, con 0 venta.
-* SC Naturals Te Limp Intes Caj con 20 bol OFE, con 0 venta.
-* SC Nat Te Piernas Cansad Caj 20 BO OFE, con 0 venta. 
+* Sc fleurs des champs crema perfumada 320g. ofe, con -639 venta.
+* Top famili sh 2 en 1 sabila nd 1lt resideño ofe 2, con -819 venta.
+* Apolo black eau de cologne 100Ml ofe1, con -1002 venta. 
 ```{r}
 tail(g0027,3)
 ```
 
 ### Sector 0006 (ZACAPA TODOS LOS MUNICIPIOS - Distrito Sirius)
 
-Se tiene que en el sector de g0006 hay 49 productos con venta total igual a 0
-```{r}
+Se tiene que en el sector de 0006 hay 49 productos con venta total igual a 0
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 g0006 <- subset(SecG, Sector == "0006")
 cerosg0006 <- ceros(g0006)
 cerosg0006
@@ -460,9 +460,9 @@ g0006 <- g0006[order(g0006$VentasTotales, decreasing = TRUE),]
 head(g0006,3)
 ```
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de USO DIARIO y TEENS, siendo estos: 
-* Acne Solution Gel Trat C/Almend 12, con 0 venta.
-* Acne Solution Mascar EXF C/Soya 10, con 0 venta.
-* Action Locion Capilar Anticaida 180 ML, con 0 venta. 
+* Apolo black eau de cologne 100 ml ofe1, con -214 venta.
+* Sc grazia eau de parfum 100 ml ofe 1, con -434 venta.
+* Bolsa de bacha (Fuscia) tienda, con -1850 venta. 
 ```{r}
 tail(g0006,3)
 ```
@@ -471,7 +471,7 @@ tail(g0006,3)
 
 ### Sector EX01 (EXTERIOR - Distrito EXTERIOR)
 Este sector cuenta con 0 ventas
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 gEX01 <- as.data.frame(subset(SecG, Sector == "EX01"))
 gEX01 <- gEX01[order(gEX01$VentasTotales, decreasing = TRUE),]
 head(gEX01, 3)
@@ -498,8 +498,8 @@ head(g040, 3)
 
 ### Sector PR01 (PREMIOS POR RECOBRAR - Distrito Abogados)
 
-Se tiene que en el sector de gPR01 hay 4 productos con venta total igual a 0
-```{r}
+Se tiene que en el sector de PR01 hay 4 productos con venta total igual a 0
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 gPR01 <- subset(SecG, Sector == "PR01")
 cerosgPR01 <- ceros(gPR01)
 cerosgPR01
@@ -527,7 +527,7 @@ head(gPR01, 3)
 ### Sector 0022 (TOTONICAPAN/QUETZALTENANGO - Distrito Orion)
 
 Se tiene que en el sector de g0022 hay 37 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 g0022 <- subset(SecG, Sector == "0022")
 cerosg0022 <- ceros(g0022)
 cerosg0022
@@ -540,9 +540,9 @@ Se observa que los productos con más ventas pertenecen a las categorías de USO
 * Estuche Sc Fruits para Gel Antibac, con 1913 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
-* Cobo Concha Nácar, con 0 ventas.
-* Acetaminofen Adultos 20 Tabletas, con 0 ventas.
-* Scentia Bella Color Luxury Nail Polish Silver, con 0 ventas.
+* Sc poema violet 100 ml ofe 1, con -36 ventas.
+* Bolsa de regalo oct 2012 ofe 2, con -16 ventas.
+* Bolsa de regalo oct 2012 ofe 1, con -7 ventas.
 
 ```{r}
 g022 <- as.data.frame(subset(SecG, Sector == "0022"))
@@ -555,7 +555,7 @@ head(g022, 3)
 ### Sector 0042 (SECTOR 42 - Distrito Orion)
 
 Se tiene que en el sector de g0042 hay 31 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 g0042 <- subset(SecG, Sector == "0042")
 cerosg0042 <- ceros(g0042)
 cerosg0042
@@ -568,9 +568,9 @@ Se observa que el producto con más ventas pertenece a la categoría de USO DIAR
 * Clean House Desin. Manzana Canela 1Gl, con 2314 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
-* Paquete Cabello Junio Extra, con 0 ventas.
-* Oro Líq Anti Edad Sha 2 en 1 400 M, con 0 ventas.
-* Oro Liquido Shampoo Negro Delumbrante 400ml. Ofe, con 0 ventas.
+* Fresh fit spray antimicotico 200 ml ofe 1, con -33 ventas.
+* Cepillo dental patito rosado, con -10 ventas.
+* Audifonos scentia 2017 ofe 2. Ofe, con -7 ventas.
 
 ```{r}
 g042 <- as.data.frame(subset(SecG, Sector == "0042"))
@@ -582,8 +582,8 @@ head(g042, 3)
 
 #### Sector 0038 (AN LUIS/POPTUN - Distrito Sirius)
 
-Se tiene que en el sector de g0038 hay 70 productos con venta total igual a 0
-```{r}
+Se tiene que en el sector de 0038 hay 70 productos con venta total igual a 0
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 g0038 <- subset(SecG, Sector == "0038")
 cerosg0038 <- ceros(g0038)
 cerosg0038
@@ -596,9 +596,9 @@ Se observa que el producto con más ventas pertenece a la categoría de USO DIAR
 * top Secret Roll-On Baby Powder 80G, con 3274 ventas.
 
 Se observa que los primeros tres productos que menos venden en este sector pertenecen a la categoría de CABELLO respectivamente, siendo estos:
-* Action Shampoo Anticaida Oferta, con 0 ventas.
-* Oro Líq Anti Edad Sha 2 en 1 400 M, con 0 ventas.
-* Oro Líq Anti Edad Bál Crem 300 G, con 0 ventas.
+* Scentia perfume aromatizante ambiental apple cinamon ofe, con -6 ventas.
+* Top family sh 2 en 1 nd chile 1 lt ofe, con -5 ventas.
+* Top family sh 2 en 1 sabila nd 1lt ofe 1, con -4 ventas.
 
 ```{r}
 g038 <- as.data.frame(subset(SecG, Sector == "0038"))
@@ -613,7 +613,7 @@ head(g038, 3)
 
 ### Honduras
 ```{r}
-# Guatemala
+# Honduras
 Honduras <- as.data.frame(crearLista(SecH, sectoresH))
 Honduras$Sector <- sectoresH
 names(Honduras)[1] <- "VentasTotales"
@@ -630,7 +630,7 @@ Honduras %>%
 #### Sector 0321
 
 Se tiene que en el sector de 0321 hay 32 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 H1 <- subset(SecH, Sector == "0321")
 cerosH1 <- ceros(H1)
 cerosH1
@@ -646,7 +646,7 @@ head(H1,3)
 #### Sector 0319
 
 Se tiene que en el sector de 0319 hay 23 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 H2 <- subset(SecH, Sector == "0319")
 cerosH2 <- ceros(H2)
 cerosH2
@@ -661,7 +661,7 @@ head(H2,3)
 #### Sector 0304
 
 Se tiene que en el sector de 0304 hay 47 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 H3 <- subset(SecH, Sector == "0304")
 cerosH3 <- ceros(H3)
 cerosH3
@@ -677,7 +677,7 @@ head(H3,3)
 #### Sector 0308
 
 Se tiene que en el sector de 0308 hay 35 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 H4 <- subset(SecH, Sector == "0308")
 cerosH4 <- ceros(H4)
 cerosH4
@@ -693,7 +693,7 @@ head(H4,3)
 #### Sector 0335
 
 Se tiene que en el sector de 0335 hay 40 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 H5 <- subset(SecH, Sector == "0335")
 cerosH5 <- ceros(H5)
 cerosH5
@@ -708,17 +708,10 @@ head(H5,3)
 ```{r}
 sH <- as.data.frame(subset(SecH, VentasTotales > "0"))
 sH <- sH[order(sH$VentasTotales, decreasing = TRUE),]
-tail(sH, 15)
+tail(sH, 10)
 ```
 
 
-
-```{r echo=FALSE, warning=FALSE, include=FALSE}
-dH <- as.data.frame(subset(SecH, Sector == "CC", VentasTotales < "0"))
-dH$VentasTotales <- dH$VentasTotales*-1
-dH <- dH[order(dH$VentasTotales, decreasing = TRUE),]
-head(dH, 10)
-```
 
 ```{r}
 # Nicaragua
@@ -775,7 +768,7 @@ Además, las tres mujeres que menos venden en Nicaragua son:
 ### Sector Contado CC
 
 Se tiene que en el sector de CC hay 35 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n1 <- as.data.frame(subset(SecN, Sector == "CC"))
 cerosn1 <- ceros(n1)
 cerosn1
@@ -794,7 +787,7 @@ tail(n1, 15)
 ### Sector  0409
 
 Se tiene que en el sector de 0409 hay 45 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n2 <- as.data.frame(subset(SecN, Sector == "0409"))
 cerosn2 <- ceros(n2)
 cerosn2
@@ -812,7 +805,7 @@ tail(n1, 15)
 ### Sector  0402
 
 Se tiene que en el sector de 0402 hay 40 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n3 <- as.data.frame(subset(SecN, Sector == "0402"))
 cerosn3 <- ceros(n3)
 cerosn3
@@ -829,7 +822,7 @@ head(n03, 3)
 ### Sector  0427
 
 Se tiene que en el sector de 0427 hay 29 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n4 <- as.data.frame(subset(SecN, Sector == "0427"))
 cerosn4 <- ceros(n4)
 cerosn4
@@ -846,7 +839,7 @@ head(n04, 3)
 
 ### Sector  0405
 Se tiene que en el sector de 0405 hay 56 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n5 <- as.data.frame(subset(SecN, Sector == "0405"))
 cerosn5 <- ceros(n5)
 cerosn5
@@ -865,7 +858,7 @@ head(n05, 3)
 ### Sector 0412
 
 Se tiene que en el sector de 0412 hay 1 producto con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n6 <- as.data.frame(subset(SecN, Sector == "0412"))
 cerosn6 <- ceros(n6)
 cerosn6
@@ -883,7 +876,7 @@ head(n06, 3)
 ### Sector 0422
 
 Se tiene que en el sector de 0422 hay 0 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n7 <- as.data.frame(subset(SecN, Sector == "0422"))
 cerosn7 <- ceros(n7)
 cerosn7
@@ -901,7 +894,7 @@ head(n07, 3)
 ### Sector 0413
 
 Se tiene que en el sector de 0413 hay 38 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n9 <- as.data.frame(subset(SecN, Sector == "0413"))
 cerosn9 <- ceros(n9)
 cerosn9
@@ -918,7 +911,7 @@ head(n9, 3)
 ### Sector 0433
 
 Se tiene que en el sector de 0433 hay 36 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 n10 <- as.data.frame(subset(SecN, Sector == "0433"))
 cerosn10 <- ceros(n10)
 cerosn10
@@ -979,11 +972,11 @@ Por otro lado, los sectores con menos ventas son:
 
 * 0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
 
-Se tiene que en el sector de 0413 hay 38 productos con venta total igual a 0
+### Sectores con más ventas
 
-#### Sector 0202
+##### Sector 0202
 Se tiene que en el sector de 0202 hay 47 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 secS1 <- as.data.frame(subset(SecS, Sector == "0202"))
 cerosS1 <- ceros(secS1)
 cerosS1
@@ -997,10 +990,10 @@ secS01 <- secS1[order(secS1$VentasTotales, decreasing=FALSE),]
 secS01 <- head(secS01, 3) #contiene los que menos se venden
 ```
 
-#### Sector 0204
+##### Sector 0204
 
 Se tiene que en el sector de 0204 hay 48 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 secS2 <- as.data.frame(subset(SecS, Sector == "0204"))
 cerosS2 <- ceros(secS2)
 cerosS2
@@ -1014,10 +1007,10 @@ secS02 <- secS2[order(secS2$VentasTotales, decreasing=FALSE),]
 secS02 <- head(secS02, 3) #contiene los que menos se venden
 ```
 
-#### Sector 0203
+##### Sector 0203
 
 Se tiene que en el sector de 0203 hay 52 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 secS3 <- as.data.frame(subset(SecS, Sector == "0203"))
 cerosS3 <- ceros(secS3)
 cerosS3
@@ -1032,10 +1025,10 @@ secS03 <- secS3[order(secS3$VentasTotales, decreasing=FALSE),]
 secS03 <- head(secS03, 3) #contiene los que menos se venden
 ```
 
-#### Sector 0212
+##### Sector 0212
 
 Se tiene que en el sector de 0212 hay 59 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 secS4 <- as.data.frame(subset(SecS, Sector == "0212"))
 cerosS4 <- ceros(secS4)
 cerosS4
@@ -1050,10 +1043,10 @@ secS04 <- secS4[order(secS4$VentasTotales, decreasing=FALSE),]
 secS04 <- head(secS04, 3) #contiene los que menos se venden
 ```
 
-#### Sector 0210
+##### Sector 0210
 
 Se tiene que en el sector de 0210 hay 62 productos con venta total igual a 0
-```{r}
+```{r echo = FALSE, warning = FALSE, include= FALSE}
 secS5 <- as.data.frame(subset(SecS, Sector == "0210"))
 cerosS5 <- ceros(secS5)
 cerosS5
@@ -1073,44 +1066,57 @@ secS05 <- head(secS05, 3) #contiene los que menos se venden
 masSalvador <-  c(secS1, secS2 , secS3, secS4, secS5)
 
 
+```
+### Sectores con menos ventas
 
-#SECTORES CON Menos VENTAS
+* 0214 (SUCHITOTO,COJUTEPEQUE, SAN RAFAEL CEDROS - Distrito Sirius) con un total de 	106909 ventas por unidad
+* 0224 (CUSCATLAN - Distrito Sirius) con un total de 112256 ventas por unidad
+* 0230 (SAN SALVADOR NORTE - Distrito Arius) con un total de 114430 ventas por unidad
+* 0223 (USULUTAN NORTE - Distrito Sirius) con un total de 140411 ventas por unidad
+* 0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
+* 0219 (MORAZAN - Distrito Sirius) con un total de 142319 ventas por unidad
+* 0221 (ARMENIA - Distrito Arius) con un total de 150182 ventas por unidad
+* 0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
+* 0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
 
-#* 0214 (SUCHITOTO,COJUTEPEQUE, SAN RAFAEL CEDROS - Distrito Sirius) con un total de 	106909 ventas por unidad
-#* 0224 (CUSCATLAN - Distrito Sirius) con un total de 112256 ventas por unidad
-#* 0230 (SAN SALVADOR NORTE - Distrito Arius) con un total de 114430 ventas por unidad
-#* 0223 (USULUTAN NORTE - Distrito Sirius) con un total de 140411 ventas por unidad
-#* 0220 (LA UNION - Distrito Sirius) con un total de 142084 ventas por unidad
-#* 0219 (MORAZAN - Distrito Sirius) con un total de 142319 ventas por unidad
-#* 0221 (ARMENIA - Distrito Arius) con un total de 150182 ventas por unidad
-#* 0213 (SOYAPANGO, ILOPANGO - Distrito Sirius) con un total de 160837 ventas por unidad
-#* 0208 (SAN MARCOS / NVO CUSCATLAN - Distrito Arius) con un total de 168747 ventas por unidad
-
-
+##### Sector 0214
+```{r}
 secS6 <- as.data.frame(subset(SecS, Sector == "0214"))
 secS6<- secS6[order(secS6$VentasTotales, decreasing=TRUE),] 
 secS6<- head(secS6, 3) #contiene los que mas se venden
 secS06 <- secS6[order(secS6$VentasTotales, decreasing=FALSE),] 
 secS06 <- head(secS06, 3) #contiene los que menos se venden
+```
 
+##### Sector 0224
+```{r}
 secS7 <- as.data.frame(subset(SecS, Sector == "0224"))
 secS7<- secS7[order(secS7$VentasTotales, decreasing=TRUE),] 
 secS7<- head(secS7, 3) #contiene los que mas se venden
 secS07 <- secS7[order(secS7$VentasTotales, decreasing=FALSE),] 
 secS07 <- head(secS07, 3) #contiene los que menos se venden
+```
 
+##### Sector 0230
+```{r}
 secS8 <- as.data.frame(subset(SecS, Sector == "0230"))
 secS8<- secS8[order(secS8$VentasTotales, decreasing=TRUE),] 
 secS8<- head(secS8, 3) #contiene los que mas se venden
 secS08 <- secS8[order(secS8$VentasTotales, decreasing=FALSE),] 
 secS08 <- head(secS08, 3) #contiene los que menos se venden
+```
 
+##### Sector 0223
+```{r}
 secS9 <- as.data.frame(subset(SecS, Sector == "0223"))
 secS9<- secS9[order(secS9$VentasTotales, decreasing=TRUE),] 
 secS9<- head(secS9, 3) #contiene los que mas se venden
 secS09 <- secS9[order(secS9$VentasTotales, decreasing=FALSE),] 
 secS09 <- head(secS09, 3) #contiene los que menos se venden
+```
 
+##### Sector 0220
+```{r}
 secS10 <- as.data.frame(subset(SecS, Sector == "0220"))
 secS10<- secS10[order(secS10$VentasTotales, decreasing=TRUE),] 
 secS10<- head(secS10, 3) #contiene los que mas se venden
@@ -1138,7 +1144,7 @@ head(s202,3)
 ```{r}
 sM <- as.data.frame(subset(SecS, VentasTotales > "0"))
 sM <- sM[order(sM$VentasTotales, decreasing = TRUE),]
-tail(sM, 15)
+tail(sM, 10)
 ```
 
 * 0214 (SUCHITOTO,COJUTEPEQUE, SAN RAFAEL CEDROS - Distrito Sirius) con un total de 	106909 ventas por unidad
@@ -1254,28 +1260,6 @@ dN <- as.data.frame(subset(SecN, VentasTotales < "0"))
 head(dN, 10)
 
 ```
-## Ventas por sector
-
-```{r}
-crearArray <- function(x,y,z){
-  coso <- c()
-  lista <-c()
-  for(i in seq(1, length(y), by=1)){
-    sec <- subset(x, Sector == y[i])
-    for (j in seq(1, length(z), by=1)){
-      cat <- subset(sec, Categoria == z[i])
-      cat <- cat[,c(length(x))]
-      lista[[j]] <- sum(as.numeric(cat))
-    }
-    coso[[i]]<- lista
-  }
-  return(coso)
-}
-
-secMasGT <- c("AB03", "CC", "0021", "0005", "0027", "0006", "0006", "0012", "0026", "0031", "0034")
-categorias <- c("CABELLO", "CUIDADO DE LA PIEL", "CUIDADO DE LAS UÑAS", "CUIDADO PERSONAL", "DESCONTINUADOS", "DIVISION FARMA", "ELLAS", "ELLOS", "GASTOS PROMOCIONALES", "JOYERIA", "KIMBERLY CLARK", "LIMPIEZA", "MAQUILLAJE", "NIÑOS", "PAQUETES", "PREMIOS", "PROMOCIONALES VENDIDOS", "SALUD Y BIENESTAR", "TEENS", "USO DIARIO")
-masGuatemala <- t(as.data.frame(crearArray(SecG, secMasGT,categorias)))
-```
 
 ## Clustering
 Se decidió hacer un clustering para las ventas totales por sector de cada país, con el fin de agrupar los sectores entre ventas bajas, medias y altas. A continuación, se usó el agrupamiento por medio de las k-medias, usando un cálculo de 3 clusters por los rangos de ventas ya antes mencionados. 
@@ -1384,10 +1368,6 @@ ggplot(data=catH, aes(x=Categoria, y=sum)) +
 ```
 Para el pais de Honduras, se observa que las categorias que mas venden son: Uso diario, limpieza, ellas y ninos. 
 Asi tambien, las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
-
-
-# Discusión
-
 
 # Conclusiones 
 
