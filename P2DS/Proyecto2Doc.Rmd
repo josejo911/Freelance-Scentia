@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Resumen Ejecutivo
 Scentia tiene una problemática que está afectando en sus números por lo tanto se debe de realizar una investigación, contar con un análisis de información para clasificarla e indagar áreas de oportunidad, conocer qué es lo que afecta actualmente a la empresa, los productos que menos rotan en cada país centroamericano, enlistar a los mejores vendedores de cada sector. Para ello se decidió determinar cada sector para poder conocer quienes son los que más o menos venden, uno de los puntos importantes para la empresa es conocer los productos que más devoluciones están obteniendo en cada país y los productos que no representan ventas para no enviar ese producto a ese país y enviarlo donde se vende mejor, así mismo conocer el comportamiento del mercado en cada país esto conlleva a recabar datos históricos sobre acontecimientos políticos, económicos y sociales.
 
-Todo el codigo realizado puede ser consultado en el siguiente link a Github (Ubicación del código): https://github.com/josejo911/Proyecto2DS.git 
+#### Todo el codigo realizado puede ser consultado en el siguiente link a Github (Ubicación del código): https://github.com/josejo911/Proyecto2DS.git 
 
 
 # Introducción 
@@ -24,6 +24,7 @@ Scentia es una empresa que se dedica a la comercialización de productos como pe
 Machine Learning es un método de aprendizaje automático que automatiza la construcción de modelos analíticos. Se basa en máquinas de enseñanza a través de modelos de algoritmos.
 
 Se puede dividir en tres modelos de aplicación:
+
 * Aprendizaje supervisado
 * Aprendizaje no supervisado
 * Aprendizaje de refuerzo
@@ -37,13 +38,17 @@ El aprendizaje por refuerzo ya se basa en observar el contexto y seleccionar la 
 Algoritmos de aprendizaje
 Existen varios algoritmos de Machine Learning pero debido a la estructura de la información que nos fue proporcionada y el objetivo general que nos expresó la empresa debemos mostrarles, es pequeña la cantidad de algoritmos que son de utilidad siendo algunos los siguientes: 
 
-Regresión Lineal: Es la mejor manera de describir la relación entre dos variables. Su objetivo es dibujar un valor que no se puede estimar inicialmente. Es parte del aprendizaje supervisado. El objetivo de la regresión lineal es encontrar la ecuación que se ajuste a la mejor línea para modelar los datos.
+#### Regresión Lineal: 
+Es la mejor manera de describir la relación entre dos variables. Su objetivo es dibujar un valor que no se puede estimar inicialmente. Es parte del aprendizaje supervisado. El objetivo de la regresión lineal es encontrar la ecuación que se ajuste a la mejor línea para modelar los datos.
 
-Clustering: También conocido como análisis de conglomerados, consiste en agrupar cada punto del conjunto de datos en un grupo específico. Los datos agrupados comparten una similitud entre sí. La agrupación es un ejemplo de método de aprendizaje no supervisado.
+#### Clustering: 
+También conocido como análisis de conglomerados, consiste en agrupar cada punto del conjunto de datos en un grupo específico. Los datos agrupados comparten una similitud entre sí. La agrupación es un ejemplo de método de aprendizaje no supervisado.
 
-Q-learning: Es el método más popular de aprendizaje por refuerzo. Le permite establecer una política de acción de forma interactiva y mostrar qué comportamiento tomar bajo ciertas circunstancias.
+#### Q-learning: 
+Es el método más popular de aprendizaje por refuerzo. Le permite establecer una política de acción de forma interactiva y mostrar qué comportamiento tomar bajo ciertas circunstancias.
 
-Series de Tiempo Temporales: Una serie temporal es un conjunto de muestras tomadas a intervalos de tiempo regulares. Es interesante analizar su comportamiento al mediano y largo plazo, intentando detectar patrones y poder hacer pronósticos de cómo será su comportamiento futuro. Lo que hace especial a una Time Series a diferencia de un problema de Regresión son dos cosas:
+#### Series de Tiempo Temporales: 
+Una serie temporal es un conjunto de muestras tomadas a intervalos de tiempo regulares. Es interesante analizar su comportamiento al mediano y largo plazo, intentando detectar patrones y poder hacer pronósticos de cómo será su comportamiento futuro. Lo que hace especial a una Time Series a diferencia de un problema de Regresión son dos cosas:
 
 * Es dependiente del Tiempo. Esto rompe con el requerimiento que tiene la regresión lineal de que sus observaciones sean independientes.
 Suelen tener algún tipo de estacionalidad, ó de tendencias a crecer ó decrecer. Pensemos en cuánto más producto vende una heladería en sólo 4 meses al año que en el resto de estaciones.
@@ -72,6 +77,9 @@ Para realizar un mejor análisis se generó una matriz de correlación utilizand
 
 
 # Modelos, Cálculos y Resultados
+
+Dado que este conjunto de datos era nuevo, se enfocó más que todo en realizar un análisis exploratorio, en vez de determinar modelos de predicción que ayudarán a predecir la venta de estos. 
+
 
 ## Análisis exploratorio
 
@@ -117,7 +125,7 @@ library(cluster)
 # F:/Data Science/Proyecto 2/Proyecto2DS
 #C:/Users/Home/Documents/Tercer año/Sexto Semestre/Data Science/Proyecto2DS/P2DS
 
-setwd("/Users/quiebres/Documents/Ivan Maldonado/UVG/SextoSemestre/Data Science/Proyecto2DS/P2DS")
+setwd("F:/Data Science/Proyecto 2/Proyecto2DS/P2DS")
 
 # Leyendo el dataset de csv importacion
 # Guatemala
@@ -1369,6 +1377,17 @@ ggplot(data=catH, aes(x=Categoria, y=sum)) +
 Para el pais de Honduras, se observa que las categorias que mas venden son: Uso diario, limpieza, ellas y ninos. 
 Asi tambien, las categorias que menos venden son: cuidado de las unas, descontinuados, joyeria y Kimberly Clark. 
 
+
+
+# Discusión de resultados:
+
+En vista a la poca cantidad de variables que se contaba para analizar el caso por sectores, se decidió que un clustering no era la opción más eficaz en este contexto; al momento de intentar agrupar aún más las variables a analizar, teníamos el riesgo de perder bastante información, por lo que se decidió trabajar con las que ya se tenían. Con respecto a las series de tiempo, se tenía una gran cantidad de sectores de cada país, por lo que se decidió realizar una serie de tiempo para los distritos únicamente. A pesar que el enfoque principal era analizar los productos que más y menos venden según los sectores y distritos, se concluyó que una serie de tiempo no puede representar el comportamiento de un conjunto de datos, ya que estos varían demasiado con respecto a otro, por lo que se recomienda hacer predicciones individuales de cada producto de cada país.
+
+Por otro lado, se observó un comportamiento similar entre los sectores que más venden en Centroamérica según el top de productos que más venden. Dado esto, se puede generalizar los productos que más venden en los sectores que más venden de cada país; sin embargo, este comportamiento no se observa dentro de los sectores con menos ventas. Para este caso, se recomienda determinar los productos de interés en estos sectores y en base a ello, realizar un análisis más profundo para predecir si estos productos con bajas ventas llegarán a su límite de venta. 
+
+Ahora, con respecto a los productos con cero ventas encontrados en cada sector, se recomienda realizar un análisis para poder decidir si es necesario continuar la distribución de estos productos en su respectivo sector. Por último, dado a la variabilidad de las ventas en cada sector, se recomienda la realización de un catálogo único por sector. Esto con el objetivo de que los productos con mayores ventas aparezcan con mayor continuidad y así poder aumentar las ganancias por sector.
+
+
 # Conclusiones 
 
 * La línea que más ventas tiene en los diferentes países es TOP FAMILY, se debe considerar para las proyecciones. 
@@ -1377,13 +1396,8 @@ Asi tambien, las categorias que menos venden son: cuidado de las unas, descontin
 * En Honduras el producto que más se vende es el Clean House Desin. Manzana Canela 1G, además es un país que tiene pocas ventas en sus productos y la categoría que más ventas representa es la de Uso Diario. Se debe establecer un buen escenario para futuras proyecciones de lanzamientos de productos.
 * En Nicaragua tiene la categoría de uso diario y salud bienestar que tiene los productos que más y menos ventas representan en todos los sectores. El producto que destaca es el Shampoo Cola de Caballo 2 en 1 y en comparación con el resto de países sus ventas no son tan bajas, pero se debe analizar sus futuros productos de lanzamiento.
 
+# Bibliografía
 
-
-
-
-
-
-# Fuentes consultadas
 * S.A (2018). *The R Graph Gallery*. Extraido de: https://www.r-graph-gallery.com/ [29/06/2019]
 
 * D. (08/2019). *Markdown Text 101*. Extraido de: https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline- [06/10/2019]
@@ -1391,3 +1405,13 @@ Asi tambien, las categorias que menos venden son: cuidado de las unas, descontin
 * Theuwissen, M. (02/12/2015). *How to write the first for loop in R*. Extraido de: https://www.r-bloggers.com/how-to-write-the-first-for-loop-in-r/ [01/10/2019]
 
 * Wickham, H. (2019). Advanced R. Chapman & Hall/CRC.
+
+# Reflexión del proceso:
+
+Al obtener el dataset por parte de Scentia, se procedió a limpiarlo, ordenarlo y analizarlo para ver qué variables se podrían tomar en cuenta para nuestro modelo. Inicialmente, se analizó solamente el archivo de “Paginación” a partir de él, se realizó un análisis exploratorio donde básicamente el objetivo fue determinar la relación entre las variables cualitativas y cuantitativas, el comportamiento de las variables cuantitativas. Resultó ser que este análisis no era el requerido por los ejecutivos de Scentia y se procedió a realizar el análisis de los archivos que contenían todas las ventas por sector de cada país e información pertinente a los distritos y sectores en los que se dividen las líneas de venta de Scentia.
+
+Se procedió con analizar las ventas por sector, donde se le dio como prioridad a la identificación de sectores con mayor cantidad de ventas, así también de las categorías que más venden.  En cuanto a actividades de limpieza, se tiene que no se modificó a mayor escala el documento, en este punto se añadió un análisis por series de tiempo para cada uno de los distritos del país de Nicaragua como el primer acercamiento a un modelo de predicción. Se obtuvo que no era lo más útil a realizar en ese momento ya que se debía de explorar el conjunto de datos con mayor profundidad. En este punto del proyecto se tomó la decisión de que el proyecto se basaría en un análisis exploratorio meticuloso del conjunto de datos brindado ya que era algo que no se había explorado o analizado con anterioridad.  Se removieron las categorías de abogados, empleados y las categorías: “Kimberly Clark”, “descontinuados”, y “cuidado de las uñas”. También se hizo el hallazgo de que dado que los productos tienen bastante variabilidad de venta con respecto a las categorías, estos mismos debían de ser analizados 1 a 1, por sector ya que habían categorías que engloba productos que más vendían así como productos que no se vendían mucho dando lugar a que el valor promedio por venta de la categoría fuera bastante variable.
+Finalmente, se añadió un análisis de las devoluciones por país, productos con 0 venta total, productos que vendan más y que venden menos en los diferentes sectores, se relacionó también el historial, político y económico con la variabilidad de las unidades vendidas por mes. 
+
+Esta fue una experiencia bastante agradable y retadora para algunos de lo integrantes del grupo que carecía dominio y se tenía que poner a prueba todo lo aprendido en clase. Fue un trabajo que permitió desenvolver el conocimiento y aprender aún más acerca de las sugerencias que los directivos compartían, de este modo se podía entender mejor los datos y la forma de trabajar con ellos. Fue una experiencia que valió la pena, ya que fue el primer acercamiento hacia la vida real en el campo profesional, proporcionando una vista previa del trabajo de un analista de datos.  
+
