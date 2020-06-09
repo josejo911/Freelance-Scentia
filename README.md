@@ -1,2 +1,2 @@
-# Proyecto2DS
-Proyecto #2 de Data Science 
+# Data Science
+Analisis exploratorio e implementacion de algoritmos para prediccion de ventas
